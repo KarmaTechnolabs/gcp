@@ -1,6 +1,8 @@
 This is a master project or a template project which we can use to speed-up the initial efforts of 
 setting up any new project.
 
+![Master Project](master_project.jpg)
+
 Instructions to setup a new project using this master project:
 
 Step 1. Setup Package Name
