@@ -1,0 +1,135 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('../keystore/allpharma.jks')
+            storePassword 'allpharma'
+            keyAlias 'allpharma'
+            keyPassword 'allpharma'
+        }
+    }
+    compileSdkVersion 29
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {
+        applicationId "com.app.allpharma"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BASE_URL", '"http://159.89.167.87/jeewanjyoti/api/"'
+        buildConfigField "String", "CONTACT_US", '"http://159.89.167.87/jeewanjyoti/contact-us"'
+        buildConfigField "String", "ABOUT_US", '"http://159.89.167.87/jeewanjyoti/about-us"'
+        buildConfigField "String", "OUT_TEAM", '"http://159.89.167.87/jeewanjyoti/our-team"'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    //Kotlin Standard Library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    //Android Jetpack libraries
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation 'com.google.android.material:material:1.2.0-beta01'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.dynamicanimation:dynamicanimation-ktx:1.0.0-alpha03"
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
+
+    //Permission
+    implementation "org.permissionsdispatcher:permissionsdispatcher:4.7.0"
+    kapt "org.permissionsdispatcher:permissionsdispatcher-processor:4.7.0"
+
+    //Image loader
+    implementation "io.coil-kt:coil:0.11.0"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //RxJava2
+    implementation "io.reactivex.rxjava2:rxjava:2.2.17"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    //Utility
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.github.stfalcon:stfalcon-imageviewer:1.0.0'
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
+    //Testing libraries
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.5'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.11.5'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.5'
+
+    // image loading lib
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // compress images
+    implementation 'id.zelory:compressor:3.0.0'
+
+    //Custom Loading Indicator
+    implementation 'com.wang.avi:library:2.1.3'
+}
+apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,170 @@
+<resources>
+    <string name="app_name">All Pharma</string>
+
+    <!-- login screen -->
+    <string name="login">Login</string>
+    <string name="hint_email">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="password_error">Please enter the password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="skip">Skip</string>
+    <string name="skip_underline"><u>Skip</u></string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? Register</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register">Register</string>
+
+    <!--Splash-->
+    <string name="splash_logo">Splash Logo</string>
+
+    <!-- forgot password screen -->
+    <string name="forgot_password_label">Forgot Password</string>
+    <string name="enter_registered_email_to_receive_link">Enter your email below to receive your password reset link.</string>
+    <string name="send_link">Send Link</string>
+
+    <!-- register screen-->
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="already_have_an_account">Already have an Account?</string>
+    <string name="by_clicking_register_button_you_agree">By clicking on Register button, you are agreed to our</string>
+    <string name="terms_and_condition">terms &amp; conditions</string>
+    <string name="privacy_policy">privacy policy.</string>
+    <string name="by_clicking_on_register_button_text">By clicking on Register button, you are agreed to our terms &amp; conditions and privacy policy.</string>
+    <string name="enter_valid_first_name">Enter valid first name</string>
+    <string name="validation_last_name">Enter valid last name</string>
+    <string name="validation_empty_address">Please enter address</string>
+    <string name="validation_empty_village">Please enter village name</string>
+    <string name="validation_empty_district">Please select district</string>
+    <string name="validation_empty_state">Please select state</string>
+    <string name="validation_empty_pincode">Please enter pincode</string>
+    <string name="validation_empty_education_qualification">Please enter highest education qualification</string>
+    <string name="validation_empty_dob">Please select date of birth</string>
+    <string name="validation_empty_occupation">Please enter occupation</string>
+    <string name="validation_empty_how_you_hear_about_us">Please enter how did you hear about us</string>
+    <string name="validation_empty_member_of_app">Please select member type</string>
+    <string name="enter_valid_email">Enter valid email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="enter_confirm_password">Enter confirm password</string>
+    <string name="enter_valid_password">Password must be 5–15 characters with minimum 1 Uppercase, 1 Lowercase, 1 Numeric and 1 Special character.</string>
+    <string name="password_confirm_password_does_not_match">Password and Confirm password does not match</string>
+    <string name="new_password_confirm_password_does_not_match">New password and Confirm password does not match</string>
+
+    <!--Language Screen-->
+    <string name="language">Language</string>
+    <string name="marathi">मराठी</string>
+    <string name="english">English</string>
+    <string name="hindi">हिन्दी</string>
+    <string name="next">Next</string>
+
+    <!--Category Screen-->
+    <string name="category_icon">Category Icon</string>
+    <string name="bulletins">Bulletins</string>
+    <string name="courses">Courses</string>
+    <string name="jobs">Jobs</string>
+    <string name="business_idea">Business Idea</string>
+    <string name="alumni">Alumni</string>
+
+    <!--Home Screen-->
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="explore_courses">Explore Courses</string>
+    <string name="jeewan_jyoti_bulletin">Jeewan Jyoti Bulletin</string>
+    <string name="business_idea_image">Business Idea Image</string>
+    <string name="transparent_image">Transparent Image</string>
+    <string name="submit">Submit</string>
+    <string name="have_a_business_idea_nshare_with_us">Have a business idea?\nShare with us.</string>
+    <string name="jobs_posted">Jobs Posted</string>
+    <string name="slider_image">Slider Image</string>
+    <string name="course_icon">Course Icon</string>
+    <string name="number_modules">%d Modules</string>
+    <string name="bulletin_image">Bulletin Image</string>
+    <string name="interviewer_image">Interviewer Image</string>
+    <string name="apply">Apply</string>
+    <string name="tips_and_tricks">Tips &amp; Tricks</string>
+    <string name="see_more">See More</string>
+    <string name="see_all">See All</string>
+    <string name="close_icon">Close Icon</string>
+    <string name="business_title">Business Title</string>
+    <string name="describe_your_business_idea">Describe your business idea</string>
+    <string name="describe_your_story">Describe your story</string>
+    <string name="course_image">Course Image</string>
+    <string name="enroll">Enroll</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="about_us">About Us</string>
+    <string name="app_version">App Version</string>
+    <string name="our_team">Our Team</string>
+    <string name="get_in_touch">Get in Touch</string>
+    <string name="logout">Logout</string>
+    <string name="tips_tricks">Tips &amp; Tricks</string>
+    <string name="sources">Sources:</string>
+    <string name="job_details">Job Details</string>
+    <string name="experience">Experience</string>
+    <string name="employment">Employment</string>
+    <string name="salary">Salary</string>
+    <string name="trial_period">Trial Period</string>
+    <string name="job_description">Job Description</string>
+    <string name="interviewer">Interviewer</string>
+    <string name="hint_middle_name">Middle Name(Optional)</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_mobile_number">Mobile Number</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_village_name">Village Name</string>
+    <string name="hint_district">District</string>
+    <string name="hint_state">State</string>
+    <string name="hint_pincode">Pincode</string>
+    <string name="hint_highest_education_qualification">Highest Education Qualification</string>
+    <string name="hint_date_of_birth">Date of Birth</string>
+    <string name="hint_occupation">Occupation</string>
+    <string name="hint_how_did_you_hear_about_us">How did you hear about us</string>
+    <string name="are_you_member_of_jeewan_jyoti_s">Are you member of Jeewan Jyoti’s?</string>
+    <string name="shg">SHG</string>
+    <string name="trainee">Trainee</string>
+    <string name="current_student">Current Student</string>
+    <string name="none_of_the_above">None of the Above</string>
+    <string name="save">Save</string>
+    <string name="hint_old_password">Old Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_re_enter_password">Re-enter Password</string>
+    <string name="hint_name">Name</string>
+    <string name="preffered_method_of_communication">Preferred method of communication</string>
+    <string name="phone">Phone</string>
+    <string name="hint_message">Message</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="about">About</string>
+    <string name="resources">Resources</string>
+    <string name="syllabus">Syllabus</string>
+    <string name="hint_title">Title</string>
+    <string name="choose_file">Choose File</string>
+    <string name="add_story">Add Story</string>
+
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout ?</string>
+    <string name="str_no">No</string>
+    <string name="str_yes">Yes</string>
+    <string name="no_network_available">No network available</string>
+    <string name="push_notification_channel_title">Push Notification about Jeewan Jyoti</string>
+
+    <string name="media_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string>
+    <string name="select">Select</string>
+    <string name="move_along_guest_user">Move along as Guest User</string>
+    <string name="dashboard">Dashboard</string>
+
+    <string name="need_permission">Need permission</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="this_app_requires_camera_permission_to_continue">This app requires Camera permission to access some features</string>
+
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="choose_via">Choose via</string>
+    <string name="go_to_settings">Go to Settings</string>
+    <string name="allow_permission_to_use_this_feature">Allow permission to use this feature</string>
+
+    <string name="search_here">Search here..</string>
+    <string name="select_state">Select State</string>
+    <string name="please_select_state">Please select State</string>
+    <string name="select_district">Select District</string>
+
+
+    <string name="get_started">Get Started!</string>
+    <string name="view_indicator">View Indicator</string>
+</resources>

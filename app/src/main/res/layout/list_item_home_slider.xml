@@ -1,0 +1,70 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.app.masterproject.model.HomeSliderModel" />
+
+        <variable
+            name="needToShowTitle"
+            type="boolean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_slider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/slider_image"
+            android:scaleType="centerCrop"
+            android:src="@{model.sliderImage}"
+            tools:src="@drawable/temp_slider_image_1" />
+
+        <ImageView
+            android:id="@+id/iv_transparent_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/transparent_image"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_transparent_view" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title"
+            style="@style/TextViewPrimaryHugeStyleHeader"
+            android:layout_above="@id/tv_sub_title"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="2"
+            android:paddingStart="@dimen/fragment_horizontal_padding"
+            android:paddingEnd="@dimen/fragment_horizontal_padding"
+            android:text="@{model.title}"
+            android:textColor="@color/colorWhite"
+            android:visibility="@{needToShowTitle ? View.VISIBLE :View.GONE}"
+            tools:text="Learn Sewing" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_sub_title"
+            style="@style/TextViewPrimaryMediumStyleHeader"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="@dimen/_28sdp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingStart="@dimen/fragment_horizontal_padding"
+            android:paddingEnd="@dimen/fragment_horizontal_padding"
+            android:text="@{model.subTitle}"
+            android:textColor="@color/colorWhite"
+            android:visibility="@{needToShowTitle ? View.VISIBLE :View.GONE}"
+            app:fontFamily="@font/gotham_book"
+            tools:text="by the best teachers in Mumbai" />
+    </RelativeLayout>
+</layout>

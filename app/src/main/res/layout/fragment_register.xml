@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.RegisterFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_marginTop="@dimen/back_margin_for_full_screen"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="@{clickListener::onClick}"
+            android:padding="@dimen/mediator_size"
+            android:tint="@color/colorGreen"
+            app:srcCompat="@drawable/ic_back_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/fragment_horizontal_padding"
+                android:paddingEnd="@dimen/fragment_horizontal_padding">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_label_register"
+                    style="@style/TextViewPrimaryHugeStyleHeader"
+                    android:text="@string/register"
+                    android:textColor="@color/colorGreen"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ti_first_name"
+                    style="@style/InputTextLayoutStyle"
+                    android:layout_marginTop="@dimen/huge_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_register">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_first_name"
+                        style="@style/TextInputEditBoxStyle"
+                        android:drawableEnd="@drawable/ic_user"
+                        android:drawablePadding="@dimen/normal_size"
+                        android:hint="@string/hint_first_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="@integer/max_name"
+                        tools:text="Test test" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ti_last_name"
+                    style="@style/InputTextLayoutStyle"
+                    android:layout_marginTop="@dimen/huge_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ti_first_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_last_name"
+                        style="@style/TextInputEditBoxStyle"
+                        android:drawableEnd="@drawable/ic_user"
+                        android:drawablePadding="@dimen/normal_size"
+                        android:hint="@string/hint_first_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="@integer/max_name"
+                        tools:text="Test test" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ti_email"
+                    style="@style/InputTextLayoutStyle"
+                    android:layout_marginTop="@dimen/regular_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ti_last_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_email"
+                        style="@style/TextInputEditBoxStyle"
+                        android:drawableEnd="@drawable/ic_email"
+                        android:drawablePadding="@dimen/normal_size"
+                        android:hint="@string/hint_email"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="@integer/max_email_length"
+                        tools:text="vishal@mailinator.com" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ti_password"
+                    style="@style/InputTextLayoutStyle"
+                    android:layout_marginTop="@dimen/regular_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ti_email"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorGray">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_password"
+                        style="@style/TextInputEditBoxStyle"
+                        android:hint="@string/hint_password"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:maxLength="@integer/max_password"
+                        tools:text="Letsdoit@123" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ti_confirm_password"
+                    style="@style/InputTextLayoutStyle"
+                    android:layout_marginTop="@dimen/regular_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ti_password"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorGray">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_confirm_password"
+                        style="@style/TextInputEditBoxStyle"
+                        android:hint="@string/hint_confirm_password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:maxLength="@integer/max_password"
+                        tools:text="Letsdoit@123" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_terms_and_privacy"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_marginTop="@dimen/huge_size"
+                    android:gravity="center"
+                    android:text="@string/by_clicking_on_register_button_text"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ti_confirm_password" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_register"
+                    style="@style/LoginButtonStyle"
+                    android:onClick="@{clickListener::onClick}"
+                    android:text="@string/register"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_terms_and_privacy" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_login"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/huge_size"
+                    android:layout_marginBottom="@dimen/mediator_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_register"
+                    tools:text="Already have an Account? Login" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+    </LinearLayout>
+</layout>

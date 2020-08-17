@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/chooseViaLabelTV"
+            style="@style/TextViewPrimaryMediumStyle"
+            android:layout_marginTop="@dimen/fragment_horizontal_padding"
+            android:fontFamily="@font/gotham_medium"
+            android:gravity="start"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:text="@string/choose_via"
+            android:textColor="@color/colorGreyText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_camera"
+            style="@style/TextViewPrimaryMediumStyle"
+            android:layout_marginTop="@dimen/normal_size"
+            android:background="?attr/selectableItemBackground"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingTop="@dimen/fragment_horizontal_padding"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingBottom="@dimen/fragment_horizontal_padding"
+            android:text="@string/camera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chooseViaLabelTV" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_gallery"
+            android:layout_marginBottom="@dimen/fragment_horizontal_padding"
+            style="@style/TextViewPrimaryMediumStyle"
+            android:background="?attr/selectableItemBackground"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingTop="@dimen/fragment_horizontal_padding"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingBottom="@dimen/fragment_horizontal_padding"
+            android:text="@string/gallery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_camera" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
