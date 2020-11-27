@@ -141,7 +141,7 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
         return when {
             firstName.checkIsNullOrBlank() -> {
 //                showToast(R.string.enter_valid_first_name)
-                binding.tiFirstName.error = getString(R.string.enter_valid_email)
+                binding.tiFirstName.error = getString(R.string.enter_valid_first_name)
                 false
             }
             lastName.checkIsNullOrBlank() -> {
@@ -156,12 +156,12 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
             }
             !Validator.isPasswordValid(password) -> {
 //                showToast(R.string.enter_valid_password)
-                binding.tiPassword.error = getString(R.string.enter_valid_email)
+                binding.tiPassword.error = getString(R.string.enter_valid_password)
                 false
             }
             confirmPassword.toString() != password.toString() -> {
 //                showToast(R.string.password_confirm_password_does_not_match)
-                binding.tiPassword.error = getString(R.string.enter_valid_email)
+                binding.tiPassword.error = getString(R.string.password_confirm_password_does_not_match)
                 false
             }
             else -> {

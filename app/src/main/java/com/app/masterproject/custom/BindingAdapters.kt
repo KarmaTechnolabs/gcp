@@ -4,7 +4,7 @@ import android.net.Uri
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import coil.api.load
+import coil.load
 import com.app.masterproject.R
 import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView

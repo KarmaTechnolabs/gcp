@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:autofilledHighlight">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme" />
@@ -11,7 +12,7 @@
     <style name="TextViewPrimaryStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:includeFontPadding">false</item>
         <item name="fontFamily">@font/gotham_medium</item>
@@ -41,7 +42,7 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -85,7 +86,7 @@
         <item name="fontFamily">@font/gotham_medium</item>
         <item name="android:fontFamily">@font/gotham_medium</item>
         <item name="android:includeFontPadding">false</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:paddingTop">@dimen/mini_size</item>
         <item name="android:paddingBottom">@dimen/mini_size</item>
     </style>

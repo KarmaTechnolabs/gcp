@@ -105,7 +105,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_register"
             style="@style/TextViewPrimaryStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:gravity="center"
             android:layout_marginTop="@dimen/large_size"
             android:layout_marginBottom="@dimen/mediator_size"
             android:text="@string/don_t_have_an_account_register"
