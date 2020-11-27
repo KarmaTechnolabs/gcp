@@ -26,4 +26,10 @@
 
     <color name="backGroundColorViewDivider">#D8D8D8</color>
     <color name="backGroundColorPagerIndicator">#EFEFF4</color>
+
+    <color name="colorTextPrimary">#000000</color>
+    <color name="colorTextHint">#A5A5A5</color>
+    <color name="shimmer_color">#dddddd</color>
+    <color name="greyText_color">#808080</color>
+    <color name="colorWhiteNight">#ffffff</color>
 </resources>

@@ -18,10 +18,12 @@ object Constants {
     const val IMAGE_TYPE_GALLERY = 1
 
     const val API_OFFSET_ITEM = 15
+    const val DEFAULT_CURRENCY = "₹"
 
     //region Preference Constants
     const val PREF_FIREBASE_TOKEN = "PREF_FIREBASE_TOKEN"
     const val PREF_BEARER_TOKEN = "PREF_BEARER_TOKEN"
+    const val PREF_UPDATE_SKIPPED_VERSION = "PREF_UPDATE_SKIPPED_VERSION"
 
     const val PREF_USER_ID_INT = "PREF_USER_ID"
     const val PREF_USER_SLUG = "PREF_USER_SLUG"
