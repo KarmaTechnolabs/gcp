@@ -24,18 +24,23 @@ Refer: https://developer.android.com/studio/publish/app-signing#generate-key
 you can download the file from Project Settings ->  Your Apps.
 - Download it and move to the "app" folder in the project.
 
-### Step 4. Setup Adaptive Launcher Icon
+### Step 4. Setup Social Login
+- Generate Google Login API Key and replace the key in build.gradle file
+- Generate the Facebook Login Keys and replace the keys in build.gradle file
+- Use release keystore to generate SHA or Key hash.
+
+### Step 5. Setup Adaptive Launcher Icon
 - We need two layers for creating the adaptive launcher icon. Foreground and Background.
 - Ask designer to provide these two layers as separate image files (Minimum 500x500)
 - Once you have both images, go to res->drawable. Right click on drawable folder.
 - Go to New -> Image Asset.
 - There you'll need to select foreground and background images. Click next, verify icons and finish.
 
-### Step 5. Setup APIs
+### Step 6. Setup APIs
 - Go to app module build gradle file and update the URLs mentioned under defaultConfig block.
 - Verify the endpoints mentioned in APIConstants.kt file.
 
-### Step 6: Move the project setup code to actual repository
+### Step 7: Move the project setup code to actual repository
 - Once project setup is done, move all the project files to the empty repository of your project and commit.
 - You'll need to open the project from that folder in Android Studio going forward.
 
