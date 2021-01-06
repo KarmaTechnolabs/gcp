@@ -30,6 +30,14 @@ android {
         buildConfigField "String", "CONTACT_US", '"http://159.89.167.87/jeewanjyoti/contact-us"'
         buildConfigField "String", "ABOUT_US", '"http://159.89.167.87/jeewanjyoti/about-us"'
         buildConfigField "String", "OUT_TEAM", '"http://159.89.167.87/jeewanjyoti/our-team"'
+
+        //facebook login keys
+        resValue "string", "facebook_app_id", "418562175019271"
+        resValue "string", "fb_login_protocol_scheme", "fb418562175019271"
+
+        //google login api key
+        buildConfigField "String", "GOOGLE_LOGIN_CLIENT_KEY",
+                "\"926285547778-fp9ohfnao5jvhogibkj8gqk3efudk5h9.apps.googleusercontent.com\""
     }
 
     buildTypes {
@@ -129,6 +137,10 @@ dependencies {
     // compress images
     implementation 'id.zelory:compressor:3.0.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
+    //social login
+    implementation "com.google.android.gms:play-services-auth:19.0.0"
+    implementation 'com.facebook.android:facebook-login:8.1.0'
 
     //Custom Loading Indicator
     implementation 'com.wang.avi:library:2.1.3'

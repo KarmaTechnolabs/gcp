@@ -1,5 +1,6 @@
 package com.app.masterproject.ui.fragments
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -23,8 +24,10 @@ import com.app.masterproject.custom.showToast
 import com.app.masterproject.databinding.FragmentLoginBinding
 import com.app.masterproject.ui.activities.MainActivity
 import com.app.masterproject.utils.Constants
+import com.app.masterproject.utils.sociallogin.FacebookLoginManager
 import com.app.masterproject.utils.UserStateManager
 import com.app.masterproject.utils.Validator
+import com.app.masterproject.utils.sociallogin.GoogleLoginManager
 import com.app.masterproject.viewmodel.OnBoardViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -33,6 +36,8 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentLoginBinding
     private val onBoardViewModel by activityViewModels<OnBoardViewModel>()
+    private lateinit var facebookLoginManager: FacebookLoginManager
+    private lateinit var googleLoginManager: GoogleLoginManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +49,11 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
 
+        facebookLoginManager = FacebookLoginManager(this)
+        googleLoginManager = GoogleLoginManager(this)
+
+        initView()
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
@@ -115,7 +123,25 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
                 )
 
             }
+            binding.fbLogin -> {
+                facebookLoginManager.login { accessToken ->
+                    //TODO - Call Login API with FB Access Token
+                }
+            }
+            binding.googleLogin -> {
+                googleLoginManager.login { accessToken ->
+                    //TODO - Call Login API with Google Access Token
+                }
+            }
         }
+
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        facebookLoginManager.onActivityResult(requestCode, resultCode, data)
+        googleLoginManager.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun isDataValid(): Boolean {

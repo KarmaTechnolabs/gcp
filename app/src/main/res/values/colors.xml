@@ -23,6 +23,7 @@
     <color name="colorGreyText">#A5A5A5</color>
     <color name="colorUnselectedDot">#4DFFFFFF</color>
     <color name="colorJobInterviewerBorder">#CACACA</color>
+    <color name="ripple_default_color">#1f000000</color>
 
     <color name="backGroundColorViewDivider">#D8D8D8</color>
     <color name="backGroundColorPagerIndicator">#EFEFF4</color>

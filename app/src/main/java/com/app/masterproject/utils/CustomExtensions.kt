@@ -1,11 +1,15 @@
 package com.app.masterproject.utils
 
+import android.app.Activity
+import android.content.DialogInterface
 import android.os.Handler
 import android.os.SystemClock
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 
 /**
  * Extension method to remove the required boilerplate for running code after a view has been
@@ -87,4 +91,20 @@ fun EditText.showForcedKeyboard() {
             e.printStackTrace()
         }
     }, 200)
+}
+
+fun Activity.showInfoAlert(title: String, message: String) {
+    AlertDialog.Builder(this)
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton("OK") { _, _ -> }
+        .create().show()
+}
+
+fun Fragment.showInfoAlert(title: String, message: String) {
+    AlertDialog.Builder(requireContext())
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton("OK") { _, _ -> }
+        .create().show()
 }
