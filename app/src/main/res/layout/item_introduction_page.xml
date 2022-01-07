@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.app.masterproject.model.IntroductionModel" />
+            type="com.app.estore.model.IntroductionModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

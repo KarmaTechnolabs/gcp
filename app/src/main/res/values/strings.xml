@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">All Pharma</string>
+    <string name="app_name">EStore</string>
 
     <!-- login screen -->
     <string name="login">Login</string>
