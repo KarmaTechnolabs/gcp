@@ -26,7 +26,6 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:onClick="@{clickListener::onClick}"
             android:padding="@dimen/mediator_size"
-            android:tint="@color/colorGreen"
             app:srcCompat="@drawable/ic_back_arrow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +46,7 @@
                     android:id="@+id/tv_label_register"
                     style="@style/TextViewPrimaryHugeStyleHeader"
                     android:text="@string/register"
-                    android:textColor="@color/colorGreen"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
