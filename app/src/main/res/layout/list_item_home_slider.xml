@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.app.estore.model.HomeSliderModel" />
+            type="com.app.gcp.model.HomeSliderModel" />
 
         <variable
             name="needToShowTitle"

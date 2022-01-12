@@ -6,13 +6,13 @@
     <data>
 
         <import type="android.view.View" />
-        <import type="com.app.estore.utils.Utils"/>
+        <import type="com.app.gcp.utils.Utils"/>
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
         <variable
             name="model"
-            type="com.app.estore.api.responsemodel.LoginResponse" />
+            type="com.app.gcp.api.responsemodel.LoginResponse" />
         <variable
             name="isLogin"
             type="boolean" />

@@ -26,9 +26,9 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:onClick="@{clickListener::onClick}"
             android:padding="@dimen/mediator_size"
-            app:srcCompat="@drawable/ic_back_arrow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_arrow" />
 
         <ScrollView
             android:id="@+id/scroll"
@@ -92,7 +92,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/ti_email"
+                    android:id="@+id/ti_phone"
                     style="@style/InputTextLayoutStyle"
                     android:layout_marginTop="@dimen/regular_size"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -100,15 +100,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/ti_last_name">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tie_email"
+                        android:id="@+id/tie_phone"
                         style="@style/TextInputEditBoxStyle"
-                        android:drawableEnd="@drawable/ic_email"
+                        android:drawableEnd="@drawable/ic_phone"
                         android:drawablePadding="@dimen/normal_size"
-                        android:hint="@string/hint_email"
+                        android:hint="@string/hint_phone"
                         android:imeOptions="actionNext"
-                        android:inputType="textEmailAddress"
-                        android:maxLength="@integer/max_email_length"
-                        tools:text="vishal@mailinator.com" />
+                        android:inputType="phone"
+                        android:maxLength="@integer/max_number"
+                        tools:text="1234567890" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -117,8 +117,9 @@
                     android:layout_marginTop="@dimen/regular_size"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ti_email"
+                    app:layout_constraintTop_toBottomOf="@+id/ti_phone"
                     app:passwordToggleEnabled="true"
+                    android:visibility="gone"
                     app:passwordToggleTint="@color/colorGray">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -135,6 +136,7 @@
                     android:id="@+id/ti_confirm_password"
                     style="@style/InputTextLayoutStyle"
                     android:layout_marginTop="@dimen/regular_size"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ti_password"
@@ -154,11 +156,11 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_terms_and_privacy"
                     style="@style/TextViewPrimaryStyle"
-                    android:layout_marginTop="@dimen/huge_size"
                     android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/huge_size"
                     android:gravity="center"
                     android:text="@string/by_clicking_on_register_button_text"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorUnselectedDot"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ti_confirm_password" />
@@ -166,8 +168,9 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_register"
                     style="@style/LoginButtonStyle"
+                    android:background="@drawable/ic_login"
                     android:onClick="@{clickListener::onClick}"
-                    android:text="@string/register"
+                    android:text="@string/send_otp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_terms_and_privacy" />
@@ -177,9 +180,9 @@
                     android:id="@+id/tv_login"
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
-                    android:gravity="center"
                     android:layout_marginTop="@dimen/huge_size"
                     android:layout_marginBottom="@dimen/mediator_size"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

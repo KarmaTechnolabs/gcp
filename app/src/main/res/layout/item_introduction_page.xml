@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.app.estore.model.IntroductionModel" />
+            type="com.app.gcp.model.IntroductionModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_splash_logo" />
+            tools:src="@drawable/ic_logo" />
 
         <TextView
             android:id="@+id/titleTV"

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <import type="com.app.estore.utils.Constants"/>
+        <import type="com.app.gcp.utils.Constants"/>
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
         <variable
             name="model"
-            type="com.app.estore.api.responsemodel.LoginResponse" />
+            type="com.app.gcp.api.responsemodel.LoginResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

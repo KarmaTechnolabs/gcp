@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">EStore</string>
+    <string name="app_name">GCP</string>
 
     <!-- login screen -->
     <string name="login">Login</string>
     <string name="hint_email">Email Address</string>
+    <string name="hint_phone">Phone Number</string>
     <string name="hint_password">Password</string>
     <string name="password_error">Please enter the password</string>
     <string name="forgot_password">Forgot Password?</string>
@@ -12,6 +13,7 @@
     <string name="don_t_have_an_account_register">Don\'t have an account? Register</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="register">Register</string>
+    <string name="send_otp">Send OTP</string>
 
     <!--Splash-->
     <string name="splash_logo">Splash Logo</string>
@@ -19,6 +21,7 @@
     <!-- forgot password screen -->
     <string name="forgot_password_label">Forgot Password</string>
     <string name="enter_registered_email_to_receive_link">Enter your email below to receive your password reset link.</string>
+    <string name="enter_registered_phone_number_for_otp">Enter your phone number below to receive your OTP.</string>
     <string name="send_link">Send Link</string>
 
     <!-- register screen-->
@@ -42,6 +45,7 @@
     <string name="validation_empty_how_you_hear_about_us">Please enter how did you hear about us</string>
     <string name="validation_empty_member_of_app">Please select member type</string>
     <string name="enter_valid_email">Enter valid email</string>
+    <string name="enter_valid_phone">Enter valid phone number</string>
     <string name="enter_password">Enter password</string>
     <string name="enter_confirm_password">Enter confirm password</string>
     <string name="enter_valid_password">Password must be 5–15 characters with minimum 1 Uppercase, 1 Lowercase, 1 Numeric and 1 Special character.</string>
