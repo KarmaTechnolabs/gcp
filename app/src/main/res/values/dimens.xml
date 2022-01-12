@@ -14,6 +14,7 @@
     <dimen name="back_margin_for_full_screen">24dp</dimen>
 
     <!-- Common padding or margin size -->
+    <dimen name="zero_size">0dp</dimen>
     <dimen name="tiny_size">@dimen/_2sdp</dimen>
     <dimen name="mini_size">@dimen/_4sdp</dimen>
     <dimen name="small_size">@dimen/_6sdp</dimen>

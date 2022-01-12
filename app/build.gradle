@@ -138,10 +138,6 @@ dependencies {
     implementation 'id.zelory:compressor:3.0.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 
-    //social login
-    implementation "com.google.android.gms:play-services-auth:20.0.1"
-    implementation 'com.facebook.android:facebook-login:8.1.0'
-
     //Custom Loading Indicator
     implementation 'com.wang.avi:library:2.1.3'
 }

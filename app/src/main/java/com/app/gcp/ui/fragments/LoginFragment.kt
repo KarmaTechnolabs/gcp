@@ -24,20 +24,14 @@ import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentLoginBinding
 import com.app.gcp.ui.activities.MainActivity
 import com.app.gcp.utils.Constants
-import com.app.gcp.utils.sociallogin.FacebookLoginManager
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.utils.Validator
-import com.app.gcp.utils.sociallogin.GoogleLoginManager
 import com.app.gcp.viewmodel.OnBoardViewModel
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.iid.FirebaseInstanceId
 
 class LoginFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentLoginBinding
     private val onBoardViewModel by activityViewModels<OnBoardViewModel>()
-    private lateinit var facebookLoginManager: FacebookLoginManager
-    private lateinit var googleLoginManager: GoogleLoginManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,20 +44,8 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        facebookLoginManager = FacebookLoginManager(this)
-        googleLoginManager = GoogleLoginManager(this)
-
         initView()
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    return@OnCompleteListener
-                }
-                // Get new Instance ID token
-                val token = task.result?.token
-                if (!token.isNullOrEmpty())
-                    UserStateManager.saveFirebaseToken(token)
-            })
+
 
         onBoardViewModel.loginResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
@@ -96,8 +78,6 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         registerSpan.setSpan(ForegroundColorSpan(ContextCompat.getColor(requireActivity(), R.color.colorPrimary)), 0, getString(R.string.register).length, 0)
         registerSpan.setSpan(StyleSpan(Typeface.BOLD), 0, getString(R.string.register).length, 0)
         registerSpan.setSpan(StyleSpan(Typeface.ITALIC), 0, getString(R.string.register).length, 0)
-        binding.tvRegister.text = customFontColorSpan.append(" ").append(registerSpan)
-        binding.tvRegister.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun onClick(view: View?) {
@@ -123,48 +103,33 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
                 )
 
             }
-            binding.fbLogin -> {
-                facebookLoginManager.login { accessToken ->
-                    //TODO - Call Login API with FB Access Token
-                }
-            }
-            binding.googleLogin -> {
-                googleLoginManager.login { accessToken ->
-                    //TODO - Call Login API with Google Access Token
-                }
-            }
+
         }
 
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        facebookLoginManager.onActivityResult(requestCode, resultCode, data)
-        googleLoginManager.onActivityResult(requestCode, resultCode, data)
-    }
-
     private fun isDataValid(): Boolean {
-        val email = binding.tiePhone.text
+        val email = binding.tieEmail.text
         val password = binding.tiePassword.text
 
-        binding.tiePhone.error = ""
+        binding.tieEmail.error = ""
         binding.tiPassword.error = ""
 
         return when {
             !Validator.isEmailValid(email) -> {
-//                showToast(R.string.enter_valid_email)
-                binding.tiePhone.error = getString(R.string.enter_valid_phone)
+                showToast(R.string.enter_valid_email)
+                binding.tieEmail.error = getString(R.string.enter_valid_email)
                 false
             }
             TextUtils.isEmpty(password) -> {
-//                showToast(R.string.password_error)
+                showToast(R.string.password_error)
                 binding.tiPassword.error = getString(R.string.password_error)
                 false
             }
 
             !Validator.isPasswordValid(password) -> {
-//                showToast(R.string.enter_valid_password)
+                showToast(R.string.enter_valid_password)
                 binding.tiPassword.error = getString(R.string.enter_valid_password)
                 false
             }

@@ -53,6 +53,13 @@
         <item name="android:layout_marginBottom">@dimen/medium_size</item>
     </style>
 
+    <style name="TextViewPrimarySmallStyleHeader" parent="TextViewPrimaryHugeStyleHeader">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_marginTop">@dimen/normal_size</item>
+        <item name="android:layout_marginBottom">@dimen/normal_size</item>
+    </style>
+
     <style name="MoreTextViewStyle" parent="TextViewPrimaryHugeStyleHeader">
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:gravity">start</item>
