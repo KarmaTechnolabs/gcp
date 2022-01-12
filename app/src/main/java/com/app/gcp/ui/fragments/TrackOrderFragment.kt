@@ -2,6 +2,7 @@ package com.app.gcp.ui.fragments
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,22 +15,23 @@ import com.app.gcp.api.requestmodel.ForgotPasswordRequestModel
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentForgotPasswordBinding
+import com.app.gcp.databinding.FragmentTrackOrderBinding
 import com.app.gcp.ui.dialogs.LogOutAlertDialog
 import com.app.gcp.ui.dialogs.PasswordResetLinkAlertDialog
 import com.app.gcp.utils.Validator
 import com.app.gcp.viewmodel.OnBoardViewModel
 
-class ForgotPasswordFragment : BaseFragment(), View.OnClickListener,
+class TrackOrderFragment : BaseFragment(), View.OnClickListener,
     PasswordResetLinkAlertDialog.ResetClickListener {
 
-    private lateinit var binding: FragmentForgotPasswordBinding
+    private lateinit var binding: FragmentTrackOrderBinding
     private val onBoardViewModel by activityViewModels<OnBoardViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
+        binding = FragmentTrackOrderBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -46,16 +48,6 @@ class ForgotPasswordFragment : BaseFragment(), View.OnClickListener,
             }
         }
 
-        binding.tieEmail.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                binding.viewEmail.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorPrimary))
-                binding.tieEmail.compoundDrawableTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorPrimary))
-            } else {
-                binding.viewEmail.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorGray))
-                binding.tieEmail.compoundDrawableTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorGray))
-            }
-        }
-
     }
 
 
@@ -64,13 +56,10 @@ class ForgotPasswordFragment : BaseFragment(), View.OnClickListener,
             R.id.iv_back, R.id.tv_back_to_login -> {
                 findNavController().navigateUp()
             }
-            R.id.btn_send_link -> {
+            R.id.btn_track_order -> {
                 if (isDataValid()) {
 //                    val email = binding.tieEmail.text
-                    val resetPasswordDialog =
-                        PasswordResetLinkAlertDialog.newInstance()
-                    resetPasswordDialog.setListener(this)
-                    resetPasswordDialog.show(childFragmentManager, "Reset-Password")
+                    findNavController().navigateUp()
 //                    onBoardViewModel.callForgotPasswordAPI(
 //                        ForgotPasswordRequestModel(
 //                            email.toString()
@@ -82,14 +71,14 @@ class ForgotPasswordFragment : BaseFragment(), View.OnClickListener,
     }
 
     private fun isDataValid(): Boolean {
-        val email = binding.tieEmail.text
+        val trackingNumber = binding.tieTrackingNumber.text
 
-        binding.tiEmail.error = ""
+        binding.tieTrackingNumber.error = ""
 
         return when {
-            !Validator.isEmailValid(email) -> {
-                showToast(R.string.enter_valid_email)
-                binding.tieEmail.error = getString(R.string.enter_valid_email)
+            TextUtils.isEmpty(trackingNumber) -> {
+                showToast(R.string.password_error)
+                binding.tieTrackingNumber.error = getString(R.string.track_number_error)
                 false
             }
             else -> {

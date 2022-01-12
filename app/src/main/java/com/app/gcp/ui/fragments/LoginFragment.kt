@@ -1,6 +1,7 @@
 package com.app.gcp.ui.fragments
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -46,7 +47,6 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
 
         initView()
 
-
         onBoardViewModel.loginResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(response) { it, message ->
@@ -78,29 +78,50 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         registerSpan.setSpan(ForegroundColorSpan(ContextCompat.getColor(requireActivity(), R.color.colorPrimary)), 0, getString(R.string.register).length, 0)
         registerSpan.setSpan(StyleSpan(Typeface.BOLD), 0, getString(R.string.register).length, 0)
         registerSpan.setSpan(StyleSpan(Typeface.ITALIC), 0, getString(R.string.register).length, 0)
+
+        binding.tieEmail.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.viewEmail.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorPrimary))
+                binding.tieEmail.compoundDrawableTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorPrimary))
+            } else {
+                binding.viewEmail.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorGray))
+                binding.tieEmail.compoundDrawableTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorGray))
+            }
+        }
+        binding.tiePassword.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.viewPassword.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorPrimary))
+                binding.tiePassword.compoundDrawableTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorPrimary))
+            } else {
+                binding.viewPassword.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorGray))
+                binding.tiePassword.compoundDrawableTintList = ColorStateList.valueOf(ContextCompat.getColor(requireActivity(),R.color.colorGray))
+            }
+        }
     }
 
     override fun onClick(view: View?) {
         when (view) {
             binding.tvForgotPassword -> findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment())
 
+            binding.btnTrackOrder -> findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToTrackOrderFragment())
+
             binding.btnLogin -> {
-                /*if (isDataValid()) {
+                if (isDataValid()) {
                     val email = binding.tieEmail.text
                     val password = binding.tiePassword.text
-                    onBoardViewModel.callLoginAPI(
-                        LoginRequestModel(
-                            email.toString(),
-                            password.toString(),
-                            getPreferenceValue(Constants.PREF_FIREBASE_TOKEN, "")
-                        )
-                    )
-                }*/
+//                    onBoardViewModel.callLoginAPI(
+//                        LoginRequestModel(
+//                            email.toString(),
+//                            password.toString(),
+//                            getPreferenceValue(Constants.PREF_FIREBASE_TOKEN, "")
+//                        )
+//                    )
+                }
 
-                requireActivity().gotoActivity(
-                    MainActivity::class.java,
-                    clearAllActivity = true
-                )
+//                requireActivity().gotoActivity(
+//                    MainActivity::class.java,
+//                    clearAllActivity = true
+//                )
 
             }
 
@@ -124,13 +145,13 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             }
             TextUtils.isEmpty(password) -> {
                 showToast(R.string.password_error)
-                binding.tiPassword.error = getString(R.string.password_error)
+                binding.tiePassword.error = getString(R.string.password_error)
                 false
             }
 
             !Validator.isPasswordValid(password) -> {
                 showToast(R.string.enter_valid_password)
-                binding.tiPassword.error = getString(R.string.enter_valid_password)
+                binding.tiePassword.error = getString(R.string.enter_valid_password)
                 false
             }
             else -> {

@@ -1,4 +1,4 @@
-package com.app.gcp.custom
+package com.app.gcp.ui.dialogs
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

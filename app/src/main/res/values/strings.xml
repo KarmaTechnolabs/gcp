@@ -16,15 +16,25 @@
     <string name="send_otp">Send OTP</string>
     <string name="welcome">Welcome</string>
     <string name="track_your_order">Track your order</string>
+    <string name="please_enter_your_registered_details">Please enter your registered details</string>
+    <string name="our_other_products_services">Our other products/services</string>
 
     <!--Splash-->
     <string name="splash_logo">Splash Logo</string>
 
     <!-- forgot password screen -->
-    <string name="forgot_password_label">Forgot Password</string>
-    <string name="enter_registered_email_to_receive_link">Enter your email below to receive your password reset link.</string>
+    <string name="forgot_password_label">Forgot your password</string>
+    <string name="enter_registered_email_to_receive_link">Enter enter your registered email below to receive your password reset link.</string>
     <string name="enter_registered_phone_number_for_otp">Enter your phone number below to receive your OTP.</string>
-    <string name="send_link">Send Link</string>
+    <string name="request_reset_link">Request reset link</string>
+    <string name="back_to_login">Back to login</string>
+    <string name="back_to_login_u"><u>Back to login</u></string>
+
+    <!-- track order screen -->
+    <string name="please_enter_your_tracking_number">Please enter your tracking number</string>
+    <string name="enter_your_tracking_number">Enter your tracking number</string>
+    <string name="track_order">Track Order</string>
+    <string name="track_number_error">Please enter the tracking number</string>
 
     <!-- register screen-->
     <string name="hint_first_name">First Name</string>
@@ -179,6 +189,6 @@
     <string name="fb_login_failed">Some thing went wrong from Facebook, Try normal login</string>
     <string name="google_login_failed">Some thing went wrong from Google, Try normal login</string>
     <string name="or_continue_with">or continue with</string>
-    <string name="please_enter_your_registered_details">Please enter your registered details</string>
-    <string name="our_other_products_services">Our other products/services</string>
+
+
 </resources>

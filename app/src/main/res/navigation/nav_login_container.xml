@@ -23,6 +23,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_trackOrderFragment"
+            app:destination="@id/trackOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -34,4 +37,9 @@
         android:name="com.app.gcp.ui.fragments.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/trackOrderFragment"
+        android:name="com.app.gcp.ui.fragments.TrackOrderFragment"
+        android:label="TrackOrderFragment"
+        tools:layout="@layout/fragment_track_order"/>
 </navigation>

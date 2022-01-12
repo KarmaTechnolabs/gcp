@@ -12,7 +12,7 @@ import com.app.gcp.BuildConfig
 import com.app.gcp.R
 import com.app.gcp.api.responsemodel.LoginResponse
 import com.app.gcp.base.BaseFragment
-import com.app.gcp.custom.LogOutAlertDialog
+import com.app.gcp.ui.dialogs.LogOutAlertDialog
 import com.app.gcp.custom.gotoActivity
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentMoreNavigationBinding
