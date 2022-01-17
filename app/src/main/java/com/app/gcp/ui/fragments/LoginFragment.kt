@@ -23,6 +23,7 @@ import com.app.gcp.custom.gotoActivity
 import com.app.gcp.custom.savePreferenceValue
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentLoginBinding
+import com.app.gcp.ui.activities.DashboardActivity
 import com.app.gcp.ui.activities.MainActivity
 import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
@@ -118,10 +119,10 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
 //                    )
                 }
 
-//                requireActivity().gotoActivity(
-//                    MainActivity::class.java,
-//                    clearAllActivity = true
-//                )
+                requireActivity().gotoActivity(
+                    DashboardActivity::class.java,
+                    clearAllActivity = true
+                )
 
             }
 
@@ -131,6 +132,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun isDataValid(): Boolean {
+        return true
         val email = binding.tieEmail.text
         val password = binding.tiePassword.text
 

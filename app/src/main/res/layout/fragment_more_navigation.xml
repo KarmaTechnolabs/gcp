@@ -144,7 +144,7 @@
                 style="@style/MoreTextViewStyle"
                 android:background="?attr/selectableItemBackground"
                 android:onClick="@{clickListener::onClick}"
-                android:text="@string/logout"
+                android:text="@string/menu_logout"
                 android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
 
             <View

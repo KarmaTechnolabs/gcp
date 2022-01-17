@@ -1,38 +1,40 @@
 package com.app.gcp.ui.fragments
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.app.gcp.R
-import com.app.gcp.api.requestmodel.ForgotPasswordRequestModel
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.showToast
-import com.app.gcp.databinding.FragmentForgotPasswordBinding
 import com.app.gcp.databinding.FragmentTrackOrderBinding
-import com.app.gcp.ui.dialogs.LogOutAlertDialog
 import com.app.gcp.ui.dialogs.PasswordResetLinkAlertDialog
-import com.app.gcp.utils.Validator
 import com.app.gcp.viewmodel.OnBoardViewModel
 
 class TrackOrderFragment : BaseFragment(), View.OnClickListener,
     PasswordResetLinkAlertDialog.ResetClickListener {
 
-    private lateinit var binding: FragmentTrackOrderBinding
+    private var _binding: FragmentTrackOrderBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
     private val onBoardViewModel by activityViewModels<OnBoardViewModel>()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTrackOrderBinding.inflate(inflater, container, false)
-        return binding.root
+        _binding = FragmentTrackOrderBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +51,6 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
         }
 
     }
-
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -89,5 +90,10 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
 
     override fun onClick() {
         binding.tvBackToLogin.performClick()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
