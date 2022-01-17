@@ -41,5 +41,10 @@
         android:id="@+id/trackOrderFragment"
         android:name="com.app.gcp.ui.fragments.TrackOrderFragment"
         android:label="TrackOrderFragment"
-        tools:layout="@layout/fragment_track_order"/>
+        tools:layout="@layout/fragment_track_order">
+        <argument
+            android:name="isBack"
+            app:argType="boolean"
+            android:defaultValue="true"/>
+    </fragment>
 </navigation>

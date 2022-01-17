@@ -4,9 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<!--        <variable-->
-<!--            name="isBack"-->
-<!--            type="Boolean" />-->
+
+        <variable
+            name="isBack"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
@@ -121,6 +125,7 @@
                 android:paddingEnd="@dimen/mini_size"
                 android:text="@string/back_to_login_u"
                 android:textColor="@color/colorPrimary"
+                android:visibility="@{isBack?View.VISIBLE:View.GONE}"
                 app:fontFamily="@font/gotham_book"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

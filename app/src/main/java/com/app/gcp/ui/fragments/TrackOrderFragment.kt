@@ -25,7 +25,7 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
     // onDestroyView.
     private val binding get() = _binding!!
     private val onBoardViewModel by activityViewModels<OnBoardViewModel>()
-
+    private val args: TrackOrderFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -40,7 +40,7 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.clickListener = this
-
+        binding.isBack = args.isBack
         onBoardViewModel.forgotPasswordResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(response) { _, message ->
