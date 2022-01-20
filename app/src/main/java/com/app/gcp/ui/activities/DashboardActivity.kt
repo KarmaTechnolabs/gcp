@@ -2,6 +2,7 @@ package com.app.gcp.ui.activities
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
@@ -16,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.app.gcp.R
 import com.app.gcp.base.BaseActivity
+import com.app.gcp.custom.hideKeyboard
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.ActivityDashboardBinding
 import com.app.gcp.ui.dialogs.LogOutAlertDialog
@@ -25,7 +27,7 @@ import com.app.gcp.viewmodel.DashBoardViewModel
 import com.app.gcp.viewmodel.MoreViewModel
 
 class DashboardActivity : BaseActivity(), View.OnClickListener,
-    LogOutAlertDialog.LogoutClickListener {
+    LogOutAlertDialog.LogoutClickListener, DrawerLayout.DrawerListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityDashboardBinding
@@ -59,6 +61,8 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        binding.drawerLayout.addDrawerListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -97,5 +101,25 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
 //            }
 //        }
     }
+
+    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+        hideKeyboard(drawerView)
+        window.decorView.clearFocus()
+    }
+
+    override fun onDrawerOpened(drawerView: View) {
+        hideKeyboard(drawerView)
+        window.decorView.clearFocus()
+    }
+
+    override fun onDrawerClosed(drawerView: View) {
+        hideKeyboard(drawerView)
+        window.decorView.clearFocus()
+    }
+
+    override fun onDrawerStateChanged(newState: Int) {
+
+    }
+
 
 }

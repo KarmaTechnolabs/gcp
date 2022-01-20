@@ -21,7 +21,10 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal_size"
+        android:layout_marginEnd="@dimen/normal_size"
+        android:layout_marginStart="@dimen/normal_size"
+        android:layout_marginTop="@dimen/mini_size"
+        android:layout_marginBottom="@dimen/mini_size"
         app:cardCornerRadius="@dimen/normal_size"
         app:strokeColor="@color/colorGray"
         app:strokeWidth="@dimen/_1sdp">
@@ -33,19 +36,21 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_order_number"
-                style="@style/TextViewPrimaryMediumStyle"
+                style="@style/TextViewPrimaryStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gotham_bold"
-                android:text="@string/order"
+                tools:text="@string/order"
+                android:text="@{model.orderNumber}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_order_date"
-                style="@style/TextViewPrimaryMediumStyle"
+                style="@style/TextViewPrimarySmallStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{model.orderDate}"
                 android:layout_marginTop="@dimen/small_size"
                 android:fontFamily="@font/gotham_black"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +59,10 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_name"
-                style="@style/TextViewPrimaryMediumStyle"
+                style="@style/TextViewPrimarySmallStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{model.name}"
                 android:layout_marginTop="@dimen/normal_size"
                 android:fontFamily="@font/gotham_black"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +71,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_order_status"
-                style="@style/TextViewPrimaryMediumStyle"
+                style="@style/TextViewPrimarySmallStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_corner_gray_drawable"
@@ -73,6 +79,7 @@
                 android:paddingLeft="@dimen/medium_size"
                 android:paddingTop="@dimen/normal_size"
                 android:paddingRight="@dimen/medium_size"
+                android:text="@{model.orderStatus}"
                 android:paddingBottom="@dimen/normal_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
