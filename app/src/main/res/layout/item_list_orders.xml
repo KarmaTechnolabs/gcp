@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.app.gcp.api.responsemodel.OrdersResponse" />
+
+        <variable
+            name="position"
+            type="int" />
+        <import type="com.app.gcp.utils.DateTimeUtils"/>
+        <import type="com.app.gcp.utils.DateTimeConstants"/>
+        <variable
+            name="clickListener"
+            type="com.app.gcp.listeners.ItemClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_size"
+        app:cardCornerRadius="@dimen/normal_size"
+        app:strokeColor="@color/colorGray"
+        app:strokeWidth="@dimen/_1sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/normal_size">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_order_number"
+                style="@style/TextViewPrimaryMediumStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham_bold"
+                android:text="@string/order"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_order_date"
+                style="@style/TextViewPrimaryMediumStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_size"
+                android:fontFamily="@font/gotham_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_order_number"
+                tools:text="@string/order_date" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name"
+                style="@style/TextViewPrimaryMediumStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_size"
+                android:fontFamily="@font/gotham_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_order_date"
+                tools:text="Excel Inc. | Mr. John Doe" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_order_status"
+                style="@style/TextViewPrimaryMediumStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corner_gray_drawable"
+                android:fontFamily="@font/gotham_black"
+                android:paddingLeft="@dimen/medium_size"
+                android:paddingTop="@dimen/normal_size"
+                android:paddingRight="@dimen/medium_size"
+                android:paddingBottom="@dimen/normal_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/pending..." />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
