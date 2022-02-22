@@ -25,7 +25,9 @@ import com.app.gcp.utils.UserStateManager
 import com.app.gcp.utils.Utils
 import com.app.gcp.viewmodel.DashBoardViewModel
 import com.app.gcp.viewmodel.MoreViewModel
+import android.widget.Toast
 
+private var back_pressed: Long = 0
 class DashboardActivity : BaseActivity(), View.OnClickListener,
     LogOutAlertDialog.LogoutClickListener, DrawerLayout.DrawerListener {
 
@@ -120,6 +122,12 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
     override fun onDrawerStateChanged(newState: Int) {
 
     }
-
+//    override fun onBackPressed() {
+//        if (back_pressed + 2000 > System.currentTimeMillis())
+//            super.onBackPressed()
+//        else
+//            showToast(resources.getString(R.string.press_again))
+//        back_pressed = System.currentTimeMillis()
+//    }
 
 }

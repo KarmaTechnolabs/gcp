@@ -11,8 +11,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.app.gcp.R
 import com.app.gcp.base.BaseFragment
+import com.app.gcp.custom.gotoActivity
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentTrackOrderBinding
+import com.app.gcp.ui.activities.MainActivity
+import com.app.gcp.ui.activities.OrderStatusActivity
 import com.app.gcp.ui.dialogs.PasswordResetLinkAlertDialog
 import com.app.gcp.viewmodel.OnBoardViewModel
 
@@ -60,7 +63,12 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
             R.id.btn_track_order -> {
                 if (isDataValid()) {
 //                    val email = binding.tieEmail.text
-                    findNavController().navigateUp()
+//                    findNavController().navigateUp()
+                    requireActivity().gotoActivity(
+                        OrderStatusActivity::class.java,
+                        clearAllActivity = false,
+                        needToFinish = false
+                    )
 //                    onBoardViewModel.callForgotPasswordAPI(
 //                        ForgotPasswordRequestModel(
 //                            email.toString()

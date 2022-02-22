@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isBack"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.ForgotPasswordFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_marginTop="@dimen/back_margin_for_full_screen"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="@{clickListener::onClick}"
+            android:padding="@dimen/mediator_size"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_arrow" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/fragment_horizontal_padding"
+            android:paddingEnd="@dimen/fragment_horizontal_padding">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/empty_space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_size_extra_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_logo" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_label_app_name"
+                style="@style/TextViewPrimaryHugeStyleHeader"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/empty_space" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_label_forgot_password"
+                style="@style/TextViewPrimaryMediumStyleHeader"
+                android:layout_marginTop="@dimen/margin_size_big"
+                android:gravity="center"
+                android:text="@string/track_your_order"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_label_app_name" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_enter_register_email_label"
+                style="@style/TextViewPrimarySmallStyleHeader"
+                android:gravity="center"
+                android:paddingStart="@dimen/mini_size"
+                android:paddingEnd="@dimen/mini_size"
+                android:text="@string/please_enter_your_tracking_number"
+                android:textColor="@color/colorPrimary"
+                app:fontFamily="@font/gotham_book"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_label_forgot_password" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_tracking_number"
+                style="@style/InputTextLayoutStyle"
+                android:layout_marginTop="@dimen/huge_size"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_enter_register_email_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tie_tracking_number"
+                    style="@style/TextInputEditBoxStyle"
+                    android:hint="@string/enter_your_tracking_number"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="@integer/max_email_length"
+                    tools:text="12345678" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_track_order"
+                style="@style/LoginButtonStyle"
+                android:background="@drawable/ic_login"
+                android:onClick="@{clickListener::onClick}"
+                android:text="@string/track_order"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ti_tracking_number" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_back_to_login"
+                style="@style/TextViewPrimaryMediumStyle"
+                android:layout_marginTop="@dimen/medium_size"
+                android:gravity="end"
+                android:onClick="@{clickListener::onClick}"
+                android:paddingStart="@dimen/mini_size"
+                android:paddingEnd="@dimen/mini_size"
+                android:text="@string/back_to_login_u"
+                android:textColor="@color/colorPrimary"
+                android:visibility="@{isBack?View.VISIBLE:View.GONE}"
+                app:fontFamily="@font/gotham_book"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_track_order" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

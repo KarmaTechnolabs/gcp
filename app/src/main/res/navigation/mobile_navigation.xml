@@ -27,4 +27,5 @@
         android:name="com.app.gcp.ui.fragments.FAQsFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_faqs" />
+
 </navigation>

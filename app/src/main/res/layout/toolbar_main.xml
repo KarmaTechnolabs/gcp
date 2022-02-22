@@ -35,6 +35,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="@dimen/mediator_size"
                 app:srcCompat="@drawable/ic_back_arrow"
+                android:tint="@color/colorWhiteNight"
                 android:visibility="@{isBackButtonHide?View.INVISIBLE:View.VISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +50,7 @@
                 android:textSize="@dimen/text_size_huge"
                 android:visibility="@{isFromBottomMenu?View.GONE:View.VISIBLE}"
                 app:fontFamily="@font/gotham_bold"
+                android:textColor="@color/colorWhiteNight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_media"
                 app:layout_constraintStart_toEndOf="@id/iv_back"

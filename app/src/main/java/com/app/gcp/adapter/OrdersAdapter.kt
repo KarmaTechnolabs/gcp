@@ -38,7 +38,7 @@ class OrdersAdapter(context: Context?) :
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence): FilterResults {
                 val results = FilterResults()
-                if (charSequence == null || charSequence.length == 0) {
+                if (charSequence == null || charSequence.isEmpty()) {
                     results.values = originalData
                     results.count = originalData.size
                 } else {
@@ -70,21 +70,20 @@ class OrdersAdapter(context: Context?) :
     }
 
     inner class ViewHolder(binding: ItemListOrdersBinding) :
-        RecyclerView.ViewHolder(binding.getRoot()) {
-        var binding: ItemListOrdersBinding
+        RecyclerView.ViewHolder(binding.root) {
+        var binding: ItemListOrdersBinding = binding
         fun setBinding(model: OrdersResponse?) {
-            binding.setModel(model)
+            binding.model = model
             binding.clickListener = clickListener
             binding.position = absoluteAdapterPosition
             binding.executePendingBindings()
         }
 
         init {
-            this.binding = binding
-            binding.getRoot().setOnClickListener(View.OnClickListener { view ->
+            binding.root.setOnClickListener(View.OnClickListener { view ->
                 if (onItemClickListener != null) {
-                    val model:OrdersResponse = getListItem(adapterPosition)
-                    val selectedPos = adapterPosition
+                    val model:OrdersResponse = getListItem(bindingAdapterPosition)
+                    val selectedPos = bindingAdapterPosition
                     notifyDataSetChanged()
                     onItemClickListener.onItemClick(view, model, selectedPos)
                 }

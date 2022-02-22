@@ -11,18 +11,21 @@ import com.app.gcp.R
 import com.app.gcp.adapter.OrdersAdapter
 import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.base.BaseFragment
+import com.app.gcp.custom.gotoActivity
 import com.app.gcp.databinding.FragmentOrdersBinding
 import com.app.gcp.listeners.ItemClickListener
+import com.app.gcp.ui.activities.OrderDetailActivity
+import com.app.gcp.ui.activities.OrderStatusUpdateActivity
 import com.app.gcp.viewmodel.DashBoardViewModel
-import java.util.ArrayList
+import java.util.*
 
 class OrdersFragment : BaseFragment(), View.OnClickListener,
     ItemClickListener<OrdersResponse> {
 
     private lateinit var ordersViewModel: DashBoardViewModel
     private var _binding: FragmentOrdersBinding? = null
-    private val gameListArray = mutableListOf<OrdersResponse>()
-    private var gameListAdapter: OrdersAdapter? = null
+    private val orderListArray = mutableListOf<OrdersResponse>()
+    private var orderListAdapter: OrdersAdapter? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -53,22 +56,50 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         binding.clickListener = this
 
         for (i in 1..4) {
-            gameListArray.add(OrdersResponse(resources.getString(R.string.order),resources.getString(R.string.order_date),resources.getString(R.string.pending___),resources.getString(R.string.order_name)));
-            gameListArray.add(OrdersResponse(resources.getString(R.string.order),resources.getString(R.string.order_date),resources.getString(R.string.pending___),"arik"));
-            gameListArray.add(OrdersResponse(resources.getString(R.string.order),resources.getString(R.string.order_date),resources.getString(R.string.pending___),"sam"));
-            gameListArray.add(OrdersResponse(resources.getString(R.string.order),resources.getString(R.string.order_date),resources.getString(R.string.pending___),"david"));
+            orderListArray.add(
+                OrdersResponse(
+                    resources.getString(R.string.order),
+                    resources.getString(R.string.order_date),
+                    resources.getString(R.string.pending___),
+                    resources.getString(R.string.order_name)
+                )
+            )
+            orderListArray.add(
+                OrdersResponse(
+                    resources.getString(R.string.order),
+                    resources.getString(R.string.order_date),
+                    resources.getString(R.string.pending___),
+                    "arik"
+                )
+            )
+            orderListArray.add(
+                OrdersResponse(
+                    resources.getString(R.string.order),
+                    resources.getString(R.string.order_date),
+                    resources.getString(R.string.pending___),
+                    "sam"
+                )
+            )
+            orderListArray.add(
+                OrdersResponse(
+                    resources.getString(R.string.order),
+                    resources.getString(R.string.order_date),
+                    resources.getString(R.string.pending___),
+                    "david"
+                )
+            )
         }
 
 
-        gameListAdapter = OrdersAdapter(activity)
-        gameListAdapter?.setClickListener(this)
-        binding.rvSearchOrder.adapter=gameListAdapter
-        gameListAdapter?.setItems(gameListArray as ArrayList<OrdersResponse?>)
+        orderListAdapter = OrdersAdapter(activity)
+        orderListAdapter?.setClickListener(this)
+        binding.rvSearchOrder.adapter = orderListAdapter
+        orderListAdapter?.setItems(orderListArray as ArrayList<OrdersResponse?>)
         checkNoData()
 
         binding.svSearchGame.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                gameListAdapter?.filter?.filter(query)
+                orderListAdapter?.filter?.filter(query)
                 Handler().postDelayed({
                     checkNoData()
                 }, 100)
@@ -76,7 +107,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                gameListAdapter?.filter?.filter(newText)
+                orderListAdapter?.filter?.filter(newText)
                 Handler().postDelayed({
                     checkNoData()
                 }, 100)
@@ -87,7 +118,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
     }
 
     private fun checkNoData() {
-        if (gameListAdapter?.itemCount!! > 0) {
+        if (orderListAdapter?.itemCount!! > 0) {
             binding.tvNoData.visibility = View.GONE
         } else {
             binding.tvNoData.visibility = View.VISIBLE
@@ -100,7 +131,18 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
 
     override fun onItemClick(viewIdRes: Int, model: OrdersResponse, position: Int) {
         when (viewIdRes) {
-
+            R.id.mcv_main -> {
+                requireActivity().gotoActivity(
+                    OrderDetailActivity::class.java,
+                    needToFinish = false
+                )
+            }
+            R.id.tv_order_status -> {
+                requireActivity().gotoActivity(
+                    OrderStatusUpdateActivity::class.java,
+                    needToFinish = false
+                )
+            }
         }
     }
 
