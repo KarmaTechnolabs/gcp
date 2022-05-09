@@ -1,21 +1,13 @@
 package com.app.gcp.ui.fragments
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.app.gcp.R
-import com.app.gcp.adapter.OrdersAdapter
-import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.databinding.FragmentFaqsBinding
 import com.app.gcp.viewmodel.DashBoardViewModel
-import java.util.ArrayList
 
 class FAQsFragment : BaseFragment() {
 

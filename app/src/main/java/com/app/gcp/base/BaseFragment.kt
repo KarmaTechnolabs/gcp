@@ -11,7 +11,7 @@ open class BaseFragment : Fragment() {
 
     private var progressDialog: Dialog? = null
 
-    fun showProgressDialog() {
+    private fun showProgressDialog() {
         if (progressDialog == null || !progressDialog?.isShowing!!) {
             progressDialog = Dialog(requireContext())
             progressDialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -21,7 +21,7 @@ open class BaseFragment : Fragment() {
         }
     }
 
-    fun hideProgressDialog() {
+    private fun hideProgressDialog() {
         try {
             if (progressDialog != null && progressDialog?.isShowing!!) {
                 progressDialog?.dismiss()
@@ -47,6 +47,42 @@ open class BaseFragment : Fragment() {
             Status.NO_NETWORK -> {
                 hideProgressDialog()
                 showToast(R.string.no_network_available)
+            }
+            else -> {
+                hideProgressDialog()
+                successListener.invoke(resource.data!!, resource.message!!)
+            }
+        }
+    }
+
+    fun <T> manageAPIResource(
+        resource: APIResource<T>,
+        isShowProgress: Boolean = true,
+        successListener: (T, String) -> Unit,
+        failureListener: () -> Unit
+    ) {
+        when (resource.status) {
+            Status.LOADING -> {
+                if (isShowProgress)
+                    showProgressDialog()
+            }
+            Status.ERROR -> {
+                hideProgressDialog()
+                if (resource.message.equals(
+                        resources.getString(R.string.no_record_found),
+                        ignoreCase = true
+                    )
+                )
+                    return
+                resource.message?.let {
+                    showToast(it)
+                    failureListener.invoke()
+                }
+            }
+            Status.NO_NETWORK -> {
+                hideProgressDialog()
+                showToast(R.string.no_network_available)
+                failureListener.invoke()
             }
             else -> {
                 hideProgressDialog()

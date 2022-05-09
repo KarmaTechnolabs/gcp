@@ -1,11 +1,10 @@
 package com.app.gcp.api
 
-import com.app.gcp.api.requestmodel.ChangePasswordRequestModel
-import com.app.gcp.api.requestmodel.ForgotPasswordRequestModel
-import com.app.gcp.api.requestmodel.LoginRequestModel
-import com.app.gcp.api.requestmodel.RegisterRequestModel
+import com.app.gcp.api.requestmodel.*
 import com.app.gcp.api.responsemodel.LoginResponse
+import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.api.responsemodel.RegisterResponse
+import com.app.gcp.api.responsemodel.TrackOrderResponse
 import com.app.gcp.base.BaseRequestModel
 import com.app.gcp.base.BaseResponseModel
 import com.app.gcp.model.*
@@ -21,10 +20,16 @@ interface ApiCallInterface {
     fun callRegisterAPI(@Body requestBody: BaseRequestModel<RegisterRequestModel>): Single<BaseResponseModel<RegisterResponse>>
 
     @POST(APIConstants.API_SIGN_IN)
-    fun callLoginAPI(@Body requestBody: BaseRequestModel<LoginRequestModel>): Single<BaseResponseModel<LoginResponse>>
+    fun callLoginAPI(@Body requestBody: LoginRequestModel): Single<BaseResponseModel<LoginResponse>>
+
+    @POST(APIConstants.API_ORDERS)
+    fun callOrderListAPI(@Body requestBody: OrderListRequestModel): Single<BaseResponseModel<List<OrdersResponse>>>
 
     @POST(APIConstants.API_FORGOT_PASSWORD)
     fun callForgotPasswordAPI(@Body requestBody: BaseRequestModel<ForgotPasswordRequestModel>): Single<BaseResponseModel<Any>>
+
+    @POST(APIConstants.API_TRACK_ORDER)
+    fun callTrackOrderAPI(@Body requestBody: TrackingOrderRequestModel): Single<BaseResponseModel<TrackOrderResponse>>
 
     @POST(APIConstants.API_LOGOUT)
     fun callLogoutAPI(): Single<BaseResponseModel<Any>>

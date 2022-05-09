@@ -7,8 +7,10 @@ import androidx.lifecycle.switchMap
 import com.app.gcp.api.requestmodel.ForgotPasswordRequestModel
 import com.app.gcp.api.requestmodel.LoginRequestModel
 import com.app.gcp.api.requestmodel.RegisterRequestModel
+import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
 import com.app.gcp.api.responsemodel.LoginResponse
 import com.app.gcp.api.responsemodel.RegisterResponse
+import com.app.gcp.api.responsemodel.TrackOrderResponse
 import com.app.gcp.base.APIResource
 import com.app.gcp.custom.Event
 import com.app.gcp.repository.OnBoardRepository
@@ -20,6 +22,7 @@ class OnBoardViewModel : ViewModel() {
     private val signInRequestLiveData = MutableLiveData<LoginRequestModel>()
     private val registerRequestLiveData = MutableLiveData<RegisterRequestModel>()
     private val forgotPasswordRequestLiveData = MutableLiveData<ForgotPasswordRequestModel>()
+    private val trackingOrderRequestLiveData = MutableLiveData<TrackingOrderRequestModel>()
 
     val loginResponse: LiveData<Event<APIResource<LoginResponse>>> =
         signInRequestLiveData.switchMap {
@@ -36,8 +39,13 @@ class OnBoardViewModel : ViewModel() {
             repository.callForgotPasswordAPI(it)
         }
 
-    fun callLoginAPI(signInRequestModel: LoginRequestModel) {
-        signInRequestLiveData.value = signInRequestModel
+    val trackingOrderResponse: LiveData<Event<APIResource<TrackOrderResponse>>> =
+        trackingOrderRequestLiveData.switchMap {
+            repository.callTrackOrderAPI(it)
+        }
+
+    fun callLoginAPI(request: LoginRequestModel) {
+        signInRequestLiveData.value = request
     }
 
     fun callRegisterAPI(registerRequestModel: RegisterRequestModel) {
@@ -46,6 +54,10 @@ class OnBoardViewModel : ViewModel() {
 
     fun callForgotPasswordAPI(forgotPasswordRequestModel: ForgotPasswordRequestModel) {
         forgotPasswordRequestLiveData.value = forgotPasswordRequestModel
+    }
+
+    fun callTrackingOrderAPI(request: TrackingOrderRequestModel) {
+        trackingOrderRequestLiveData.value = request
     }
 
     override fun onCleared() {

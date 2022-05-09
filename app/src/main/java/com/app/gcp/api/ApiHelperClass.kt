@@ -26,9 +26,9 @@ class ApiHelperClass private constructor() {
             .writeTimeout(timeOut, TimeUnit.MILLISECONDS)
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
-                    .addHeader(
-                        APIConstants.HEADER_AUTHORIZATION,
-                        APIConstants.HEADER_BEARER + UserStateManager.getBearerToken())
+//                    .addHeader(
+//                        APIConstants.HEADER_AUTHORIZATION,
+//                        APIConstants.HEADER_BEARER + UserStateManager.getBearerToken())
                     .build()
                 chain.proceed(newRequest)
             }

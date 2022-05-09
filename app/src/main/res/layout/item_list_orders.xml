@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gotham_bold"
                 tools:text="@string/order"
-                android:text="@{model.orderNumber}"
+                android:text="@{model.trackingNumber}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +64,7 @@
                 style="@style/TextViewPrimarySmallStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{model.name}"
+                android:text="@{model.note}"
                 android:layout_marginTop="@dimen/normal_size"
                 android:fontFamily="@font/gotham_black"
                 app:layout_constraintStart_toStartOf="parent"

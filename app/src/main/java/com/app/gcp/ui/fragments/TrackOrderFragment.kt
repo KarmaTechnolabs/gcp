@@ -10,6 +10,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.app.gcp.R
+import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.gotoActivity
 import com.app.gcp.custom.showToast
@@ -17,6 +18,7 @@ import com.app.gcp.databinding.FragmentTrackOrderBinding
 import com.app.gcp.ui.activities.MainActivity
 import com.app.gcp.ui.activities.OrderStatusActivity
 import com.app.gcp.ui.dialogs.PasswordResetLinkAlertDialog
+import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.OnBoardViewModel
 
 class TrackOrderFragment : BaseFragment(), View.OnClickListener,
@@ -36,19 +38,28 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTrackOrderBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.lifecycleOwner = activity
         binding.clickListener = this
+
         binding.isBack = args.isBack
-        onBoardViewModel.forgotPasswordResponse.observe(viewLifecycleOwner) { event ->
+        onBoardViewModel.trackingOrderResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(response) { _, message ->
                     showToast(message)
+
                     findNavController().navigateUp()
+                    requireActivity().gotoActivity(
+                        OrderStatusActivity::class.java,
+                        clearAllActivity = false,
+                        needToFinish = false
+                    )
+//                    findNavController().navigateUp()
                 }
             }
         }
@@ -62,13 +73,15 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
             }
             R.id.btn_track_order -> {
                 if (isDataValid()) {
-//                    val email = binding.tieEmail.text
-//                    findNavController().navigateUp()
-                    requireActivity().gotoActivity(
-                        OrderStatusActivity::class.java,
-                        clearAllActivity = false,
-                        needToFinish = false
+
+                    onBoardViewModel.callTrackingOrderAPI(
+                        TrackingOrderRequestModel(
+                            tracking_number = binding.tieTrackingNumber.text.toString(),
+                            token = UserStateManager.getBearerToken()
+                        )
                     )
+
+
 //                    onBoardViewModel.callForgotPasswordAPI(
 //                        ForgotPasswordRequestModel(
 //                            email.toString()
@@ -82,11 +95,11 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
     private fun isDataValid(): Boolean {
         val trackingNumber = binding.tieTrackingNumber.text
 
-        binding.tieTrackingNumber.error = ""
+        binding.tieTrackingNumber.error = null
 
         return when {
             TextUtils.isEmpty(trackingNumber) -> {
-                showToast(R.string.password_error)
+                showToast(R.string.track_number_error)
                 binding.tieTrackingNumber.error = getString(R.string.track_number_error)
                 false
             }

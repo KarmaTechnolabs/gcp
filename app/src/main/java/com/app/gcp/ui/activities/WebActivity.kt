@@ -28,7 +28,7 @@ class WebActivity : BaseActivity(), View.OnClickListener {
         if (intent.extras!=null){
             title = intent.getStringExtra(Constants.EXTRA_TITLE);
             link = intent.getStringExtra(Constants.EXTRA_LINK);
-            binding.toolbarGetInTouch.tvTitle.setText(title)
+            binding.toolbarGetInTouch.tvTitle.text = title
         }
 
         binding.toolbarGetInTouch.ivBack.setOnClickListener(this)
@@ -46,7 +46,7 @@ class WebActivity : BaseActivity(), View.OnClickListener {
         }
 
         binding.webview.settings.javaScriptEnabled = true
-        binding.webview.loadUrl(link)
+        link?.let { binding.webview.loadUrl(it) }
         showProgressDialog()
 
 

@@ -7,8 +7,10 @@ import com.app.gcp.api.ApiHelperClass
 import com.app.gcp.api.requestmodel.ForgotPasswordRequestModel
 import com.app.gcp.api.requestmodel.LoginRequestModel
 import com.app.gcp.api.requestmodel.RegisterRequestModel
+import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
 import com.app.gcp.api.responsemodel.LoginResponse
 import com.app.gcp.api.responsemodel.RegisterResponse
+import com.app.gcp.api.responsemodel.TrackOrderResponse
 import com.app.gcp.base.APIResource
 import com.app.gcp.base.BaseRequestModel
 import com.app.gcp.custom.Event
@@ -69,7 +71,7 @@ class OnBoardRepository private constructor() {
         val baseLoginRequestModel = BaseRequestModel(signInRequestModel)
 
         if (Utils.isNetworkAvailable()) {
-            val disposable = ApiHelperClass.getAPIClient().callLoginAPI(baseLoginRequestModel)
+            val disposable = ApiHelperClass.getAPIClient().callLoginAPI(signInRequestModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ responseModel ->
@@ -120,6 +122,44 @@ class OnBoardRepository private constructor() {
                     if (responseModel.status == APIConstants.SUCCESS) {
                         val otpInt =
                             responseModel.getResponseModel(Any::class.java)
+                        data.value = Event(APIResource.success(otpInt, responseModel.message))
+                    } else {
+                        responseModel.message?.let {
+                            data.value = Event(APIResource.error(it, null))
+                        }
+                    }
+                }, { e ->
+                    Timber.e(e)
+                    data.postValue(Event(APIResource.error(e.localizedMessage ?: "", null)))
+                })
+
+            compositeDisposable.add(disposable)
+        } else {
+            data.value = Event(APIResource.noNetwork())
+        }
+        return data
+    }
+
+    fun callTrackOrderAPI(requestModel: TrackingOrderRequestModel): LiveData<Event<APIResource<TrackOrderResponse>>> {
+        val data = MutableLiveData<Event<APIResource<TrackOrderResponse>>>()
+        data.value = Event(APIResource.loading(null))
+
+//        val baseRequestModel = BaseRequestModel(requestModel)
+
+        if (Utils.isNetworkAvailable()) {
+            val disposable = ApiHelperClass.getAPIClient().callTrackOrderAPI(requestModel)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ responseModel ->
+
+                    if (responseModel == null) {
+                        data.value = Event(APIResource.error("", null))
+                        return@subscribe
+                    }
+
+                    if (responseModel.status == APIConstants.SUCCESS) {
+                        val otpInt =
+                            responseModel.getResponseModel(TrackOrderResponse::class.java)
                         data.value = Event(APIResource.success(otpInt, responseModel.message))
                     } else {
                         responseModel.message?.let {

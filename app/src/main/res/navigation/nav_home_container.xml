@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/menu_more"
-        android:name="com.app.gcp.ui.navigation.MoreNavigationFragment"
-        android:label="@string/settings"
-        tools:layout="@layout/fragment_more_navigation" />
+        android:name="com.app.gcp.ui.fragments.FAQsFragment"
+        android:label="@string/menu_faqs"
+        tools:layout="@layout/fragment_faqs" />
 </navigation>

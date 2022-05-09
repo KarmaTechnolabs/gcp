@@ -101,7 +101,8 @@
                     android:hint="@string/enter_your_tracking_number"
                     android:imeOptions="actionDone"
                     android:inputType="number"
-                    android:maxLength="@integer/max_email_length"
+                    android:maxLength="@integer/max_track_order_length"
+                    android:text="20251647117854"
                     tools:text="12345678" />
             </com.google.android.material.textfield.TextInputLayout>
 

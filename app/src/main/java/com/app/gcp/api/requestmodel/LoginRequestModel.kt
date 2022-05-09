@@ -7,14 +7,5 @@ data class LoginRequestModel(
     val email: String,
 
     @field:SerializedName("password")
-    val password: String,
-
-    @field:SerializedName("device_token")
-    val deviceToken: String,
-
-    @field:SerializedName("app_type")
-    val appType: String = "1",
-
-    @field:SerializedName("device_type")
-    val deviceType: String = "1"
+    val password: String
 )

@@ -8,7 +8,9 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
@@ -46,13 +48,43 @@ class Utils {
         }
 
         fun isNetworkAvailable(): Boolean {
-            val cm =
+
+            var result = false
+            val connectivityManager =
                 BaseApplication.getApplicationContext()
                     .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val netInfo = cm.activeNetworkInfo
-            return (netInfo != null && netInfo.isConnectedOrConnecting
-                    && cm.activeNetworkInfo.isAvailable
-                    && cm.activeNetworkInfo.isConnected)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val networkCapabilities = connectivityManager.activeNetwork ?: return false
+                val actNw =
+                    connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
+                result = when {
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                    else -> false
+                }
+            } else {
+                connectivityManager.run {
+                    connectivityManager.activeNetworkInfo?.run {
+                        result = when (type) {
+                            ConnectivityManager.TYPE_WIFI -> true
+                            ConnectivityManager.TYPE_MOBILE -> true
+                            ConnectivityManager.TYPE_ETHERNET -> true
+                            else -> false
+                        }
+
+                    }
+                }
+            }
+
+            return result
+//            val cm =
+//                BaseApplication.getApplicationContext()
+//                    .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+//            val netInfo = cm.activeNetworkInfo
+//            return (netInfo != null && netInfo.isConnectedOrConnecting
+//                    && cm.activeNetworkInfo!!.isAvailable
+//                    && cm.activeNetworkInfo!!.isConnected)
         }
 
         fun getRequestBody(requestString: String): RequestBody {
@@ -125,15 +157,15 @@ class Utils {
         }
 
         private fun isDownloadsDocument(uri: Uri): Boolean {
-            return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+            return "com.android.providers.downloads.documents" == uri.authority
         }
 
         private fun isMediaDocument(uri: Uri): Boolean {
-            return "com.android.providers.media.documents".equals(uri.getAuthority());
+            return "com.android.providers.media.documents" == uri.authority
         }
 
         private fun isGooglePhotosUri(uri: Uri): Boolean {
-            return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+            return "com.google.android.apps.photos.content" == uri.authority
         }
 
         fun isCameraAndGalleryPermissionGranted(context: Context): Boolean {

@@ -1,16 +1,18 @@
 package com.app.gcp.api
 
 object APIConstants {
-    const val SUCCESS = 1
+    const val SUCCESS = 200
     const val FAILURE = 0
 
     const val HEADER_AUTHORIZATION = "Authorization"
     const val HEADER_BEARER = "Bearer "
 
     //OnBoarding APIs
-    const val API_SIGN_IN = "login"
+    const val API_SIGN_IN = "user_login"
+    const val API_ORDERS = "orders"
     const val API_REGISTER = "register"
     const val API_FORGOT_PASSWORD = "forgotPassword"
+    const val API_TRACK_ORDER = "track"
     const val API_LOGOUT = "logout"
     const val API_CHANGE_PASSWORD = "changePassword"
 

@@ -18,7 +18,7 @@ class SplashActivity : FullScreenBaseActivity() {
         Timer("splash", false).schedule(3000) {
 
             if (UserStateManager.isUserLoggedIn()) {
-                gotoActivity(MainActivity::class.java, clearAllActivity = true)
+                gotoActivity(DashboardActivity::class.java, clearAllActivity = true)
             } /*else if (UserStateManager.isOnBoardingComplete()) {
                 gotoActivity(LoginContainerActivity::class.java, clearAllActivity = true)
             } */else {

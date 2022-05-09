@@ -18,6 +18,7 @@
     <string name="track_your_order">Track your order</string>
     <string name="please_enter_your_registered_details">Please enter your registered details</string>
     <string name="our_other_products_services">Our other products/services</string>
+    <string name="no_record_found">No Record Found.</string>
 
     <!--Splash-->
     <string name="splash_logo">Splash Logo</string>
@@ -60,7 +61,7 @@
     <string name="enter_valid_phone">Enter valid phone number</string>
     <string name="enter_password">Enter password</string>
     <string name="enter_confirm_password">Enter confirm password</string>
-    <string name="enter_valid_password">Password must be 5–15 characters with minimum 1 Uppercase, 1 Lowercase, 1 Numeric and 1 Special character.</string>
+    <string name="enter_valid_password">Password must be minimum 8 characters .</string>
     <string name="password_confirm_password_does_not_match">Password and Confirm password does not match</string>
     <string name="new_password_confirm_password_does_not_match">New password and Confirm password does not match</string>
 

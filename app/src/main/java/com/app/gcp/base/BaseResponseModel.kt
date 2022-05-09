@@ -8,7 +8,7 @@ import java.lang.reflect.Type
 
 class BaseResponseModel<T> {
 
-    var ResponseJson: T? = null
+    var responseJson: T? = null
 
     @SerializedName("status")
     @Expose
@@ -24,7 +24,7 @@ class BaseResponseModel<T> {
 
     fun getResponseModel(aModel: Class<T>?): T? {
         setResponseJson(aModel)
-        return ResponseJson
+        return responseJson
     }
 
     fun getResponseModel(typeOfObjectsList: Type?): T {
@@ -36,7 +36,7 @@ class BaseResponseModel<T> {
     }
 
     private fun setResponseJson(aModel: Class<T>?) {
-        ResponseJson = prepareModel(data!!, aModel)
+        responseJson = prepareModel(data!!, aModel)
     }
 
     private fun <T> prepareModel(aString: Any, aClass: Class<T>?): T {

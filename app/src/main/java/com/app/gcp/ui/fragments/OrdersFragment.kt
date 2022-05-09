@@ -2,20 +2,26 @@ package com.app.gcp.ui.fragments
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.app.gcp.R
 import com.app.gcp.adapter.OrdersAdapter
+import com.app.gcp.api.requestmodel.OrderListRequestModel
 import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.gotoActivity
+import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentOrdersBinding
 import com.app.gcp.listeners.ItemClickListener
 import com.app.gcp.ui.activities.OrderDetailActivity
 import com.app.gcp.ui.activities.OrderStatusUpdateActivity
+import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.DashBoardViewModel
 import java.util.*
 
@@ -26,7 +32,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
     private var _binding: FragmentOrdersBinding? = null
     private val orderListArray = mutableListOf<OrdersResponse>()
     private var orderListAdapter: OrdersAdapter? = null
-
+    private val dashboardViewModel by activityViewModels<DashBoardViewModel>()
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -37,70 +43,60 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         savedInstanceState: Bundle?
     ): View? {
         ordersViewModel =
-            ViewModelProvider(this).get(DashBoardViewModel::class.java)
+            ViewModelProvider(this)[DashBoardViewModel::class.java]
 
         _binding = FragmentOrdersBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-//        val textView: TextView = binding.textHome
-//        ordersViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
         binding.clickListener = this
 
-        for (i in 1..4) {
-            orderListArray.add(
-                OrdersResponse(
-                    resources.getString(R.string.order),
-                    resources.getString(R.string.order_date),
-                    resources.getString(R.string.pending___),
-                    resources.getString(R.string.order_name)
-                )
-            )
-            orderListArray.add(
-                OrdersResponse(
-                    resources.getString(R.string.order),
-                    resources.getString(R.string.order_date),
-                    resources.getString(R.string.pending___),
-                    "arik"
-                )
-            )
-            orderListArray.add(
-                OrdersResponse(
-                    resources.getString(R.string.order),
-                    resources.getString(R.string.order_date),
-                    resources.getString(R.string.pending___),
-                    "sam"
-                )
-            )
-            orderListArray.add(
-                OrdersResponse(
-                    resources.getString(R.string.order),
-                    resources.getString(R.string.order_date),
-                    resources.getString(R.string.pending___),
-                    "david"
-                )
-            )
+        binding.swipeRefresh.setOnRefreshListener {
+            callOrderListApi()
+            binding.swipeRefresh.isRefreshing = true
+        }
+
+        dashboardViewModel.orderListResponse.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { response ->
+                manageAPIResource(
+                    response, isShowProgress = false,
+                    successListener = object : (List<OrdersResponse>, String) -> Unit {
+                        override fun invoke(it: List<OrdersResponse>, message: String) {
+                            showToast(message)
+                            orderListArray.clear()
+                            orderListArray.addAll(it)
+                            orderListAdapter?.setItems(orderListArray as ArrayList<OrdersResponse?>)
+                            checkNoData()
+                            binding.swipeRefresh.isRefreshing = false
+                        }
+                    },
+                    failureListener = object : () -> Unit {
+                        override fun invoke() {
+                            checkNoData()
+                            binding.swipeRefresh.isRefreshing = false
+                        }
+                    })
+
+            }
         }
 
 
         orderListAdapter = OrdersAdapter(activity)
         orderListAdapter?.setClickListener(this)
         binding.rvSearchOrder.adapter = orderListAdapter
-        orderListAdapter?.setItems(orderListArray as ArrayList<OrdersResponse?>)
-        checkNoData()
 
-        binding.svSearchGame.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+        callOrderListApi()
+
+        binding.svSearchOrder.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 orderListAdapter?.filter?.filter(query)
-                Handler().postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
                     checkNoData()
                 }, 100)
                 return false
@@ -108,13 +104,22 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
 
             override fun onQueryTextChange(newText: String): Boolean {
                 orderListAdapter?.filter?.filter(newText)
-                Handler().postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
                     checkNoData()
                 }, 100)
                 return false
             }
         })
 
+    }
+
+    private fun callOrderListApi() {
+        dashboardViewModel.callOrderListAPI(
+            OrderListRequestModel(
+                search = "","1","1",
+                UserStateManager.getBearerToken()
+            )
+        )
     }
 
     private fun checkNoData() {

@@ -1,5 +1,6 @@
 package com.app.gcp.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.text.TextUtils
@@ -9,6 +10,7 @@ import com.app.gcp.custom.gotoActivity
 import com.app.gcp.ui.activities.LoginContainerActivity
 import com.google.gson.GsonBuilder
 
+@SuppressLint("StaticFieldLeak")
 object UserStateManager {
 
     private val context: Context = BaseApplication.getApplicationContext()
@@ -47,7 +49,7 @@ object UserStateManager {
             GsonBuilder().addSerializationExclusionStrategy(SerializedExclusionStrategy()).create()
         val json = gson.toJson(loginResponse)
         sharedPreferenceHelper.setValue(Constants.PREF_LOGIN_DATA, json)
-        saveBearerToken(loginResponse.token)
+        saveBearerToken(loginResponse.auth_token)
     }
 
     fun markOnBoardingComplete() {
@@ -57,12 +59,13 @@ object UserStateManager {
         sharedPreferenceHelper.setValue(Constants.PREF_FIREBASE_TOKEN, token)
     }
 
-    fun saveBearerToken(token: String) {
+    private fun saveBearerToken(token: String) {
         sharedPreferenceHelper.setValue(Constants.PREF_BEARER_TOKEN, token)
     }
 
     fun logout(activity: Activity) {
         sharedPreferenceHelper.clearExcept(Constants.PREF_FIREBASE_TOKEN)
+        sharedPreferenceHelper.clearExcept(Constants.PREF_BEARER_TOKEN)
         sharedPreferenceHelper.setValue(Constants.PREF_LOGIN_DATA, "")
         activity.gotoActivity(
                 LoginContainerActivity::class.java,
