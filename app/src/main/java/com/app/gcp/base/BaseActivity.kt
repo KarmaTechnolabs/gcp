@@ -67,13 +67,49 @@ open class BaseActivity : AppCompatActivity() {
             }
         }
 
+    fun <T> manageAPIResource(
+        resource: APIResource<T>,
+        isShowProgress: Boolean = true,
+        successListener: (T, String) -> Unit,
+        failureListener: () -> Unit
+    ) {
+        when (resource.status) {
+            Status.LOADING -> {
+                if (isShowProgress)
+                    showProgressDialog()
+            }
+            Status.ERROR -> {
+                hideProgressDialog()
+                if (resource.message.equals(
+                        resources.getString(R.string.no_record_found),
+                        ignoreCase = true
+                    )
+                )
+                    return
+                resource.message?.let {
+                    showToast(it)
+                    failureListener.invoke()
+                }
+            }
+            Status.NO_NETWORK -> {
+                hideProgressDialog()
+                showToast(R.string.no_network_available)
+                failureListener.invoke()
+            }
+            else -> {
+                hideProgressDialog()
+                successListener.invoke(resource.data!!, resource.message!!)
+            }
+        }
+    }
+
         fun showPermissionAlert(message: String, listener: PermissionListener) {
             val builder = AlertDialog.Builder(this)
             builder.setTitle(getString(R.string.need_permission))
             builder.setMessage(message)
             builder.setPositiveButton(
-                getString(R.string.ok),
-                { dialog, which -> listener.onPermissionClick() })
+                getString(R.string.ok)
+            ) { _, _ -> listener.onPermissionClick() }
             builder.setNeutralButton(getString(R.string.cancel), null)
             val dialog = builder.create()
             dialog.show()

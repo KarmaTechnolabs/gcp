@@ -14,8 +14,8 @@ data class UpdateProfileRequestModel(
     val howDidYouHearAboutTheApp: String? = null,
     @SerializedName("last_name")
     val lastName: String? = null,
-    @SerializedName("member_of_jeewanjyoti")
-    val memberOfJeewanjyoti: String? = null,
+    @SerializedName("member_of_gcp")
+    val memberOfGcp: String? = null,
     @SerializedName("middle_name")
     val middleName: String? = null,
     @SerializedName("occupation")

@@ -4,15 +4,20 @@ import com.google.gson.annotations.SerializedName
 
 data class TrackOrderResponse(
     @SerializedName("history")
-    val history: List<Any>?,
+    val history: History?,
     @SerializedName("order_details")
     val orderDetails: OrderDetails?,
     @SerializedName("order_stages")
     val orderStages: OrderStages?,
     @SerializedName("order_stages_history")
-    val orderStagesHistory: List<Any>?,
+    val orderStagesHistory: List<OrderStagesHistory>?,
     @SerializedName("order_tracking_number")
     val orderTrackingNumber: String?
+)
+
+data class History(
+    @SerializedName("7")
+    val x7: List<X7>?
 )
 
 data class OrderDetails(
@@ -103,4 +108,54 @@ data class OrderStages(
     val taxId2: String?,
     @SerializedName("tracking_number")
     val trackingNumber: String?
+)
+
+data class OrderStagesHistory(
+    @SerializedName("color")
+    val color: String?,
+    @SerializedName("created_at")
+    val createdAt: String?,
+    @SerializedName("deleted")
+    val deleted: String?,
+    @SerializedName("id")
+    val id: String?,
+    @SerializedName("is_current")
+    val isCurrent: String?,
+    @SerializedName("notes")
+    val notes: String?,
+    @SerializedName("order_id")
+    val orderId: String?,
+    @SerializedName("sort")
+    val sort: String?,
+    @SerializedName("stage_id")
+    val stageId: String?,
+    @SerializedName("title")
+    val title: String?,
+    @SerializedName("updated_at")
+    val updatedAt: String?
+)
+
+data class X7(
+    @SerializedName("color")
+    val color: String?,
+    @SerializedName("created_at")
+    val createdAt: String?,
+    @SerializedName("deleted")
+    val deleted: String?,
+    @SerializedName("id")
+    val id: String?,
+    @SerializedName("is_current")
+    val isCurrent: String?,
+    @SerializedName("notes")
+    val notes: String?,
+    @SerializedName("order_id")
+    val orderId: String?,
+    @SerializedName("sort")
+    val sort: String?,
+    @SerializedName("stage_id")
+    val stageId: String?,
+    @SerializedName("title")
+    val title: String?,
+    @SerializedName("updated_at")
+    val updatedAt: String?
 )

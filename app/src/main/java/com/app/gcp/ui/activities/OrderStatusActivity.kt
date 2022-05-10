@@ -4,21 +4,34 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import com.app.gcp.R
+import com.app.gcp.api.requestmodel.LoginRequestModel
+import com.app.gcp.api.responsemodel.TrackOrderResponse
 import com.app.gcp.base.BaseActivity
 import com.app.gcp.databinding.ActivityOrderStatusBinding
+import com.app.gcp.utils.Constants
 
 
 class OrderStatusActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityOrderStatusBinding
+    private val trackOrderResponse = MutableLiveData<TrackOrderResponse>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_status)
 
         initView()
 
-        getOrderStatus("3")
+        if (intent.extras!=null && intent.hasExtra(Constants.EXTRA_TRACK_ORDER)){
+            trackOrderResponse.postValue(intent.getParcelableExtra(Constants.EXTRA_TRACK_ORDER))
+            binding.tvOrder.text=trackOrderResponse.value?.orderTrackingNumber
+            getOrderStatus("3")
+        }
+
+
     }
 
     private fun initView() {
@@ -31,18 +44,23 @@ class OrderStatusActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun getOrderStatus(orderStatus: String) {
-        if (orderStatus == "0") {
-            val alfa = 0.5.toFloat()
-            setStatus(alfa)
-        } else if (orderStatus == "1") {
-            val alfa = 1.toFloat()
-            setStatus1(alfa)
-        } else if (orderStatus == "2") {
-            val alfa = 1.toFloat()
-            setStatus2(alfa)
-        } else if (orderStatus == "3") {
-            val alfa = 1.toFloat()
-            setStatus3(alfa)
+        when (orderStatus) {
+            "0" -> {
+                val alfa = 0.5.toFloat()
+                setStatus(alfa)
+            }
+            "1" -> {
+                val alfa = 1.toFloat()
+                setStatus1(alfa)
+            }
+            "2" -> {
+                val alfa = 1.toFloat()
+                setStatus2(alfa)
+            }
+            "3" -> {
+                val alfa = 1.toFloat()
+                setStatus3(alfa)
+            }
         }
     }
 

@@ -132,7 +132,7 @@
     <string name="hint_date_of_birth">Date of Birth</string>
     <string name="hint_occupation">Occupation</string>
     <string name="hint_how_did_you_hear_about_us">How did you hear about us</string>
-    <string name="are_you_member_of_jeewan_jyoti_s">Are you member of Jeewan Jyoti’s?</string>
+    <string name="are_you_member_of_jeewan_jyoti_s">Are you member of GCP?</string>
     <string name="shg">SHG</string>
     <string name="trainee">Trainee</string>
     <string name="current_student">Current Student</string>
@@ -157,7 +157,7 @@
     <string name="str_no">No</string>
     <string name="str_yes">Yes</string>
     <string name="no_network_available">No network available</string>
-    <string name="push_notification_channel_title">Push Notification about Jeewan Jyoti</string>
+    <string name="push_notification_channel_title">Push Notification about GCP</string>
 
     <string name="media_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string>
     <string name="select">Select</string>
@@ -201,7 +201,7 @@
     <string name="menu_logout">Logout</string>
     <string name="no_data_found">No data found.</string>
     <!--orders list Screen-->
-    <string name="order">Order# 002285686</string>
+    <string name="order">Order# </string>
     <string name="order_date">03 - jan - 20226</string>
     <string name="pending...">Pending...</string>
     <string name="order_name">Excel Inc. | Mr. John Doe</string>
@@ -212,5 +212,6 @@
 
     <!--orders update status-->
     <string name="comment">Comment</string>
+    <string name="order_status_update">Order Status Update</string>
 
 </resources>

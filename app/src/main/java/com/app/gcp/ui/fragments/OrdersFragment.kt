@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -21,6 +22,7 @@ import com.app.gcp.databinding.FragmentOrdersBinding
 import com.app.gcp.listeners.ItemClickListener
 import com.app.gcp.ui.activities.OrderDetailActivity
 import com.app.gcp.ui.activities.OrderStatusUpdateActivity
+import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.DashBoardViewModel
 import java.util.*
@@ -67,7 +69,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
                     response, isShowProgress = false,
                     successListener = object : (List<OrdersResponse>, String) -> Unit {
                         override fun invoke(it: List<OrdersResponse>, message: String) {
-                            showToast(message)
+//                            showToast(message)
                             orderListArray.clear()
                             orderListArray.addAll(it)
                             orderListAdapter?.setItems(orderListArray as ArrayList<OrdersResponse?>)
@@ -85,11 +87,9 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
             }
         }
 
-
         orderListAdapter = OrdersAdapter(activity)
         orderListAdapter?.setClickListener(this)
         binding.rvSearchOrder.adapter = orderListAdapter
-
 
         callOrderListApi()
 
@@ -145,6 +145,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
             R.id.tv_order_status -> {
                 requireActivity().gotoActivity(
                     OrderStatusUpdateActivity::class.java,
+                    bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model),
                     needToFinish = false
                 )
             }

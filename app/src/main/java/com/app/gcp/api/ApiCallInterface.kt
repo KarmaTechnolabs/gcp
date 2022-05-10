@@ -1,10 +1,7 @@
 package com.app.gcp.api
 
 import com.app.gcp.api.requestmodel.*
-import com.app.gcp.api.responsemodel.LoginResponse
-import com.app.gcp.api.responsemodel.OrdersResponse
-import com.app.gcp.api.responsemodel.RegisterResponse
-import com.app.gcp.api.responsemodel.TrackOrderResponse
+import com.app.gcp.api.responsemodel.*
 import com.app.gcp.base.BaseRequestModel
 import com.app.gcp.base.BaseResponseModel
 import com.app.gcp.model.*
@@ -24,6 +21,12 @@ interface ApiCallInterface {
 
     @POST(APIConstants.API_ORDERS)
     fun callOrderListAPI(@Body requestBody: OrderListRequestModel): Single<BaseResponseModel<List<OrdersResponse>>>
+
+    @POST(APIConstants.API_ORDER_STATUS)
+    fun callOrderStatusAPI(@Body requestBody: TrackingOrderRequestModel): Single<BaseResponseModel<List<OrderStatusResponse>>>
+
+    @POST(APIConstants.API_UPDATE_ORDER)
+    fun callOrderStatusUpdateAPI(@Body requestBody: OrderStatusUpdateRequestModel): Single<EmptyResponse>
 
     @POST(APIConstants.API_FORGOT_PASSWORD)
     fun callForgotPasswordAPI(@Body requestBody: BaseRequestModel<ForgotPasswordRequestModel>): Single<BaseResponseModel<Any>>

@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import com.app.gcp.databinding.FragmentTrackOrderBinding
 import com.app.gcp.ui.activities.MainActivity
 import com.app.gcp.ui.activities.OrderStatusActivity
 import com.app.gcp.ui.dialogs.PasswordResetLinkAlertDialog
+import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.OnBoardViewModel
 
@@ -56,7 +58,7 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
                     findNavController().navigateUp()
                     requireActivity().gotoActivity(
                         OrderStatusActivity::class.java,
-                        clearAllActivity = false,
+                        bundle = bundleOf(Constants.EXTRA_TRACK_ORDER to response),
                         needToFinish = false
                     )
 //                    findNavController().navigateUp()
@@ -76,8 +78,7 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
 
                     onBoardViewModel.callTrackingOrderAPI(
                         TrackingOrderRequestModel(
-                            tracking_number = binding.tieTrackingNumber.text.toString(),
-                            token = UserStateManager.getBearerToken()
+                            tracking_number = binding.tieTrackingNumber.text.toString()
                         )
                     )
 

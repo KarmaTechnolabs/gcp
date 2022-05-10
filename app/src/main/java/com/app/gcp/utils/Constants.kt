@@ -12,7 +12,7 @@ package com.app.gcp.utils
  * Other than this every single key's value is String data type.
  */
 object Constants {
-    const val PUSH_NOTIFICATION_CHANNEL_ID = "PUSH_NOTIFICATION_JEEWAN_JYOTI"
+    const val PUSH_NOTIFICATION_CHANNEL_ID = "PUSH_NOTIFICATION_GCP"
 
     const val IMAGE_TYPE_CAMERA = 0
     const val IMAGE_TYPE_GALLERY = 1
@@ -71,9 +71,6 @@ object Constants {
     const val REQUESTCODE_SELECT_STATE = 1006
     const val REQUESTCODE_SELECT_CITY = 1007
 
-    const val MEMBER_SHG = "1"
-    const val MEMBER_ALUMNI = "2"
-    const val MEMBER_TRAINEE = "3"
-    const val MEMBER_CURRENT_STUDENT = "4"
-    const val MEMBER_NONE = "5"
+    const val EXTRA_TRACK_ORDER = "EXTRA_TRACK_ORDER"
+    const val EXTRA_ORDER_STATUS = "EXTRA_ORDER_STATUS"
 }

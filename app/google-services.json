@@ -1,9 +1,9 @@
 {
   "project_info": {
     "project_number": "347009259867",
-    "firebase_url": "https://jeewan-jyoti.firebaseio.com",
-    "project_id": "jeewan-jyoti",
-    "storage_bucket": "jeewan-jyoti.appspot.com"
+    "firebase_url": "https://gcp.firebaseio.com",
+    "project_id": "gcp",
+    "storage_bucket": "gcp.appspot.com"
   },
   "client": [
     {
