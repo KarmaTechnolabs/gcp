@@ -57,8 +57,6 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-
-
     private fun callOrderDetailApi() {
         viewModel.callOrderDetailAPI(
             OrderDetailsRequestModel(
