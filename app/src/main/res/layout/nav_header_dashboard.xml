@@ -21,29 +21,33 @@
     <!--        android:src="@drawable/ic_profile_placeholder" />-->
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_short_name"
         style="@style/TextViewPrimaryHugeStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/circular_textview"
         android:fontFamily="@font/gotham_bold"
+        android:maxLength="2"
+        android:textAllCaps="true"
         android:gravity="center"
-        android:text="JD" />
+        tools:text="JD" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_name"
         style="@style/TextViewPrimaryMediumStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gotham_bold"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/nav_header_title"
+        tools:text="@string/nav_header_title"
         android:textColor="@color/colorWhiteNight" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_short_email"
         style="@style/TextViewPrimarySmallStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gotham_black"
-        android:text="@string/nav_header_subtitle"
+        tools:text="@string/nav_header_subtitle"
         android:textColor="@color/colorWhiteNight" />
 </androidx.appcompat.widget.LinearLayoutCompat>

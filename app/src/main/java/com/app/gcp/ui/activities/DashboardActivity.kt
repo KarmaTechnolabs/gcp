@@ -2,19 +2,15 @@ package com.app.gcp.ui.activities
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import com.app.gcp.R
 import com.app.gcp.base.BaseActivity
 import com.app.gcp.custom.hideKeyboard
@@ -22,10 +18,9 @@ import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.ActivityDashboardBinding
 import com.app.gcp.ui.dialogs.LogOutAlertDialog
 import com.app.gcp.utils.UserStateManager
-import com.app.gcp.utils.Utils
 import com.app.gcp.viewmodel.DashBoardViewModel
-import com.app.gcp.viewmodel.MoreViewModel
-import android.widget.Toast
+import com.google.android.material.navigation.NavigationView
+
 
 private var back_pressed: Long = 0
 class DashboardActivity : BaseActivity(), View.OnClickListener,
@@ -53,7 +48,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_dashboard)
+//        val navController = findNavController(R.id.nav_host_fragment_content_dashboard)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -61,10 +56,17 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
                 R.id.nav_orders, R.id.nav_order_tracking, R.id.nav_faqs
             ), drawerLayout
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        setupActionBarWithNavController(findNavController(R.id.nav_host_fragment_content_dashboard), appBarConfiguration)
+        navView.setupWithNavController(findNavController(R.id.nav_host_fragment_content_dashboard))
 
         binding.drawerLayout.addDrawerListener(this)
+
+//        val headerView: View = navigationView.inflateHeaderView(R.layout.navigation_header)
+//        navView.findViewById<View>(R.id.navigation_header_text)
+        val headerView:View  = navView.getHeaderView(0)
+        headerView.findViewById<AppCompatTextView>(R.id.tv_short_name).text=UserStateManager.getUserProfile()?.firstName
+        headerView.findViewById<AppCompatTextView>(R.id.tv_name).text=UserStateManager.getUserProfile()?.firstName
+        headerView.findViewById<AppCompatTextView>(R.id.tv_short_email).text=UserStateManager.getUserProfile()?.email
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
