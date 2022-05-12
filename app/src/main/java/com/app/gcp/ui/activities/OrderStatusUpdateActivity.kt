@@ -39,7 +39,6 @@ class OrderStatusUpdateActivity : BaseActivity(), View.OnClickListener {
 
         if (intent.extras != null && intent.hasExtra(Constants.EXTRA_ORDER_STATUS)) {
             viewModel.orderStatusResponse.postValue(intent.getParcelableExtra(Constants.EXTRA_ORDER_STATUS))
-            callOrderStatusApi()
         }
 
 //        binding.edtOrderStatus.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
@@ -47,27 +46,6 @@ class OrderStatusUpdateActivity : BaseActivity(), View.OnClickListener {
 //                binding.spnOrderStatus.performClick()
 //            }
 //        }
-
-        viewModel.orderStatusListResponse.observe(this) { event ->
-            event.getContentIfNotHandled()?.let { response ->
-                manageAPIResource(
-                    response, isShowProgress = false,
-                    successListener = object : (List<OrderStatusResponse>, String) -> Unit {
-                        override fun invoke(it: List<OrderStatusResponse>, message: String) {
-//                            showToast(message)
-                            viewModel.orderStatusArray.clear()
-                            viewModel.orderStatusArray.addAll(it)
-                            setOrderStatus()
-                        }
-                    },
-                    failureListener = object : () -> Unit {
-                        override fun invoke() {
-
-                        }
-                    })
-
-            }
-        }
     }
 
     private fun setOrderStatus() {
@@ -102,14 +80,6 @@ class OrderStatusUpdateActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun callOrderStatusApi() {
-        viewModel.callOrderStatusAPI(
-            TrackingOrderRequestModel(
-                tracking_number = viewModel.orderStatusResponse.value?.trackingNumber
-            )
-        )
-    }
-
     override fun onClick(view: View?) {
         when (view) {
             binding.toolbarOrderStatus.ivBack -> onBackPressed()
@@ -117,22 +87,22 @@ class OrderStatusUpdateActivity : BaseActivity(), View.OnClickListener {
                 onBackPressed()
             }
             binding.btnSubmit -> {
-                viewModel.callOrderStatusUpdateAPI(
-                    OrderStatusUpdateRequestModel(
-                        orderId = viewModel.orderStatusResponse.value?.trackingNumber,
-                        statusId = viewModel.orderStatusArray[binding.spnOrderStatus.selectedItemPosition].id,
-                        note = binding.edtOrderComment.text.toString(),
-                        token = UserStateManager.getBearerToken()
-                    )
-                ).observe(this) { event ->
-                    event.getContentIfNotHandled()?.let { response ->
-                        manageAPIResource(response) { it, _ ->
-                            response.message?.let { it1 -> showToast(it1) }
-
-                            onBackPressed()
-                        }
-                    }
-                }
+//                viewModel.callOrderStatusUpdateAPI(
+//                    OrderStatusUpdateRequestModel(
+//                        orderId = viewModel.orderStatusResponse.value?.trackingNumber,
+//                        statusId = viewModel.orderStatusArray[binding.spnOrderStatus.selectedItemPosition].id,
+//                        note = binding.edtOrderComment.text.toString(),
+//                        token = UserStateManager.getBearerToken()
+//                    )
+//                ).observe(this) { event ->
+//                    event.getContentIfNotHandled()?.let { response ->
+//                        manageAPIResource(response) { it, _ ->
+//                            response.message?.let { it1 -> showToast(it1) }
+//
+//                            onBackPressed()
+//                        }
+//                    }
+//                }
             }
         }
     }

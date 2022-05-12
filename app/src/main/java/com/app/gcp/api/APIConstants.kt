@@ -17,6 +17,7 @@ object APIConstants {
     const val API_LOGOUT = "logout"
     const val API_CHANGE_PASSWORD = "changePassword"
     const val API_UPDATE_ORDER = "update_order"
+    const val API_ORDER_DETAILS = "order_details"
 
     // edit profile apis
     const val API_GET_STATE = "state"

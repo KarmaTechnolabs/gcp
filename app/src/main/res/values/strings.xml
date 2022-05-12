@@ -113,7 +113,6 @@
     <string name="get_in_touch">Get in Touch</string>
     <string name="tips_tricks">Tips &amp; Tricks</string>
     <string name="sources">Sources:</string>
-    <string name="job_details">Job Details</string>
     <string name="experience">Experience</string>
     <string name="employment">Employment</string>
     <string name="salary">Salary</string>
@@ -142,7 +141,6 @@
     <string name="hint_new_password">New Password</string>
     <string name="hint_re_enter_password">Re-enter Password</string>
     <string name="hint_name">Name</string>
-    <string name="preffered_method_of_communication">Preferred method of communication</string>
     <string name="phone">Phone</string>
     <string name="hint_message">Message</string>
     <string name="coming_soon">Coming soon</string>
@@ -194,6 +192,7 @@
     <string name="nav_header_subtitle">john_doe@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_search">Search</string>
+    <string name="action_filter">Filter</string>
 
     <string name="menu_orders">Orders</string>
     <string name="menu_track_your_order">Track your order</string>
@@ -201,7 +200,7 @@
     <string name="menu_logout">Logout</string>
     <string name="no_data_found">No data found.</string>
     <!--orders list Screen-->
-    <string name="order">Order# </string>
+    <string name="order">Order#&#160;</string>
     <string name="order_date">03 - jan - 20226</string>
     <string name="pending...">Pending...</string>
     <string name="order_name">Excel Inc. | Mr. John Doe</string>
@@ -213,5 +212,8 @@
     <!--orders update status-->
     <string name="comment">Comment</string>
     <string name="order_status_update">Order Status Update</string>
+
+    <!--orders detail-->
+    <string name="order_detail">Order Detail</string>
 
 </resources>

@@ -6,7 +6,9 @@ import com.app.gcp.api.APIConstants
 import com.app.gcp.api.ApiHelperClass
 import com.app.gcp.api.requestmodel.LoginRequestModel
 import com.app.gcp.api.requestmodel.OrderListRequestModel
+import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
 import com.app.gcp.api.responsemodel.LoginResponse
+import com.app.gcp.api.responsemodel.OrderStatusResponse
 import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.base.APIResource
 import com.app.gcp.base.BaseRequestModel
@@ -97,6 +99,43 @@ class DashBoardRepository private constructor() {
         return data
     }
 
+    fun callOrderStatusAPI(): LiveData<Event<APIResource<List<OrderStatusResponse>>>> {
+        val data = MutableLiveData<Event<APIResource<List<OrderStatusResponse>>>>()
+        data.value = Event(APIResource.loading(null))
+
+//        val baseLoginRequestModel = BaseRequestModel(requestModel)
+
+        if (Utils.isNetworkAvailable()) {
+            val disposable = ApiHelperClass.getAPIClient().callOrderStatusAPI()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ responseModel ->
+
+                    if (responseModel == null) {
+                        data.value = Event(APIResource.error("", null))
+                        return@subscribe
+                    }
+
+                    if (responseModel.status == APIConstants.SUCCESS) {
+                        val typeOfObjectsList = object : TypeToken<ArrayList<OrderStatusResponse>>() {}.type
+                        val orderResponse =
+                            responseModel.getResponseModel(typeOfObjectsList)
+                        data.value = Event(APIResource.success(orderResponse, responseModel.message))
+                    } else {
+                        responseModel.message?.let {
+                            data.value = Event(APIResource.error(it, null))
+                        }
+                    }
+                }, { e ->
+                    Timber.e(e)
+                    data.postValue(Event(APIResource.error(e.localizedMessage ?: "", null)))
+                })
+            compositeDisposable.add(disposable)
+        } else {
+            data.value = Event(APIResource.noNetwork())
+        }
+        return data
+    }
 
     fun clearRepo() {
         compositeDisposable.clear()

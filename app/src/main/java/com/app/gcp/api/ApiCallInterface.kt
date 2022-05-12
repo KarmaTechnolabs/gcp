@@ -23,10 +23,13 @@ interface ApiCallInterface {
     fun callOrderListAPI(@Body requestBody: OrderListRequestModel): Single<BaseResponseModel<List<OrdersResponse>>>
 
     @POST(APIConstants.API_ORDER_STATUS)
-    fun callOrderStatusAPI(@Body requestBody: TrackingOrderRequestModel): Single<BaseResponseModel<List<OrderStatusResponse>>>
+    fun callOrderStatusAPI(): Single<BaseResponseModel<List<OrderStatusResponse>>>
 
     @POST(APIConstants.API_UPDATE_ORDER)
     fun callOrderStatusUpdateAPI(@Body requestBody: OrderStatusUpdateRequestModel): Single<EmptyResponse>
+
+    @POST(APIConstants.API_ORDER_DETAILS)
+    fun callOrderDetailsUpdateAPI(@Body requestBody: OrderDetailsRequestModel): Single<BaseResponseModel<OrdersDetailsResponse>>
 
     @POST(APIConstants.API_FORGOT_PASSWORD)
     fun callForgotPasswordAPI(@Body requestBody: BaseRequestModel<ForgotPasswordRequestModel>): Single<BaseResponseModel<Any>>

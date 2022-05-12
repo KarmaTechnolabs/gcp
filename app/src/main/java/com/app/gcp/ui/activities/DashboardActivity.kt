@@ -3,6 +3,7 @@ package com.app.gcp.ui.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.AdapterView
 import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.drawerlayout.widget.DrawerLayout
@@ -12,6 +13,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.app.gcp.R
+import com.app.gcp.adapter.OrderStatusAdapter
+import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
+import com.app.gcp.api.responsemodel.OrderStatusResponse
 import com.app.gcp.base.BaseActivity
 import com.app.gcp.custom.hideKeyboard
 import com.app.gcp.custom.showToast
@@ -21,14 +25,12 @@ import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.DashBoardViewModel
 import com.google.android.material.navigation.NavigationView
 
-
-private var back_pressed: Long = 0
 class DashboardActivity : BaseActivity(), View.OnClickListener,
     LogOutAlertDialog.LogoutClickListener, DrawerLayout.DrawerListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityDashboardBinding
-    private val dashBoardViewModel by viewModels<DashBoardViewModel>()
+    private val viewModel by viewModels<DashBoardViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,33 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
 
         initView()
 
+        callOrderStatusApi()
+
+        viewModel.orderStatusListResponse.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { response ->
+                manageAPIResource(
+                    response, isShowProgress = false,
+                    successListener = object : (List<OrderStatusResponse>, String) -> Unit {
+                        override fun invoke(it: List<OrderStatusResponse>, message: String) {
+//                            showToast(message)
+                            viewModel.orderStatusArray.clear()
+                            viewModel.orderStatusArray.addAll(it)
+
+                        }
+                    },
+                    failureListener = object : () -> Unit {
+                        override fun invoke() {
+
+                        }
+                    })
+            }
+        }
+    }
+
+    private fun callOrderStatusApi() {
+        viewModel.callOrderStatusAPI(
+            TrackingOrderRequestModel(tracking_number="")
+        )
     }
 
     private fun initView() {

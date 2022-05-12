@@ -6,17 +6,21 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.app.gcp.R
+import com.app.gcp.adapter.OrderStatusAdapter
 import com.app.gcp.adapter.OrdersAdapter
 import com.app.gcp.api.requestmodel.OrderListRequestModel
+import com.app.gcp.api.responsemodel.OrderStatusResponse
 import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.gotoActivity
+import com.app.gcp.custom.hideKeyboard
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentOrdersBinding
 import com.app.gcp.listeners.ItemClickListener
@@ -83,7 +87,6 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
                             binding.swipeRefresh.isRefreshing = false
                         }
                     })
-
             }
         }
 
@@ -92,6 +95,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         binding.rvSearchOrder.adapter = orderListAdapter
 
         callOrderListApi()
+        setOrderStatus()
 
         binding.svSearchOrder.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -130,8 +134,43 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         }
     }
 
-    override fun onClick(view: View?) {
+    private fun setOrderStatus() {
+        val statusAdapter =
+            OrderStatusAdapter(
+                activity,
+                R.layout.list_item_order_status_spinner,
+                R.id.tv_order_status,
+                dashboardViewModel.orderStatusArray
+            )
+        binding.spnOrderStatus.adapter = statusAdapter
+        binding.spnOrderStatus.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?,
+                position: Int, id: Long
+            ) {
+                val model = parent?.getItemAtPosition(position) as OrderStatusResponse
+//                binding.edtOrderStatus.setText(model.title)
+            }
 
+            override fun onNothingSelected(arg0: AdapterView<*>?) {
+            }
+        }
+//        for ((index, item) in dashboardViewModel.orderStatusArray.withIndex()) {
+//            if (dashboardViewModel.orderStatusResponse.value?.orderStatus.equals(
+//                    item.title,
+//                    ignoreCase = true
+//                )
+//            ) {
+//                binding.spnOrderStatus.setSelection(index)
+//            }
+//        }
+    }
+
+    override fun onClick(view: View?) {
+        when (view) {
+//            binding.ivFilterStatus ->
+        }
     }
 
     override fun onItemClick(viewIdRes: Int, model: OrdersResponse, position: Int) {
@@ -139,16 +178,17 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
             R.id.mcv_main -> {
                 requireActivity().gotoActivity(
                     OrderDetailActivity::class.java,
-                    needToFinish = false
-                )
-            }
-            R.id.tv_order_status -> {
-                requireActivity().gotoActivity(
-                    OrderStatusUpdateActivity::class.java,
                     bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model),
                     needToFinish = false
                 )
             }
+//            R.id.tv_order_status -> {
+//                requireActivity().gotoActivity(
+//                    OrderStatusUpdateActivity::class.java,
+//                    bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model),
+//                    needToFinish = false
+//                )
+//            }
         }
     }
 

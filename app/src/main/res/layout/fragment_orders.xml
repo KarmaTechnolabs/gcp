@@ -23,7 +23,7 @@
             android:layout_marginHorizontal="@dimen/normal_size"
             android:layout_marginVertical="@dimen/_8sdp"
             app:cardCornerRadius="@dimen/_5sdp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_filter_status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -34,11 +34,32 @@
                 android:inputType="number"
                 app:iconifiedByDefault="false"
                 app:queryBackground="@null"
-                app:queryHint="Search by Name"
+                app:queryHint="Search By Tracking Number"
                 app:searchIcon="@null" />
         </com.google.android.material.card.MaterialCardView>
+        
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_filter_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/normal_size"
+            android:layout_marginStart="@dimen/normal_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="@id/cv_search_order"
+            app:layout_constraintBottom_toBottomOf="@id/cv_search_order"
+            android:src="@drawable/ic_filter"/>
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spn_order_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/regular_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_filter_status"
+            android:theme="@android:style/TextAppearance.Material.Title"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

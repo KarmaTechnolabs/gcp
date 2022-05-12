@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gotham_bold"
                 tools:text="@string/order"
-                android:text="@{model.trackingNumber}"
+                android:text="@{@string/order+model.trackingNumber}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
