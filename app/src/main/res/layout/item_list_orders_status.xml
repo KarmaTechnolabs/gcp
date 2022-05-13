@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.app.gcp.api.responsemodel.OrderStatusResponse" />
+
+        <variable
+            name="position"
+            type="int" />
+        <variable
+            name="isSelected"
+            type="boolean" />
+
+        <variable
+            name="clickListener"
+            type="com.app.gcp.listeners.ItemClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal_size"
+        android:layout_marginTop="@dimen/mini_size"
+        android:layout_marginEnd="@dimen/normal_size"
+        android:layout_marginBottom="@dimen/mini_size"
+        app:cardCornerRadius="@dimen/normal_size"
+        app:strokeColor="@color/colorGray"
+        app:strokeWidth="@dimen/_1sdp">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/rb_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:checked="@{isSelected}"
+            android:onClick="@{v -> clickListener.onItemClick(v.id,model,position)}"
+            android:drawableLeft="@drawable/drawable_radio_button"
+            android:drawablePadding="@dimen/_15sdp"
+            android:fontFamily="@font/gotham_black"
+            android:includeFontPadding="false"
+            android:padding="@dimen/normal_size"
+            android:text="@{model.title}"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/_15sdp"
+            tools:text="@string/order_status" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

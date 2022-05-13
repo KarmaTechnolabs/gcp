@@ -17,7 +17,7 @@ import java.util.*
 class OrdersAdapter(context: Context?) :
     BaseAdapter<OrdersResponse?, OrdersAdapter.ViewHolder?>(context),
     Filterable {
-    var filteredGameList = ArrayList<OrdersResponse?>()
+    var filteredOrderList = ArrayList<OrdersResponse?>()
     var originalData = ArrayList<OrdersResponse?>()
     private var clickListener: ItemClickListener<OrdersResponse>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,18 +55,18 @@ class OrdersAdapter(context: Context?) :
             }
 
             override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
-                filteredGameList = filterResults.values as ArrayList<OrdersResponse?>
+                filteredOrderList = filterResults.values as ArrayList<OrdersResponse?>
                 notifyDataSetChanged()
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return filteredGameList.size
+        return filteredOrderList.size
     }
 
     override fun getListItem(position: Int): OrdersResponse {
-        return filteredGameList[position]!!
+        return filteredOrderList[position]!!
     }
 
     inner class ViewHolder(binding: ItemListOrdersBinding) :
@@ -92,7 +92,7 @@ class OrdersAdapter(context: Context?) :
     }
 
     init {
-        filteredGameList = list
+        filteredOrderList = list
         originalData = list
     }
 

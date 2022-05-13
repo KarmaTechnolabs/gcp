@@ -6,35 +6,29 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.app.gcp.R
-import com.app.gcp.adapter.OrderStatusAdapter
 import com.app.gcp.adapter.OrdersAdapter
 import com.app.gcp.api.requestmodel.OrderListRequestModel
 import com.app.gcp.api.responsemodel.OrderStatusResponse
 import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.gotoActivity
-import com.app.gcp.custom.hideKeyboard
-import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentOrdersBinding
 import com.app.gcp.listeners.ItemClickListener
 import com.app.gcp.ui.activities.OrderDetailActivity
-import com.app.gcp.ui.activities.OrderStatusUpdateActivity
+import com.app.gcp.ui.dialogs.OrderStatusFilterBottomSheet
 import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.DashBoardViewModel
 import java.util.*
 
 class OrdersFragment : BaseFragment(), View.OnClickListener,
-    ItemClickListener<OrdersResponse> {
+    ItemClickListener<OrdersResponse>, OrderStatusFilterBottomSheet.OrderStatusListener {
 
-    private lateinit var ordersViewModel: DashBoardViewModel
     private var _binding: FragmentOrdersBinding? = null
     private val orderListArray = mutableListOf<OrdersResponse>()
     private var orderListAdapter: OrdersAdapter? = null
@@ -42,14 +36,14 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var isFirstTime = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        ordersViewModel =
-            ViewModelProvider(this)[DashBoardViewModel::class.java]
+
 
         _binding = FragmentOrdersBinding.inflate(inflater, container, false)
 
@@ -95,7 +89,6 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         binding.rvSearchOrder.adapter = orderListAdapter
 
         callOrderListApi()
-        setOrderStatus()
 
         binding.svSearchOrder.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -115,12 +108,33 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
             }
         })
 
+//        binding.spnOrderStatus.onItemSelectedListener = object :
+//            AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?, view: View?,
+//                position: Int, id: Long
+//            ) {
+//                if (isFirstTime) {
+//                    isFirstTime = false
+//                }else {
+//                val model = parent?.getItemAtPosition(position) as OrderStatusResponse
+////                binding.edtOrderStatus.setText(model.title)
+//                    dashboardViewModel.selectedOrderStatusFilter= model.id.toString()
+//                callOrderListApi()
+//                }
+//
+//            }
+//
+//            override fun onNothingSelected(arg0: AdapterView<*>?) {
+//            }
+//        }
+
     }
 
     private fun callOrderListApi() {
         dashboardViewModel.callOrderListAPI(
             OrderListRequestModel(
-                search = "","1","1",
+                search = "", status_id = dashboardViewModel.selectedOrderStatusFilter,"1",
                 UserStateManager.getBearerToken()
             )
         )
@@ -135,41 +149,30 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
     }
 
     private fun setOrderStatus() {
-        val statusAdapter =
-            OrderStatusAdapter(
-                activity,
-                R.layout.list_item_order_status_spinner,
-                R.id.tv_order_status,
-                dashboardViewModel.orderStatusArray
-            )
-        binding.spnOrderStatus.adapter = statusAdapter
-        binding.spnOrderStatus.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?, view: View?,
-                position: Int, id: Long
-            ) {
-                val model = parent?.getItemAtPosition(position) as OrderStatusResponse
-//                binding.edtOrderStatus.setText(model.title)
-            }
+//        val statusAdapter =
+//            OrderStatusAdapter(
+//                activity,
+//                R.layout.list_item_order_status_spinner,
+//                R.id.tv_order_status,
+//                dashboardViewModel.orderStatusArray
+//            )
+//        binding.spnOrderStatus.adapter = statusAdapter
+//
+//        binding.spnOrderStatus.performClick()
 
-            override fun onNothingSelected(arg0: AdapterView<*>?) {
+        val orderStatusBottomSheet =
+            dashboardViewModel.orderStatusArray.let {
+                OrderStatusFilterBottomSheet.newInstance(
+                    it as ArrayList<OrderStatusResponse>,dashboardViewModel.selectedOrderStatusFilter
+                )
             }
-        }
-//        for ((index, item) in dashboardViewModel.orderStatusArray.withIndex()) {
-//            if (dashboardViewModel.orderStatusResponse.value?.orderStatus.equals(
-//                    item.title,
-//                    ignoreCase = true
-//                )
-//            ) {
-//                binding.spnOrderStatus.setSelection(index)
-//            }
-//        }
+        orderStatusBottomSheet.setOnOrderStatusListener(this)
+        orderStatusBottomSheet.show(childFragmentManager, "filter-picker")
     }
 
     override fun onClick(view: View?) {
         when (view) {
-//            binding.ivFilterStatus ->
+            binding.ivFilterStatus -> setOrderStatus()
         }
     }
 
@@ -196,5 +199,10 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onOrderStatusSelected(orderStatus: OrderStatusResponse) {
+        dashboardViewModel.selectedOrderStatusFilter= orderStatus.id.toString()
+        callOrderListApi()
     }
 }

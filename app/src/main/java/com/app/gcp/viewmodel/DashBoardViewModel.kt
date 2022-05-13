@@ -19,6 +19,7 @@ class DashBoardViewModel : ViewModel() {
     private val orderListRequestLiveData = MutableLiveData<OrderListRequestModel>()
     private val orderStatusRequestLiveData = MutableLiveData<TrackingOrderRequestModel>()
     var orderStatusArray = mutableListOf<OrderStatusResponse>()
+    var selectedOrderStatusFilter : String = ""
 
     val orderListResponse: LiveData<Event<APIResource<List<OrdersResponse>>>> =
         orderListRequestLiveData.switchMap {

@@ -73,4 +73,6 @@ object Constants {
 
     const val EXTRA_TRACK_ORDER = "EXTRA_TRACK_ORDER"
     const val EXTRA_ORDER_STATUS = "EXTRA_ORDER_STATUS"
+    const val EXTRA_DATA = "EXTRA_DATA"
+    const val EXTRA_SELECTED = "EXTRA_SELECTED"
 }

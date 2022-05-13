@@ -16,12 +16,12 @@
         android:paddingTop="@dimen/_10sdp"
         android:paddingBottom="@dimen/_10sdp"
         android:singleLine="true"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorBlack"
         tools:text="data" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorBlack" />
+        android:background="@color/colorGray" />
 
 </LinearLayout>
