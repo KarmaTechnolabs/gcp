@@ -3,9 +3,6 @@ package com.app.gcp.api.requestmodel
 import com.google.gson.annotations.SerializedName
 
 data class OrderListRequestModel(
-    @field:SerializedName("search")
-    val search: String,
-
     @field:SerializedName("status_id")
     val status_id: String,
 

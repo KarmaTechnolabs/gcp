@@ -134,7 +134,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
     private fun callOrderListApi() {
         dashboardViewModel.callOrderListAPI(
             OrderListRequestModel(
-                search = "", status_id = dashboardViewModel.selectedOrderStatusFilter,"1",
+                status_id = dashboardViewModel.selectedOrderStatusFilter,"1",
                 UserStateManager.getBearerToken()
             )
         )

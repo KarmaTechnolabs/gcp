@@ -215,5 +215,16 @@
 
     <!--orders detail-->
     <string name="order_detail">Order Detail</string>
+    <string name="customer_details">Customer Details</string>
+    <string name="product_details">Product Details</string>
+    <string name="additional_details">Additional Details</string>
+    <string name="po_number">PO Number</string>
+    <string name="po_date">PO Date</string>
+    <string name="download">Download</string>
+    <string name="po_copy">PO Copy</string>
+    <string name="material_user">Material User</string>
+    <string name="running_meter">Running Meter</string>
+    <string name="product">Product</string>
+    <string name="sub_total">Sub Total</string>
 
 </resources>
