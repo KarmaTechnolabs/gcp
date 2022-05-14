@@ -8,7 +8,6 @@ import androidx.lifecycle.observe
 import com.app.gcp.R
 import com.app.gcp.adapter.OrderDetailAdditionalDetailsAdapter
 import com.app.gcp.adapter.OrderDetailProductAdapter
-import com.app.gcp.adapter.OrdersAdapter
 import com.app.gcp.api.requestmodel.OrderDetailsRequestModel
 import com.app.gcp.api.responsemodel.OrdersDetailsResponse
 import com.app.gcp.api.responsemodel.OrdersResponse
@@ -16,9 +15,7 @@ import com.app.gcp.base.BaseActivity
 import com.app.gcp.databinding.ActivityOrderDetailBinding
 import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
-import com.app.gcp.utils.Utils
 import com.app.gcp.viewmodel.OrderDetailViewModel
-import java.util.ArrayList
 
 class OrderDetailActivity : BaseActivity(), View.OnClickListener {
 
@@ -70,7 +67,12 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
                             additionalDetailsListArray.clear()
                             it.customFields?.let { it1 -> additionalDetailsListArray.addAll(it1) }
                             additionalDetailsListAdapter?.setItems(additionalDetailsListArray as ArrayList<OrdersDetailsResponse.CustomField?>)
-                            binding.tvNoData.visibility = View.GONE
+                            binding.tvSubtotalValue.text = "₹ ".plus(productListArray.sumBy { Integer.parseInt(it.total) }.toString())
+
+//                            binding.tvGstValue.text =
+//                                binding.tvGrandTotalValue.text =
+
+                                binding.tvNoData.visibility = View.GONE
                         }
                     },
                     failureListener = object : () -> Unit {
@@ -81,6 +83,8 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
+
+
 
     private fun callOrderDetailApi() {
         viewModel.callOrderDetailAPI(
