@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.app.gcp.api.APIConstants
 import com.app.gcp.api.ApiHelperClass
 import com.app.gcp.api.requestmodel.ChangePasswordRequestModel
+import com.app.gcp.api.responsemodel.EmptyResponse
 import com.app.gcp.base.APIResource
 import com.app.gcp.base.BaseRequestModel
 import com.app.gcp.custom.Event
@@ -18,14 +19,14 @@ class ChangePasswordRepository private constructor() {
 
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    fun callChangePasswordAPI(requestModel: ChangePasswordRequestModel): LiveData<Event<APIResource<Any>>> {
-        val data = MutableLiveData<Event<APIResource<Any>>>()
+    fun callChangePasswordAPI(requestModel: ChangePasswordRequestModel): LiveData<Event<APIResource<EmptyResponse>>> {
+        val data = MutableLiveData<Event<APIResource<EmptyResponse>>>()
         data.value = Event(APIResource.loading(null))
 
-        val baseRequestModel = BaseRequestModel(requestModel)
+//        val baseRequestModel = BaseRequestModel(requestModel)
 
         if (Utils.isNetworkAvailable()) {
-            val disposable = ApiHelperClass.getAPIClient().callChangePasswordAPI(baseRequestModel)
+            val disposable = ApiHelperClass.getAPIClient().callChangePasswordAPI(requestModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ responseModel ->
@@ -36,9 +37,7 @@ class ChangePasswordRepository private constructor() {
                     }
 
                     if (responseModel.status == APIConstants.SUCCESS) {
-                        val otpInt =
-                            responseModel.getResponseModel(Any::class.java)
-                        data.value = Event(APIResource.success(otpInt, responseModel.message))
+                        data.value = Event(APIResource.success(responseModel,responseModel.message))
                     } else {
                         responseModel.message?.let {
                             data.value = Event(APIResource.error(it, null))
@@ -48,7 +47,6 @@ class ChangePasswordRepository private constructor() {
                     Timber.e(e)
                     data.postValue(Event(APIResource.error(e.localizedMessage ?: "", null)))
                 })
-
             compositeDisposable.add(disposable)
         } else {
             data.value = Event(APIResource.noNetwork())

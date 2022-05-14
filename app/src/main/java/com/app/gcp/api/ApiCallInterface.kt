@@ -41,7 +41,7 @@ interface ApiCallInterface {
     fun callLogoutAPI(): Single<BaseResponseModel<Any>>
 
     @POST(APIConstants.API_CHANGE_PASSWORD)
-    fun callChangePasswordAPI(@Body requestBody: BaseRequestModel<ChangePasswordRequestModel>): Single<BaseResponseModel<Any>>
+    fun callChangePasswordAPI(@Body requestBody: ChangePasswordRequestModel): Single<EmptyResponse>
 
     @POST(APIConstants.API_GET_STATE)
     fun getStateList(@Body requestBody: BaseRequestModel<StateRequestModel>): Single<BaseResponseModel<List<StateModel>>>

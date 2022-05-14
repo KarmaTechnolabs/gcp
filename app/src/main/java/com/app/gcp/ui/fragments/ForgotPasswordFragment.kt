@@ -35,6 +35,7 @@ class ForgotPasswordFragment : BaseFragment(), View.OnClickListener,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
         binding.clickListener = this
 
         onBoardViewModel.forgotPasswordResponse.observe(viewLifecycleOwner) { event ->
