@@ -12,7 +12,7 @@ object APIConstants {
     const val API_ORDERS = "orders"
     const val API_ORDER_STATUS = "order_status"
     const val API_REGISTER = "register"
-    const val API_FORGOT_PASSWORD = "forgotPassword"
+    const val API_FORGOT_PASSWORD = "send_reset_password_mail"
     const val API_TRACK_ORDER = "track"
     const val API_LOGOUT = "logout"
     const val API_CHANGE_PASSWORD = "changePassword"

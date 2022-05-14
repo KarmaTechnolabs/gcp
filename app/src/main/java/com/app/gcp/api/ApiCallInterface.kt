@@ -32,7 +32,7 @@ interface ApiCallInterface {
     fun callOrderDetailsUpdateAPI(@Body requestBody: OrderDetailsRequestModel): Single<BaseResponseModel<OrdersDetailsResponse>>
 
     @POST(APIConstants.API_FORGOT_PASSWORD)
-    fun callForgotPasswordAPI(@Body requestBody: BaseRequestModel<ForgotPasswordRequestModel>): Single<BaseResponseModel<Any>>
+    fun callForgotPasswordAPI(@Body requestBody: ForgotPasswordRequestModel): Single<BaseResponseModel<Any>>
 
     @POST(APIConstants.API_TRACK_ORDER)
     fun callTrackOrderAPI(@Body requestBody: TrackingOrderRequestModel): Single<BaseResponseModel<TrackOrderResponse>>

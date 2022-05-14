@@ -44,7 +44,11 @@ class OrdersAdapter(context: Context?) :
                 } else {
                     val filterData: MutableList<OrdersResponse?> = ArrayList()
                     for (model in list) {
-                        if (model?.trackingNumber?.lowercase(Locale.getDefault())?.contains(charSequence)!!) {
+                        if (model?.trackingNumber?.lowercase(Locale.getDefault())
+                                ?.contains(charSequence)!! || model?.id?.lowercase(Locale.getDefault())
+                                ?.contains(charSequence)!! || model?.companyName?.lowercase(Locale.getDefault())
+                                ?.contains(charSequence)!!
+                        ) {
                             filterData.add(model)
                         }
                     }
@@ -82,7 +86,7 @@ class OrdersAdapter(context: Context?) :
         init {
             binding.root.setOnClickListener(View.OnClickListener { view ->
                 if (onItemClickListener != null) {
-                    val model:OrdersResponse = getListItem(bindingAdapterPosition)
+                    val model: OrdersResponse = getListItem(bindingAdapterPosition)
                     val selectedPos = bindingAdapterPosition
                     notifyDataSetChanged()
                     onItemClickListener.onItemClick(view, model, selectedPos)

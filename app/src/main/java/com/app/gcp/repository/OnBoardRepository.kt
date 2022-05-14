@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.app.gcp.api.APIConstants
 import com.app.gcp.api.ApiHelperClass
+import com.app.gcp.api.ForgotPasswordApiHelperClass
 import com.app.gcp.api.requestmodel.ForgotPasswordRequestModel
 import com.app.gcp.api.requestmodel.LoginRequestModel
 import com.app.gcp.api.requestmodel.RegisterRequestModel
@@ -106,10 +107,10 @@ class OnBoardRepository private constructor() {
         val data = MutableLiveData<Event<APIResource<Any>>>()
         data.value = Event(APIResource.loading(null))
 
-        val baseRequestModel = BaseRequestModel(forgotPasswordModel)
+//        val baseRequestModel = BaseRequestModel(forgotPasswordModel)
 
         if (Utils.isNetworkAvailable()) {
-            val disposable = ApiHelperClass.getAPIClient().callForgotPasswordAPI(baseRequestModel)
+            val disposable = ForgotPasswordApiHelperClass.getAPIClient().callForgotPasswordAPI(forgotPasswordModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ responseModel ->

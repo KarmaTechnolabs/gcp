@@ -18,6 +18,7 @@ import com.app.gcp.custom.gotoActivity
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentLoginBinding
 import com.app.gcp.ui.activities.DashboardActivity
+import com.app.gcp.ui.activities.OtherServicesActivity
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.utils.Validator
 import com.app.gcp.viewmodel.OnBoardViewModel
@@ -124,6 +125,11 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             binding.tvForgotPassword -> findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment())
 
             binding.btnTrackOrder -> findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToTrackOrderFragment())
+
+            binding.tvOurProduct -> requireActivity().gotoActivity(
+                OtherServicesActivity::class.java,
+                needToFinish = false
+            )
 
             binding.btnLogin -> {
                 if (isDataValid()) {

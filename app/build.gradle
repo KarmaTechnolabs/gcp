@@ -26,6 +26,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BASE_URL", '"https://crm.globalcorepkg.in/index.php/api/"'
+        buildConfigField "String", "BASE_FORGOT_URL", '"https://crm.globalcorepkg.in/index.php/signin/"'
         buildConfigField "String", "CONTACT_US", '"http://159.89.167.87/jeewanjyoti/contact-us"'
         buildConfigField "String", "ABOUT_US", '"http://159.89.167.87/jeewanjyoti/about-us"'
         buildConfigField "String", "OUT_TEAM", '"http://159.89.167.87/jeewanjyoti/our-team"'
@@ -121,6 +122,7 @@ dependencies {
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     implementation 'org.greenrobot:eventbus:3.2.0'
+    implementation 'com.ms-square:expandableTextView:0.1.4'
 
     //Testing libraries
     testImplementation 'junit:junit:4.13.2'

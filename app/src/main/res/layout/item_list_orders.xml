@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="model"
             type="com.app.gcp.api.responsemodel.OrdersResponse" />
@@ -11,8 +12,11 @@
         <variable
             name="position"
             type="int" />
-        <import type="com.app.gcp.utils.DateTimeUtils"/>
-        <import type="com.app.gcp.utils.DateTimeConstants"/>
+
+        <import type="com.app.gcp.utils.DateTimeUtils" />
+
+        <import type="com.app.gcp.utils.DateTimeConstants" />
+
         <variable
             name="clickListener"
             type="com.app.gcp.listeners.ItemClickListener" />
@@ -22,11 +26,11 @@
         android:id="@+id/mcv_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{v -> clickListener.onItemClick(v.id,model,position)}"
-        android:layout_marginEnd="@dimen/normal_size"
         android:layout_marginStart="@dimen/normal_size"
         android:layout_marginTop="@dimen/mini_size"
+        android:layout_marginEnd="@dimen/normal_size"
         android:layout_marginBottom="@dimen/mini_size"
+        android:onClick="@{v -> clickListener.onItemClick(v.id,model,position)}"
         app:cardCornerRadius="@dimen/normal_size"
         app:strokeColor="@color/colorGray"
         app:strokeWidth="@dimen/_1sdp">
@@ -42,21 +46,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gotham_bold"
-                tools:text="@string/order"
-                android:text="@{@string/order+model.trackingNumber}"
+                android:text="@{@string/order+model.id}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/order" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_tracking_number"
+                style="@style/TextViewPrimaryStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_size"
+                android:fontFamily="@font/gotham_bold"
+                android:text="@{@string/tracking+model.trackingNumber}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_order_number"
+                tools:text="@string/tracking" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_order_date"
                 style="@style/TextViewPrimarySmallStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{model.orderDate}"
                 android:layout_marginTop="@dimen/small_size"
                 android:fontFamily="@font/gotham_black"
+                android:text="@{model.orderDate}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_order_number"
+                app:layout_constraintTop_toBottomOf="@id/tv_tracking_number"
                 tools:text="@string/order_date" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -64,9 +80,9 @@
                 style="@style/TextViewPrimarySmallStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{model.note}"
                 android:layout_marginTop="@dimen/normal_size"
                 android:fontFamily="@font/gotham_black"
+                android:text="@{model.companyName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_order_date"
                 tools:text="Excel Inc. | Mr. John Doe" />
@@ -76,14 +92,14 @@
                 style="@style/TextViewPrimarySmallStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{v -> clickListener.onItemClick(v.id,model,position)}"
                 android:background="@drawable/round_corner_gray_drawable"
                 android:fontFamily="@font/gotham_black"
+                android:onClick="@{v -> clickListener.onItemClick(v.id,model,position)}"
                 android:paddingLeft="@dimen/medium_size"
                 android:paddingTop="@dimen/normal_size"
                 android:paddingRight="@dimen/medium_size"
-                android:text="@{model.orderStatus}"
                 android:paddingBottom="@dimen/normal_size"
+                android:text="@{model.orderStatus}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/pending..." />

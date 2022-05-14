@@ -20,7 +20,7 @@ data class LoginResponse(
     val phone: String,
 
     @field:SerializedName("user_type")
-    val user_type: String,
+    val user_type: String?,
 
     @field:SerializedName("role_id")
     val role_id: String,

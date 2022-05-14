@@ -201,6 +201,7 @@
     <string name="no_data_found">No data found.</string>
     <!--orders list Screen-->
     <string name="order">Order#&#160;</string>
+    <string name="tracking">Tracking#&#160;</string>
     <string name="order_date">03 - jan - 20226</string>
     <string name="pending...">Pending...</string>
     <string name="order_name">Excel Inc. | Mr. John Doe</string>

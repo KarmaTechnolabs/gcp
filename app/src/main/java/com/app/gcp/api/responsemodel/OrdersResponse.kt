@@ -50,5 +50,11 @@ public data class OrdersResponse(
     @SerializedName("tax_id2")
     val taxId2: String?="",
     @SerializedName("tracking_number")
-    val trackingNumber: String?=""
+    val trackingNumber: String?="",
+    @SerializedName("current_stage_id")
+    val currentStage_Id: String?="",
+    @SerializedName("company_name")
+    val companyName: String?=""
+
+
 ) : Parcelable

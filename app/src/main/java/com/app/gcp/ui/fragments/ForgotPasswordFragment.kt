@@ -40,8 +40,12 @@ class ForgotPasswordFragment : BaseFragment(), View.OnClickListener,
         onBoardViewModel.forgotPasswordResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(response) { _, message ->
-                    showToast(message)
-                    findNavController().navigateUp()
+                    val resetPasswordDialog =
+                        PasswordResetLinkAlertDialog.newInstance()
+                    resetPasswordDialog.setListener(this)
+                    resetPasswordDialog.show(childFragmentManager, "Reset-Password")
+//                    showToast(message)
+//                    findNavController().navigateUp()
                 }
             }
         }
@@ -66,16 +70,12 @@ class ForgotPasswordFragment : BaseFragment(), View.OnClickListener,
             }
             R.id.btn_send_link -> {
                 if (isDataValid()) {
-//                    val email = binding.tieEmail.text
-                    val resetPasswordDialog =
-                        PasswordResetLinkAlertDialog.newInstance()
-                    resetPasswordDialog.setListener(this)
-                    resetPasswordDialog.show(childFragmentManager, "Reset-Password")
-//                    onBoardViewModel.callForgotPasswordAPI(
-//                        ForgotPasswordRequestModel(
-//                            email.toString()
-//                        )
-//                    )
+                    val email = binding.tieEmail.text
+                    onBoardViewModel.callForgotPasswordAPI(
+                        ForgotPasswordRequestModel(
+                            email.toString()
+                        )
+                    )
                 }
             }
         }

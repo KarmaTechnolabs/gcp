@@ -23,7 +23,7 @@
             android:layout_marginHorizontal="@dimen/normal_size"
             android:layout_marginVertical="@dimen/_8sdp"
             app:cardCornerRadius="@dimen/_5sdp"
-            app:layout_constraintEnd_toStartOf="@id/iv_filter_status"
+            app:layout_constraintEnd_toStartOf="@id/iv_filter_stag"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -31,13 +31,25 @@
                 android:id="@+id/sv_search_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 app:iconifiedByDefault="false"
                 app:queryBackground="@null"
-                app:queryHint="Search By Tracking Number"
+                app:queryHint="Search By Order"
                 app:searchIcon="@null" />
         </com.google.android.material.card.MaterialCardView>
-        
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_filter_stag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/normal_size"
+            android:layout_marginStart="@dimen/normal_size"
+            app:layout_constraintEnd_toStartOf="@id/iv_filter_status"
+            android:scaleType="fitXY"
+            android:onClick="@{clickListener::onClick}"
+            app:layout_constraintTop_toTopOf="@id/cv_search_order"
+            app:layout_constraintBottom_toBottomOf="@id/cv_search_order"
+            android:src="@drawable/ic_filter"/>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_filter_status"
             android:layout_width="wrap_content"
