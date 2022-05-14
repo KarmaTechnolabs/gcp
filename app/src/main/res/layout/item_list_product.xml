@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.app.gcp.api.responsemodel.OrdersResponse" />
+            type="com.app.gcp.api.responsemodel.OrdersDetailsResponse.Product" />
 
         <variable
             name="position"
@@ -34,40 +34,53 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gotham_black"
-            android:text="Product A"
-            app:layout_constraintEnd_toStartOf="@id/tv_quantity"
-            app:layout_constraintHorizontal_weight="3.5"
+            android:text="@{model.title}"
+            app:layout_constraintEnd_toStartOf="@id/tv_rate"
+            app:layout_constraintHorizontal_weight="4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Product A" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_product_label"
-            style="@style/TextViewPrimaryStyle"
-            android:layout_width="0dp"
+            android:id="@+id/tv_quantity"
+            style="@style/TextViewPrimarySmallStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_size"
             android:fontFamily="@font/gotham_black"
-            android:text="Per label price"
+            android:gravity="center"
+            android:text="@{`QTY: `+model.excessQuantity+` + `+model.quantity}"
             android:textColor="@color/colorGray"
-            android:textSize="@dimen/normal_size"
-            app:layout_constraintEnd_toEndOf="@id/tv_product"
-            app:layout_constraintHorizontal_weight="3.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_product"
+            tools:text="500" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_unit"
+            style="@style/TextViewPrimaryStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_size"
+            android:fontFamily="@font/gotham_black"
+            android:text="@{`Unit: `+model.unitType}"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quantity"
             tools:text="Per label price" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_quantity"
+            android:id="@+id/tv_rate"
             style="@style/TextViewPrimarySmallStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gotham_black"
-            android:text="500"
             android:gravity="center"
-            app:layout_constraintHorizontal_weight="3.5"
-            app:layout_constraintStart_toEndOf="@id/tv_product"
+            android:text="@{`₹ `+model.rate}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_price"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@id/tv_product"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="500" />
 
@@ -77,10 +90,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gotham_black"
-            android:text="₹ 10000"
+            android:text="@{`₹ `+model.total}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="3"
-            app:layout_constraintStart_toEndOf="@id/tv_quantity"
+            app:layout_constraintStart_toEndOf="@id/tv_rate"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="₹ 10000" />
 

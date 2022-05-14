@@ -29,8 +29,8 @@ public data class OrdersResponse(
     val gstAmount: String?="",
     @SerializedName("gst_percentage")
     val gstPercentage: String?="",
-    @SerializedName("id")
-    val id: String?="",
+    @SerializedName("order_id")
+    val orderId: String?="",
     @SerializedName("note")
     val note: String?="",
     @SerializedName("order_date")
@@ -54,7 +54,9 @@ public data class OrdersResponse(
     @SerializedName("current_stage_id")
     val currentStage_Id: String?="",
     @SerializedName("company_name")
-    val companyName: String?=""
+    val companyName: String?="",
+    @SerializedName("order_stage_title")
+    val orderStageTitle: String?=""
 
 
 ) : Parcelable

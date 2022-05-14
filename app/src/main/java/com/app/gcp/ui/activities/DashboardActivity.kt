@@ -19,7 +19,7 @@ import com.app.gcp.custom.hideKeyboard
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.ActivityDashboardBinding
 import com.app.gcp.ui.dialogs.LogOutAlertDialog
-import com.app.gcp.ui.fragments.OrdersFragment
+import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.DashBoardViewModel
 import com.google.android.material.navigation.NavigationView
@@ -82,7 +82,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_orders, R.id.nav_order_tracking, R.id.nav_faqs
+                R.id.nav_orders, R.id.nav_order_tracking,R.id.nav_change_password, R.id.nav_faqs
             ), drawerLayout
         )
         setupActionBarWithNavController(findNavController(R.id.nav_host_fragment_content_dashboard), appBarConfiguration)

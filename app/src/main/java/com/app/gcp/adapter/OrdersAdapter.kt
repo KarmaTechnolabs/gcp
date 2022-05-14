@@ -45,7 +45,7 @@ class OrdersAdapter(context: Context?) :
                     val filterData: MutableList<OrdersResponse?> = ArrayList()
                     for (model in list) {
                         if (model?.trackingNumber?.lowercase(Locale.getDefault())
-                                ?.contains(charSequence)!! || model?.id?.lowercase(Locale.getDefault())
+                                ?.contains(charSequence)!! || model?.orderId?.lowercase(Locale.getDefault())
                                 ?.contains(charSequence)!! || model?.companyName?.lowercase(Locale.getDefault())
                                 ?.contains(charSequence)!!
                         ) {

@@ -17,7 +17,7 @@
     <string name="welcome">Welcome</string>
     <string name="track_your_order">Track your order</string>
     <string name="please_enter_your_registered_details">Please enter your registered details</string>
-    <string name="our_other_products_services">Our other products/services</string>
+    <string name="our_other_products_services"><u>Our other products/services</u></string>
     <string name="no_record_found">No Record Found.</string>
 
     <!--Splash-->
@@ -197,6 +197,7 @@
     <string name="menu_orders">Orders</string>
     <string name="menu_track_your_order">Track your order</string>
     <string name="menu_faqs">FAQs</string>
+    <string name="menu_change_password">Change Password</string>
     <string name="menu_logout">Logout</string>
     <string name="no_data_found">No data found.</string>
     <!--orders list Screen-->
@@ -221,14 +222,15 @@
     <string name="additional_details">Additional Details</string>
     <string name="po_number">PO Number</string>
     <string name="po_date">PO Date</string>
-    <string name="download">Download</string>
+    <string name="download"><u>Download</u></string>
     <string name="po_copy">PO Copy</string>
     <string name="material_user">Material User</string>
     <string name="running_meter">Running Meter</string>
     <string name="product">Product</string>
     <string name="sub_total">Sub Total</string>
-    <string name="quantity">Quantity</string>
+    <string name="quantity">Quantity\nExcess QTY</string>
     <string name="total_price">Total Price</string>
     <string name="grand_total">Grand Total</string>
+    <string name="purchase_order">Purchase order</string>
 
 </resources>

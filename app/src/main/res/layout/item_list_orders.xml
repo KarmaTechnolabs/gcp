@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gotham_bold"
-                android:text="@{@string/order+model.id}"
+                android:text="@{@string/order+model.orderId}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/order" />
@@ -99,7 +99,7 @@
                 android:paddingTop="@dimen/normal_size"
                 android:paddingRight="@dimen/medium_size"
                 android:paddingBottom="@dimen/normal_size"
-                android:text="@{model.orderStatus}"
+                android:text="@{model.orderStageTitle}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/pending..." />

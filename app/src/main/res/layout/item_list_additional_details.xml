@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.app.gcp.api.responsemodel.OrdersDetailsResponse.CustomField" />
+
+        <variable
+            name="position"
+            type="int" />
+
+        <import type="com.app.gcp.utils.DateTimeUtils" />
+
+        <import type="com.app.gcp.utils.DateTimeConstants" />
+
+        <variable
+            name="clickListener"
+            type="com.app.gcp.listeners.ItemClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/small_size"
+        android:paddingBottom="@dimen/small_size">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            style="@style/TextViewPrimaryStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_black"
+            android:text="@{model.title+`: `}"
+            app:layout_constraintEnd_toStartOf="@id/tv_value"
+            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product A" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_value"
+            style="@style/TextViewPrimaryStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_black"
+            android:text="@{model.value}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_title"
+            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product A" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

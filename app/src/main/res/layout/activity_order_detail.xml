@@ -31,21 +31,24 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/regular_size"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_order_status">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_order_number"
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
+                    android:layout_marginEnd="@dimen/regular_size"
+                    android:layout_marginStart="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
-                    android:text="@{@string/order+model.orderStatusResponse.trackingNumber}"
+                    android:text="@{@string/order+model.orderDetailResponseLiveData.details.id}"
                     app:layout_constraintEnd_toStartOf="@id/tv_order_status"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -56,13 +59,14 @@
                     style="@style/TextViewPrimarySmallStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/regular_size"
                     android:background="@drawable/round_corner_gray_drawable"
                     android:fontFamily="@font/gotham_black"
                     android:paddingLeft="@dimen/medium_size"
                     android:paddingTop="@dimen/normal_size"
                     android:paddingRight="@dimen/medium_size"
                     android:paddingBottom="@dimen/normal_size"
-                    android:text="orderStatus"
+                    android:text="@{model.orderDetailResponseLiveData.details.orderStatus}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_order_number"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_order_number"
@@ -75,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="03-05-2022"
+                    android:text="@{model.orderDetailResponseLiveData.details.orderDate}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_tracking_number"
                     app:layout_constraintEnd_toStartOf="@id/tv_tracking_number"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="Tracking Id:789789"
+                    android:text="@{`Tracking Id: `+model.orderDetailResponseLiveData.details.id}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_order_status"
                     tools:text="Tracking Id:789789" />
@@ -121,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="name"
+                    android:text="@{`Name: `+model.orderDetailResponseLiveData.details.firstName}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_detail"
                     tools:text="name" />
@@ -133,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="Address"
+                    android:text="@{`Address: `+model.orderDetailResponseLiveData.details.address}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_name"
                     tools:text="Address" />
@@ -145,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="Email"
+                    android:text="@{`Email: `+model.orderDetailResponseLiveData.details.email}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_address"
                     tools:text="Email" />
@@ -157,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="Contact"
+                    android:text="@{`Contact: `+model.orderDetailResponseLiveData.details.phone}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_email"
                     tools:text="Contact" />
@@ -169,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="GST"
+                    android:text="@{`GST: `+model.orderDetailResponseLiveData.details.discountAmount}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_contact"
                     tools:text="GST" />
@@ -203,25 +207,25 @@
                     android:layout_marginTop="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="@string/product"
-                    app:layout_constraintEnd_toStartOf="@id/tv_quantity"
-                    app:layout_constraintHorizontal_weight="3.5"
+                    app:layout_constraintEnd_toStartOf="@id/tv_rate"
+                    app:layout_constraintHorizontal_weight="4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_product_detail"
                     tools:text="@string/product" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_quantity"
+                    android:id="@+id/tv_rate"
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/gotham_bold"
+                    android:text="Rate"
                     android:gravity="center"
-                    android:text="@string/quantity"
                     app:layout_constraintEnd_toStartOf="@id/tv_total"
-                    app:layout_constraintHorizontal_weight="3.5"
+                    app:layout_constraintHorizontal_weight="3"
                     app:layout_constraintStart_toEndOf="@id/tv_product"
                     app:layout_constraintTop_toTopOf="@id/tv_product"
-                    tools:text="@string/quantity" />
+                    tools:text="Rate" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_total"
@@ -233,7 +237,7 @@
                     android:text="@string/total_price"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="3"
-                    app:layout_constraintStart_toEndOf="@id/tv_quantity"
+                    app:layout_constraintStart_toEndOf="@id/tv_rate"
                     app:layout_constraintTop_toTopOf="@id/tv_product"
                     tools:text="@string/total_price" />
 
@@ -280,9 +284,9 @@
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="₹ 25000"
-                    android:layout_marginEnd="@dimen/regular_size"
                     app:layout_constraintBottom_toBottomOf="@id/tv_subtotal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="2"
@@ -297,10 +301,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
-                    android:text="GST (18%)"
+                    android:text="GST "
                     app:layout_constraintEnd_toStartOf="@id/tv_gst_value"
-                    app:layout_constraintStart_toEndOf="@id/view_product_space"
                     app:layout_constraintHorizontal_weight="3"
+                    app:layout_constraintStart_toEndOf="@id/view_product_space"
                     app:layout_constraintTop_toBottomOf="@id/tv_subtotal"
                     tools:text="GST (18%)" />
 
@@ -312,9 +316,9 @@
                     android:layout_marginEnd="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="₹ 2500"
-                    app:layout_constraintStart_toEndOf="@id/tv_gst"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="2"
+                    app:layout_constraintStart_toEndOf="@id/tv_gst"
                     app:layout_constraintTop_toTopOf="@id/tv_gst"
                     tools:text="₹ 2500" />
 
@@ -326,9 +330,9 @@
                     android:layout_marginTop="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="@string/grand_total"
-                    app:layout_constraintStart_toEndOf="@id/view_product_space"
                     app:layout_constraintEnd_toStartOf="@id/tv_subtotal_value"
                     app:layout_constraintHorizontal_weight="3"
+                    app:layout_constraintStart_toEndOf="@id/view_product_space"
                     app:layout_constraintTop_toBottomOf="@id/tv_gst"
                     tools:text="@string/grand_total" />
 
@@ -340,9 +344,9 @@
                     android:layout_marginEnd="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="₹ 2500"
-                    app:layout_constraintStart_toEndOf="@id/tv_grand_total"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="2"
+                    app:layout_constraintStart_toEndOf="@id/tv_grand_total"
                     app:layout_constraintTop_toTopOf="@id/tv_grand_total"
                     tools:text="₹ 2500" />
 
@@ -366,173 +370,189 @@
                     app:layout_constraintTop_toBottomOf="@id/view_product_detail"
                     tools:text="@string/additional_details" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_po_number"
-                    style="@style/TextViewPrimaryStyle"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_additional"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="@string/po_number"
-                    app:layout_constraintEnd_toStartOf="@id/tv_po_number_value"
-                    app:layout_constraintHorizontal_weight="4"
+                    android:orientation="vertical"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_additional_detail"
-                    tools:text="@string/po_number" />
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_list_additional_details" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_po_number_value"
+                    android:id="@+id/tv_po"
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
-                    android:text="GCP123456789"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="6"
-                    app:layout_constraintStart_toEndOf="@id/tv_po_number"
-                    app:layout_constraintTop_toBottomOf="@id/tv_additional_detail"
-                    tools:text="GCP123456789" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_po_date"
-                    style="@style/TextViewPrimaryStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="@string/po_date"
-                    app:layout_constraintEnd_toStartOf="@id/tv_po_date_value"
-                    app:layout_constraintHorizontal_weight="4"
+                    android:text="@string/purchase_order"
+                    app:layout_constraintEnd_toStartOf="@id/tv_po_download"
+                    app:layout_constraintHorizontal_weight="5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_po_number"
-                    tools:text="@string/po_date" />
+                    app:layout_constraintTop_toBottomOf="@id/rv_additional"
+                    tools:text="@string/purchase_order" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_po_date_value"
-                    style="@style/TextViewPrimaryStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="02-05-2022"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="6"
-                    app:layout_constraintStart_toEndOf="@id/tv_po_date"
-                    app:layout_constraintTop_toBottomOf="@id/tv_po_number"
-                    tools:text="02-05-2022" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_po_copy"
-                    style="@style/TextViewPrimaryStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="@string/po_copy"
-                    app:layout_constraintEnd_toStartOf="@id/tv_po_copy_value"
-                    app:layout_constraintHorizontal_weight="4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_po_date"
-                    tools:text="@string/po_copy" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_po_copy_value"
+                    android:id="@+id/tv_po_download"
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="@string/download"
+                    android:onClick="@{clickListener::onClick}"
+                    android:background="?attr/selectableItemBackground"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="6"
-                    app:layout_constraintStart_toEndOf="@id/tv_po_copy"
-                    app:layout_constraintTop_toBottomOf="@id/tv_po_date"
+                    app:layout_constraintHorizontal_weight="5"
+                    app:layout_constraintStart_toEndOf="@id/tv_po"
+                    app:layout_constraintTop_toBottomOf="@id/rv_additional"
                     tools:text="@string/download" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_material"
-                    style="@style/TextViewPrimaryStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="@string/material_user"
-                    app:layout_constraintEnd_toStartOf="@id/tv_material_value"
-                    app:layout_constraintHorizontal_weight="4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_po_copy"
-                    tools:text="@string/material_user" />
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_po_date"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="@string/po_date"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/tv_po_date_value"-->
+<!--                    app:layout_constraintHorizontal_weight="4"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_po_number"-->
+<!--                    tools:text="@string/po_date" />-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_material_value"
-                    style="@style/TextViewPrimaryStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="Polymer"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="6"
-                    app:layout_constraintStart_toEndOf="@id/tv_material"
-                    app:layout_constraintTop_toBottomOf="@id/tv_po_copy"
-                    tools:text="Polymer" />
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_po_date_value"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="02-05-2022"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_weight="6"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/tv_po_date"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_po_number"-->
+<!--                    tools:text="02-05-2022" />-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_running"
-                    style="@style/TextViewPrimaryStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="@string/running_meter"
-                    app:layout_constraintEnd_toStartOf="@id/tv_running_value"
-                    app:layout_constraintHorizontal_weight="4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_material"
-                    tools:text="@string/running_meter" />
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_po_copy"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="@string/po_copy"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/tv_po_copy_value"-->
+<!--                    app:layout_constraintHorizontal_weight="4"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_po_date"-->
+<!--                    tools:text="@string/po_copy" />-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_running_value"
-                    style="@style/TextViewPrimaryStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="General"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="6"
-                    app:layout_constraintStart_toEndOf="@id/tv_running"
-                    app:layout_constraintTop_toBottomOf="@id/tv_material"
-                    tools:text="General" />
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_po_copy_value"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="@string/download"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_weight="6"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/tv_po_copy"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_po_date"-->
+<!--                    tools:text="@string/download" />-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_comment"
-                    style="@style/TextViewPrimaryStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="@string/comment"
-                    app:layout_constraintEnd_toStartOf="@id/tv_comment_value"
-                    app:layout_constraintHorizontal_weight="4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_running"
-                    tools:text="@string/comment" />
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_material"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="@string/material_user"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/tv_material_value"-->
+<!--                    app:layout_constraintHorizontal_weight="4"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_po_copy"-->
+<!--                    tools:text="@string/material_user" />-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_comment_value"
-                    style="@style/TextViewPrimaryStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="comment test"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="6"
-                    app:layout_constraintStart_toEndOf="@id/tv_comment"
-                    app:layout_constraintTop_toBottomOf="@id/tv_running"
-                    tools:text="comment test" />
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_material_value"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="Polymer"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_weight="6"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/tv_material"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_po_copy"-->
+<!--                    tools:text="Polymer" />-->
+
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_running"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="@string/running_meter"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/tv_running_value"-->
+<!--                    app:layout_constraintHorizontal_weight="4"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_material"-->
+<!--                    tools:text="@string/running_meter" />-->
+
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_running_value"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="General"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_weight="6"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/tv_running"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_material"-->
+<!--                    tools:text="General" />-->
+
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_comment"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="@string/comment"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/tv_comment_value"-->
+<!--                    app:layout_constraintHorizontal_weight="4"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_running"-->
+<!--                    tools:text="@string/comment" />-->
+
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tv_comment_value"-->
+<!--                    style="@style/TextViewPrimaryStyle"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/regular_size"-->
+<!--                    android:fontFamily="@font/gotham_bold"-->
+<!--                    android:text="comment test"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_weight="6"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/tv_comment"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_running"-->
+<!--                    tools:text="comment test" />-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
