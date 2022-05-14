@@ -49,6 +49,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
                         override fun invoke(it: List<OrderStatusResponse>, message: String) {
 //                            showToast(message)
                             viewModel.orderStatusArray.clear()
+                            viewModel.orderStatusArray.add(OrderStatusResponse(id="", color = "#000000", title = "All", sort = "", deleted = "0"))
                             viewModel.orderStatusArray.addAll(it)
                         }
                     },

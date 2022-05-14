@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         onBoardViewModel.loginResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(response) { it, message ->
-                    showToast(message)
+//                    showToast(message)
                     UserStateManager.saveUserProfile(it)
                     requireActivity().gotoActivity(
                         DashboardActivity::class.java,

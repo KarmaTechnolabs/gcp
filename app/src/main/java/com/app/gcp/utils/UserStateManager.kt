@@ -49,7 +49,7 @@ object UserStateManager {
             GsonBuilder().addSerializationExclusionStrategy(SerializedExclusionStrategy()).create()
         val json = gson.toJson(loginResponse)
         sharedPreferenceHelper.setValue(Constants.PREF_LOGIN_DATA, json)
-        saveBearerToken(loginResponse.auth_token)
+        loginResponse.auth_token?.let { saveBearerToken(it) }
     }
 
     fun markOnBoardingComplete() {

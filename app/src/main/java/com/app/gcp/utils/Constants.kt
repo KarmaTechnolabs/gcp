@@ -20,6 +20,10 @@ object Constants {
     const val API_OFFSET_ITEM = 15
     const val DEFAULT_CURRENCY = "₹"
 
+    //user type
+    const val USER_CLIENT = "client"
+    const val USER_ADMIN = "admin"
+
     //region Preference Constants
     const val PREF_FIREBASE_TOKEN = "PREF_FIREBASE_TOKEN"
     const val PREF_BEARER_TOKEN = "PREF_BEARER_TOKEN"

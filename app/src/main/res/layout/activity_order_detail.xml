@@ -199,51 +199,80 @@
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintHorizontal_weight="3.5"
-                    android:layout_margin="@dimen/regular_size"
+                    android:layout_marginStart="@dimen/regular_size"
+                    android:layout_marginTop="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="@string/product"
                     app:layout_constraintEnd_toStartOf="@id/tv_quantity"
+                    app:layout_constraintHorizontal_weight="3.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_product_detail"
                     tools:text="@string/product" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_quantity"
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintHorizontal_weight="3"
-                    android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
-                    android:text="@string/product"
-                    app:layout_constraintStart_toEndOf="@id/tv_product"
+                    android:gravity="center"
+                    android:text="@string/quantity"
                     app:layout_constraintEnd_toStartOf="@id/tv_total"
-                    app:layout_constraintTop_toBottomOf="@id/tv_product_detail"
-                    tools:text="@string/product" />
+                    app:layout_constraintHorizontal_weight="3.5"
+                    app:layout_constraintStart_toEndOf="@id/tv_product"
+                    app:layout_constraintTop_toTopOf="@id/tv_product"
+                    tools:text="@string/quantity" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_total"
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintHorizontal_weight="3.5"
-                    android:layout_margin="@dimen/regular_size"
+                    android:layout_marginEnd="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
-                    android:text="@string/product"
-                    app:layout_constraintStart_toEndOf="@id/tv_quantity"
+                    android:text="@string/total_price"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_product_detail"
-                    tools:text="@string/product" />
+                    app:layout_constraintHorizontal_weight="3"
+                    app:layout_constraintStart_toEndOf="@id/tv_quantity"
+                    app:layout_constraintTop_toTopOf="@id/tv_product"
+                    tools:text="@string/total_price" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_product"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/regular_size"
+                    android:orientation="vertical"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_product"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_list_product" />
+
+                <View
+                    android:id="@+id/view_product_space"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/tv_subtotal"
+                    app:layout_constraintHorizontal_weight="5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_product" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_subtotal"
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
+                    android:layout_marginTop="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
+                    android:gravity="start"
                     android:text="@string/sub_total"
-                    app:layout_constraintHorizontal_weight="4"
                     app:layout_constraintEnd_toStartOf="@id/tv_subtotal_value"
-                    app:layout_constraintTop_toBottomOf="@id/tv_total"
+                    app:layout_constraintHorizontal_weight="3"
+                    app:layout_constraintStart_toEndOf="@id/view_product_space"
+                    app:layout_constraintTop_toBottomOf="@id/rv_product"
                     tools:text="@string/sub_total" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -251,13 +280,71 @@
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="₹ 25000"
-                    app:layout_constraintHorizontal_weight="5"
+                    android:layout_marginEnd="@dimen/regular_size"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_subtotal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_total"
+                    app:layout_constraintHorizontal_weight="2"
+                    app:layout_constraintStart_toEndOf="@id/tv_subtotal"
+                    app:layout_constraintTop_toTopOf="@id/tv_subtotal"
                     tools:text="₹ 25000" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_gst"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_bold"
+                    android:text="GST (18%)"
+                    app:layout_constraintEnd_toStartOf="@id/tv_gst_value"
+                    app:layout_constraintStart_toEndOf="@id/view_product_space"
+                    app:layout_constraintHorizontal_weight="3"
+                    app:layout_constraintTop_toBottomOf="@id/tv_subtotal"
+                    tools:text="GST (18%)" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_gst_value"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_bold"
+                    android:text="₹ 2500"
+                    app:layout_constraintStart_toEndOf="@id/tv_gst"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="2"
+                    app:layout_constraintTop_toTopOf="@id/tv_gst"
+                    tools:text="₹ 2500" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_grand_total"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_bold"
+                    android:text="@string/grand_total"
+                    app:layout_constraintStart_toEndOf="@id/view_product_space"
+                    app:layout_constraintEnd_toStartOf="@id/tv_subtotal_value"
+                    app:layout_constraintHorizontal_weight="3"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gst"
+                    tools:text="@string/grand_total" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_grand_total_value"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_bold"
+                    android:text="₹ 2500"
+                    app:layout_constraintStart_toEndOf="@id/tv_grand_total"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="2"
+                    app:layout_constraintTop_toTopOf="@id/tv_grand_total"
+                    tools:text="₹ 2500" />
 
                 <View
                     android:id="@+id/view_product_detail"
@@ -265,7 +352,7 @@
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/normal_size"
                     android:background="@color/colorGray"
-                    app:layout_constraintTop_toBottomOf="@id/tv_subtotal" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_grand_total" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_additional_detail"
@@ -287,9 +374,9 @@
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="@string/po_number"
+                    app:layout_constraintEnd_toStartOf="@id/tv_po_number_value"
                     app:layout_constraintHorizontal_weight="4"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tv_po_number_value"
                     app:layout_constraintTop_toBottomOf="@id/tv_additional_detail"
                     tools:text="@string/po_number" />
 
@@ -315,9 +402,9 @@
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
                     android:text="@string/po_date"
+                    app:layout_constraintEnd_toStartOf="@id/tv_po_date_value"
                     app:layout_constraintHorizontal_weight="4"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tv_po_date_value"
                     app:layout_constraintTop_toBottomOf="@id/tv_po_number"
                     tools:text="@string/po_date" />
 
@@ -370,8 +457,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_bold"
-                    app:layout_constraintEnd_toStartOf="@id/tv_material_value"
                     android:text="@string/material_user"
+                    app:layout_constraintEnd_toStartOf="@id/tv_material_value"
                     app:layout_constraintHorizontal_weight="4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_po_copy"

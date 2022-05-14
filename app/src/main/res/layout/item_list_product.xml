@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.app.gcp.api.responsemodel.OrdersResponse" />
+
+        <variable
+            name="position"
+            type="int" />
+
+        <import type="com.app.gcp.utils.DateTimeUtils" />
+
+        <import type="com.app.gcp.utils.DateTimeConstants" />
+
+        <variable
+            name="clickListener"
+            type="com.app.gcp.listeners.ItemClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/small_size"
+        android:paddingBottom="@dimen/small_size">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_product"
+            style="@style/TextViewPrimaryStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_black"
+            android:text="Product A"
+            app:layout_constraintEnd_toStartOf="@id/tv_quantity"
+            app:layout_constraintHorizontal_weight="3.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product A" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_product_label"
+            style="@style/TextViewPrimaryStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_size"
+            android:fontFamily="@font/gotham_black"
+            android:text="Per label price"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/normal_size"
+            app:layout_constraintEnd_toEndOf="@id/tv_product"
+            app:layout_constraintHorizontal_weight="3.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_product"
+            tools:text="Per label price" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_quantity"
+            style="@style/TextViewPrimarySmallStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_black"
+            android:text="500"
+            android:gravity="center"
+            app:layout_constraintHorizontal_weight="3.5"
+            app:layout_constraintStart_toEndOf="@id/tv_product"
+            app:layout_constraintEnd_toStartOf="@id/tv_price"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="500" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_price"
+            style="@style/TextViewPrimarySmallStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_black"
+            android:text="₹ 10000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@id/tv_quantity"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="₹ 10000" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
