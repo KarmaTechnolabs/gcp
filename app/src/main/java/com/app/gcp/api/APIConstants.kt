@@ -18,6 +18,7 @@ object APIConstants {
     const val API_CHANGE_PASSWORD = "update-password"
     const val API_UPDATE_ORDER = "update_order"
     const val API_ORDER_DETAILS = "order_details"
+    const val API_ORDER_STAGES = "order_stages"
 
     // edit profile apis
     const val API_GET_STATE = "state"

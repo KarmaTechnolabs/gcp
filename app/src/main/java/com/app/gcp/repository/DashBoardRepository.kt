@@ -1,5 +1,6 @@
 package com.app.gcp.repository
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.app.gcp.api.APIConstants
@@ -94,6 +95,42 @@ class DashBoardRepository private constructor() {
                     data.postValue(Event(APIResource.error(e.localizedMessage ?: "", null)))
                 })
             compositeDisposable.add(disposable)
+        } else {
+            data.value = Event(APIResource.noNetwork())
+        }
+        return data
+    }
+
+    @SuppressLint("CheckResult")
+    fun callOrderStageListAPI(): LiveData<Event<APIResource<List<OrderStatusResponse>>>> {
+        val data = MutableLiveData<Event<APIResource<List<OrderStatusResponse>>>>()
+        data.value = Event(APIResource.loading(null))
+
+        if (Utils.isNetworkAvailable()) {
+            ApiHelperClass.getAPIClient().getStagesList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ responseModel ->
+
+                    if (responseModel == null) {
+                        data.value = Event(APIResource.error("", null))
+                        return@subscribe
+                    }
+
+                    if (responseModel.status == APIConstants.SUCCESS) {
+                        val typeOfObjectsList = object : TypeToken<ArrayList<OrderStatusResponse>>() {}.type
+                        val orderResponse =
+                            responseModel.getResponseModel(typeOfObjectsList)
+                        data.value = Event(APIResource.success(orderResponse, responseModel.message))
+                    } else {
+                        responseModel.message?.let {
+                            data.value = Event(APIResource.error(it, null))
+                        }
+                    }
+                }, { e ->
+                    Timber.e(e)
+                    data.postValue(Event(APIResource.error(e.localizedMessage ?: "", null)))
+                })
         } else {
             data.value = Event(APIResource.noNetwork())
         }

@@ -48,7 +48,7 @@
             android:onClick="@{clickListener::onClick}"
             app:layout_constraintTop_toTopOf="@id/cv_search_order"
             app:layout_constraintBottom_toBottomOf="@id/cv_search_order"
-            android:src="@drawable/ic_filter"/>
+            android:src="@drawable/ic_filter_stage"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_filter_status"

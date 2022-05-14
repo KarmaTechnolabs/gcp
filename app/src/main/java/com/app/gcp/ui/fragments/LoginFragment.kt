@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentLoginBinding
 import com.app.gcp.ui.activities.DashboardActivity
 import com.app.gcp.ui.activities.OtherServicesActivity
+import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.utils.Validator
 import com.app.gcp.viewmodel.OnBoardViewModel
@@ -48,6 +50,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
                     UserStateManager.saveUserProfile(it)
                     requireActivity().gotoActivity(
                         DashboardActivity::class.java,
+                        bundle = bundleOf(Constants.EXTRA_DATA to  UserStateManager.getUserProfile()?.user_type),
                         clearAllActivity = true
                     )
                 }

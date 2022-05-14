@@ -12,6 +12,7 @@
         <variable
             name="position"
             type="int" />
+
         <variable
             name="isSelected"
             type="boolean" />
@@ -26,37 +27,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/normal_size"
-        android:layout_marginTop="@dimen/mini_size"
+        android:layout_marginTop="@dimen/tiny_size"
         android:layout_marginEnd="@dimen/normal_size"
-        android:layout_marginBottom="@dimen/mini_size"
-        >
+        android:layout_marginBottom="@dimen/tiny_size">
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/rb_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@null"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:checked="@{isSelected}"
-            android:onClick="@{v -> clickListener.onItemClick(v.id,model,position)}"
             android:drawableLeft="@drawable/drawable_radio_button"
-            android:drawablePadding="@dimen/_15sdp"
+            android:drawablePadding="@dimen/medium_size"
             android:fontFamily="@font/gotham_black"
             android:includeFontPadding="false"
-            android:padding="@dimen/normal_size"
+            android:onClick="@{v -> clickListener.onItemClick(v.id,model,position)}"
+            android:padding="@dimen/small_size"
             android:text="@{model.title}"
             android:textAlignment="textStart"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/mediator_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/order_status" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/colorGray"/>
+            android:background="@color/colorGray"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

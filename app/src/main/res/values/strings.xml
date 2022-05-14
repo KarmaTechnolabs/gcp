@@ -232,5 +232,7 @@
     <string name="total_price">Total Price</string>
     <string name="grand_total">Grand Total</string>
     <string name="purchase_order">Purchase order</string>
+    <string name="filter_by_status">Filter by Status</string>
+    <string name="filter_by_stages">Filter by Stages</string>
 
 </resources>

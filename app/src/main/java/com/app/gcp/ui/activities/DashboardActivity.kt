@@ -6,7 +6,9 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -22,6 +24,7 @@ import com.app.gcp.ui.dialogs.LogOutAlertDialog
 import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.DashBoardViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 
@@ -31,15 +34,15 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityDashboardBinding
     private val viewModel by viewModels<DashBoardViewModel>()
-
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDashboardBinding.inflate(layoutInflater)
 
         initView()
-
         callOrderStatusApi()
+        callOrderStagApi()
 
         viewModel.orderStatusListResponse.observe(this) { event ->
             event.getContentIfNotHandled()?.let { response ->
@@ -49,7 +52,15 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
                         override fun invoke(it: List<OrderStatusResponse>, message: String) {
 //                            showToast(message)
                             viewModel.orderStatusArray.clear()
-                            viewModel.orderStatusArray.add(OrderStatusResponse(id="", color = "#000000", title = "All", sort = "", deleted = "0"))
+                            viewModel.orderStatusArray.add(
+                                OrderStatusResponse(
+                                    id = "",
+                                    color = "#000000",
+                                    title = "All",
+                                    sort = "",
+                                    deleted = "0"
+                                )
+                            )
                             viewModel.orderStatusArray.addAll(it)
                         }
                     },
@@ -60,12 +71,35 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
                     })
             }
         }
+
+
+
     }
 
     private fun callOrderStatusApi() {
         viewModel.callOrderStatusAPI(
-            TrackingOrderRequestModel(tracking_number="")
+            TrackingOrderRequestModel(tracking_number = "")
         )
+    }
+    private fun callOrderStagApi() {
+        viewModel.getOrderStagListAPI().observe(this) { event ->
+            event.getContentIfNotHandled()?.let { response ->
+                manageAPIResource(response) { it, _ ->
+                    viewModel.orderStagesArray.clear()
+                    viewModel.orderStagesArray.add(
+                        OrderStatusResponse(
+                            id = "",
+                            color = "#000000",
+                            title = "All",
+                            sort = "",
+                            deleted = "0"
+                        )
+                    )
+                    viewModel.orderStagesArray.addAll(it)
+                }
+            }
+        }
+
     }
 
     private fun initView() {
@@ -82,20 +116,47 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_orders, R.id.nav_order_tracking,R.id.nav_change_password, R.id.nav_faqs
+                R.id.nav_orders, R.id.nav_order_tracking, R.id.nav_change_password, R.id.nav_faqs
             ), drawerLayout
         )
-        setupActionBarWithNavController(findNavController(R.id.nav_host_fragment_content_dashboard), appBarConfiguration)
+        setupActionBarWithNavController(
+            findNavController(R.id.nav_host_fragment_content_dashboard),
+            appBarConfiguration
+        )
         navView.setupWithNavController(findNavController(R.id.nav_host_fragment_content_dashboard))
 
         binding.drawerLayout.addDrawerListener(this)
 
 //        val headerView: View = navigationView.inflateHeaderView(R.layout.navigation_header)
 //        navView.findViewById<View>(R.id.navigation_header_text)
-        val headerView:View  = navView.getHeaderView(0)
-        headerView.findViewById<AppCompatTextView>(R.id.tv_short_name).text=UserStateManager.getUserProfile()?.firstName
-        headerView.findViewById<AppCompatTextView>(R.id.tv_name).text=UserStateManager.getUserProfile()?.firstName
-        headerView.findViewById<AppCompatTextView>(R.id.tv_short_email).text=UserStateManager.getUserProfile()?.email
+        val headerView: View = navView.getHeaderView(0)
+        headerView.findViewById<AppCompatTextView>(R.id.tv_short_name).text =
+            UserStateManager.getUserProfile()?.firstName
+        headerView.findViewById<AppCompatTextView>(R.id.tv_name).text =
+            UserStateManager.getUserProfile()?.firstName
+        headerView.findViewById<AppCompatTextView>(R.id.tv_short_email).text =
+            UserStateManager.getUserProfile()?.email
+
+        if (intent.extras != null && intent.hasExtra(Constants.EXTRA_DATA)) {
+            if (intent.getStringExtra(
+                    Constants.EXTRA_DATA
+                ).equals(
+                    "client",
+                    ignoreCase = true
+                )
+            ) {
+                val navHost =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_dashboard) as NavHostFragment?
+
+                navController = navHost!!.navController
+                val navInflater = navController.navInflater
+                val graph = navInflater.inflate(R.navigation.dashboard_navigation)
+                graph.setStartDestination(R.id.nav_change_password)
+                navController.graph = graph
+
+            }
+
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

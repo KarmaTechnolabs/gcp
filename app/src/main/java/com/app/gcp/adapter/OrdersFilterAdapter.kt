@@ -10,12 +10,11 @@ import com.app.gcp.R
 import com.app.gcp.api.responsemodel.OrderStatusResponse
 import com.app.gcp.databinding.ItemListOrdersStatusBinding
 import com.app.gcp.listeners.ItemClickListener
-import java.util.*
 
-class OrdersStatusAdapter(context: Context?) :
-    BaseAdapter<OrderStatusResponse?, OrdersStatusAdapter.ViewHolder?>(context){
+class OrdersFilterAdapter(context: Context?) :
+    BaseAdapter<OrderStatusResponse?, OrdersFilterAdapter.ViewHolder?>(context) {
     private var orderListData = ArrayList<OrderStatusResponse?>()
-    private var selectedStatus : String? = ""
+    private var selectedFilter: String? = ""
     private var clickListener: ItemClickListener<OrderStatusResponse>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemListOrdersStatusBinding = DataBindingUtil.inflate(
@@ -44,28 +43,16 @@ class OrdersStatusAdapter(context: Context?) :
         var binding: ItemListOrdersStatusBinding = binding
         fun setBinding(model: OrderStatusResponse?) {
             binding.model = model
-            binding.isSelected =  selectedStatus.equals(model?.id)
+            binding.isSelected = selectedFilter.equals(model?.id)
             binding.clickListener = clickListener
             binding.position = absoluteAdapterPosition
             binding.executePendingBindings()
-
-//            binding.rbStatus.setOnClickListener(View.OnClickListener {view ->
-//                if (!binding.rbStatus.isSelected) {
-//                    binding.rbStatus.isSelected = true
-//                    binding.rbStatus.isSelected = true
-//                    onItemClickListener.onItemClick(view, getListItem(bindingAdapterPosition), bindingAdapterPosition)
-//                } else {
-//                    binding.rbStatus.isChecked = false
-//                    binding.rbStatus.isChecked = false
-//                }
-//            })
-
         }
 
         init {
             binding.root.setOnClickListener(View.OnClickListener { view ->
                 if (onItemClickListener != null) {
-                    val model:OrderStatusResponse = getListItem(bindingAdapterPosition)
+                    val model: OrderStatusResponse = getListItem(bindingAdapterPosition)
                     val selectedPos = bindingAdapterPosition
                     notifyDataSetChanged()
                     onItemClickListener.onItemClick(view, model, selectedPos)
@@ -82,7 +69,8 @@ class OrdersStatusAdapter(context: Context?) :
         this.clickListener = clickListener
     }
 
-    fun setSelectedStatus(selectedOrderStatusFilter: String?) {
-        selectedStatus = selectedOrderStatusFilter
+    fun setSelectedFilter(selectedOrderStatusFilter: String?) {
+        selectedFilter = selectedOrderStatusFilter
     }
+
 }

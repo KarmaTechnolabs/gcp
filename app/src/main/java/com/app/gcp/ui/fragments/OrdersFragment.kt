@@ -24,7 +24,6 @@ import com.app.gcp.ui.dialogs.OrderStatusFilterBottomSheet
 import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.DashBoardViewModel
-import java.util.*
 
 class OrdersFragment : BaseFragment(), View.OnClickListener,
     ItemClickListener<OrdersResponse>, OrderStatusFilterBottomSheet.OrderStatusListener {
@@ -33,6 +32,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
     private val orderListArray = mutableListOf<OrdersResponse>()
     private var orderListAdapter: OrdersAdapter? = null
     private val dashboardViewModel by activityViewModels<DashBoardViewModel>()
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -131,8 +131,8 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
     private fun callOrderListApi() {
         dashboardViewModel.callOrderListAPI(
             OrderListRequestModel(
-                user_type = UserStateManager.getUserProfile()?.user_type.toString(),//,
-                token=UserStateManager?.getBearerToken()
+                user_type = UserStateManager.getUserProfile()?.user_type.toString(),
+                token = UserStateManager?.getBearerToken()
             )
         )
     }
@@ -160,16 +160,45 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         val orderStatusBottomSheet =
             dashboardViewModel.orderStatusArray.let {
                 OrderStatusFilterBottomSheet.newInstance(
-                    it as ArrayList<OrderStatusResponse>,dashboardViewModel.selectedOrderStatusFilter
+                    it as ArrayList<OrderStatusResponse>,
+                    dashboardViewModel.selectedOrderStatusFilter,
+                    dashboardViewModel.selectedOrderStagesFilter,
+                    1
                 )
             }
         orderStatusBottomSheet.setOnOrderStatusListener(this)
         orderStatusBottomSheet.show(childFragmentManager, "filter-picker")
     }
 
+    private fun setOrderStage() {
+//        val statusAdapter =
+//            OrderStatusAdapter(
+//                activity,
+//                R.layout.list_item_order_status_spinner,
+//                R.id.tv_order_status,
+//                dashboardViewModel.orderStatusArray
+//            )
+//        binding.spnOrderStatus.adapter = statusAdapter
+//
+//        binding.spnOrderStatus.performClick()
+
+        val orderStagesBottomSheet =
+            dashboardViewModel.orderStagesArray.let {
+                OrderStatusFilterBottomSheet.newInstance(
+                    it as ArrayList<OrderStatusResponse>,
+                    dashboardViewModel.selectedOrderStatusFilter,
+                    dashboardViewModel.selectedOrderStagesFilter,
+                    2
+                )
+            }
+        orderStagesBottomSheet.setOnOrderStatusListener(this)
+        orderStagesBottomSheet.show(childFragmentManager, "filter-picker")
+    }
+
     override fun onClick(view: View?) {
         when (view) {
             binding.ivFilterStatus -> setOrderStatus()
+            binding.ivFilterStag -> setOrderStage()
         }
     }
 
@@ -199,7 +228,23 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
     }
 
     override fun onOrderStatusSelected(orderStatus: OrderStatusResponse) {
-        dashboardViewModel.selectedOrderStatusFilter= orderStatus.id.toString()
-        callOrderListApi()
+        dashboardViewModel.selectedOrderStatusFilter = orderStatus.id.toString()
+        orderListAdapter?.setItems(orderListArray.filter {
+            it.statusId.equals(
+                dashboardViewModel.selectedOrderStatusFilter,
+                ignoreCase = true
+            ) || dashboardViewModel.selectedOrderStatusFilter.isEmpty()
+        } as ArrayList<OrdersResponse?>)
+//        callOrderListApi()
+    }
+
+    override fun onOrderStagesSelected(orderStatus: OrderStatusResponse) {
+        dashboardViewModel.selectedOrderStagesFilter = orderStatus.id.toString()
+        orderListAdapter?.setItems(orderListArray.filter {
+            it.stageId.equals(
+                dashboardViewModel.selectedOrderStagesFilter,
+                ignoreCase = true
+            ) || dashboardViewModel.selectedOrderStagesFilter.isEmpty()
+        } as ArrayList<OrdersResponse?>)
     }
 }

@@ -46,6 +46,9 @@ interface ApiCallInterface {
     @POST(APIConstants.API_GET_STATE)
     fun getStateList(@Body requestBody: BaseRequestModel<StateRequestModel>): Single<BaseResponseModel<List<StateModel>>>
 
+    @GET(APIConstants.API_ORDER_STAGES)
+    fun getStagesList(): Single<BaseResponseModel<List<OrderStatusResponse>>>
+
     @Multipart
     @POST(APIConstants.API_UPDATE_PROFILE)
     fun updateProfile(@Part profile_photo: MultipartBody.Part?, @Part("data") data: RequestBody)

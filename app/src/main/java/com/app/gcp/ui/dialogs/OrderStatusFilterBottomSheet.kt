@@ -6,33 +6,37 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.app.gcp.R
-import com.app.gcp.adapter.OrdersAdapter
-import com.app.gcp.adapter.OrdersStatusAdapter
+import com.app.gcp.adapter.OrdersFilterAdapter
 import com.app.gcp.api.responsemodel.OrderStatusResponse
 import com.app.gcp.base.BaseBottomSheetFragment
 import com.app.gcp.databinding.OrderStatusFilterBottomSheetBinding
 import com.app.gcp.listeners.ItemClickListener
 import com.app.gcp.utils.Constants
-import java.util.ArrayList
 
 class OrderStatusFilterBottomSheet : BaseBottomSheetFragment(), View.OnClickListener,
     ItemClickListener<OrderStatusResponse> {
 
     private lateinit var binding: OrderStatusFilterBottomSheetBinding
     private var listener: OrderStatusListener? = null
-    private val orderStatusListArray = mutableListOf<OrderStatusResponse>()
-    private var orderStatusListAdapter: OrdersStatusAdapter? = null
+    private val orderFilterListArray = mutableListOf<OrderStatusResponse>()
+    private var typeFilter: Int? = 0
+    private var orderFilterAdapter: OrdersFilterAdapter? = null
 
     companion object {
         fun newInstance(
             orderStatusList: ArrayList<OrderStatusResponse>,
-            selectedOrderStatusFilter: String
+            selectedOrderStatusFilter: String,
+            selectedOrderStagesFilter: String,
+            typeFilter: Int
         ): OrderStatusFilterBottomSheet {
             val alertBottomSheet = OrderStatusFilterBottomSheet()
 
             val args = Bundle()
             args.putSerializable(Constants.EXTRA_DATA, orderStatusList)
-            args.putString(Constants.EXTRA_SELECTED, selectedOrderStatusFilter)
+            args.putString(Constants.EXTRA_SELECTED_STATUS, selectedOrderStatusFilter)
+            args.putString(Constants.EXTRA_SELECTED_STAGES, selectedOrderStagesFilter)
+            args.putInt(Constants.EXTRA_FILTER_TYPE, typeFilter)
+
             alertBottomSheet.arguments = args
             return alertBottomSheet
         }
@@ -56,22 +60,26 @@ class OrderStatusFilterBottomSheet : BaseBottomSheetFragment(), View.OnClickList
         super.onViewCreated(view, savedInstanceState)
 
         binding.ivClose.setOnClickListener(this)
-        orderStatusListAdapter = OrdersStatusAdapter(activity)
-        orderStatusListAdapter?.setClickListener(this)
-        binding.rvOrderStatus.adapter = orderStatusListAdapter
-        orderStatusListArray.clear()
-        if(arguments!= null && requireArguments().containsKey(Constants.EXTRA_DATA)){
+        orderFilterAdapter = OrdersFilterAdapter(activity)
+        orderFilterAdapter?.setClickListener(this)
+        binding.rvOrderStatus.adapter = orderFilterAdapter
+        orderFilterListArray.clear()
+        if (arguments != null && requireArguments().containsKey(Constants.EXTRA_DATA)) {
 
             arguments?.getParcelableArrayList<OrderStatusResponse>(Constants.EXTRA_DATA)
-                ?.let { orderStatusListArray.addAll(it) }
-            orderStatusListAdapter?.setItems(orderStatusListArray as ArrayList<OrderStatusResponse?>)
-            orderStatusListAdapter?.setSelectedStatus(arguments?.getString(Constants.EXTRA_SELECTED))
+                ?.let { orderFilterListArray.addAll(it) }
+            orderFilterAdapter?.setItems(orderFilterListArray as ArrayList<OrderStatusResponse?>)
+            typeFilter = arguments?.getInt(Constants.EXTRA_FILTER_TYPE)
+            if (typeFilter == 1) {
+                orderFilterAdapter?.setSelectedFilter(arguments?.getString(Constants.EXTRA_SELECTED_STATUS))
+                binding.tvAlertTitle.text=resources.getString(R.string.filter_by_status)
+            } else if (typeFilter == 2) {
+                orderFilterAdapter?.setSelectedFilter(arguments?.getString(Constants.EXTRA_SELECTED_STAGES))
+                binding.tvAlertTitle.text=resources.getString(R.string.filter_by_stages)
+            }
         }
 //        prizeTypeFilter =
 //            arguments?.getSerializable(Constants.EXTRA_DATA) as Int
-
-
-
 
 
     }
@@ -80,14 +88,18 @@ class OrderStatusFilterBottomSheet : BaseBottomSheetFragment(), View.OnClickList
         fun onOrderStatusSelected(
             orderStatus: OrderStatusResponse
         )
+
+        fun onOrderStagesSelected(
+            orderStatus: OrderStatusResponse
+        )
     }
 
     fun setOnOrderStatusListener(orderStatus: OrderStatusListener) {
         this.listener = orderStatus
     }
 
-    override fun onClick(v: View) {
-        when (v) {
+    override fun onClick(view: View) {
+        when (view) {
             binding.ivClose -> {
                 dismiss()
             }
@@ -95,7 +107,11 @@ class OrderStatusFilterBottomSheet : BaseBottomSheetFragment(), View.OnClickList
     }
 
     override fun onItemClick(viewIdRes: Int, model: OrderStatusResponse, position: Int) {
-        listener?.onOrderStatusSelected(model)
+        if (typeFilter == 1) {
+            listener?.onOrderStatusSelected(model)
+        } else if (typeFilter == 2) {
+            listener?.onOrderStagesSelected(model)
+        }
         dismiss()
     }
 }

@@ -23,9 +23,10 @@ class DashBoardViewModel : ViewModel() {
     private val orderStatusRequestLiveData = MutableLiveData<TrackingOrderRequestModel>()
     private val changePasswordRequestLiveData = MutableLiveData<ChangePasswordRequestModel>()
 
-
+    var orderStagesArray = mutableListOf<OrderStatusResponse>()
     var orderStatusArray = mutableListOf<OrderStatusResponse>()
     var selectedOrderStatusFilter : String = ""
+    var selectedOrderStagesFilter : String = ""
 
     val orderListResponse: LiveData<Event<APIResource<List<OrdersResponse>>>> =
         orderListRequestLiveData.switchMap {
@@ -37,6 +38,10 @@ class DashBoardViewModel : ViewModel() {
             repository.callOrderStatusAPI()
         }
 
+    fun getOrderStagListAPI(): LiveData<Event<APIResource<List<OrderStatusResponse>>>> {
+        return repository.callOrderStageListAPI()
+    }
+
     //    val callLogoutAPI: LiveData<Event<APIResource<Any>>> = repository.callLogoutAPI()
     fun callOrderListAPI(request: OrderListRequestModel) {
         orderListRequestLiveData.value = request
@@ -45,6 +50,8 @@ class DashBoardViewModel : ViewModel() {
     fun callOrderStatusAPI(request: TrackingOrderRequestModel) {
         orderStatusRequestLiveData.value = request
     }
+
+
 
     val changePasswordResponse: LiveData<Event<APIResource<EmptyResponse>>> =
         changePasswordRequestLiveData.switchMap {
