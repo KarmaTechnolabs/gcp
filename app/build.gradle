@@ -123,6 +123,7 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'com.ms-square:expandableTextView:0.1.4'
+    implementation "androidx.work:work-runtime-ktx:2.7.1"
 
     //Testing libraries
     testImplementation 'junit:junit:4.13.2'
