@@ -20,7 +20,6 @@ import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentLoginBinding
 import com.app.gcp.ui.activities.DashboardActivity
 import com.app.gcp.ui.activities.OtherServicesActivity
-import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.utils.Validator
 import com.app.gcp.viewmodel.OnBoardViewModel

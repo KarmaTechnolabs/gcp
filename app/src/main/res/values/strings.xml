@@ -235,4 +235,76 @@
     <string name="filter_by_status">Filter by Status</string>
     <string name="filter_by_stages">Filter by Stages</string>
 
+    <string-array name="string_array_alcohol">
+        <item>Vodka</item>
+        <item>Rum</item>
+        <item>Whiskey</item>
+        <item>Gin</item>
+        <item>Tequila</item>
+    </string-array>
+
+    <string-array name="string_array_coffee">
+        <item>Espresso</item>
+        <item>Machado</item>
+        <item>Cappuccino</item>
+        <item>Cafe Latte</item>
+        <item>Ristretto</item>
+    </string-array>
+
+    <string-array name="string_array_pasta">
+        <item>Carbonate</item>
+        <item>Capelli</item>
+        <item>Spaghetti</item>
+        <item>Gnocchi</item>
+        <item>Lanette</item>
+    </string-array>
+
+    <string-array name="string_array_cold_drinks">
+        <item>Cola</item>
+        <item>Lemonade</item>
+        <item>Citrus soda</item>
+        <item>Juice</item>
+        <item>Sparkling Water</item>
+    </string-array>
+
+
+    <string name="text_alcohol">Alcohol</string>
+    <string name="text_coffee">Coffee</string>
+    <string name="text_pasta">Pasta</string>
+    <string name="text_cold_drinks">Cold Drinks</string>
+    <string name="text_expanded">Expanded</string>
+    <string name="text_collapsed">Collapsed</string>
+    <string name="faq_title1">What types of labels do we manufacture?</string>
+    <string name="faq_description1">We manufacture the following types of labels:\n
+Self-adhesive labels\n
+Linerless Labels\n
+Smart Labels\n
+Shrink sleeve labels\n
+Wrap around labels\n
+Metallised labels\n
+Holographic labels\n
+Antimicrobial labels</string>
+    <string name="faq_title2">Where is our Corporate office located?</string>
+    <string name="faq_description2">Our state of art Corporate office is located at C-152 Okhla Industrial Area Phase 1, New Delhi -110020. </string>
+    <string name="faq_title3">What sectors do we serve?</string>
+    <string name="faq_description3">We provide labels to the following sectors:\n
+FMCG\n
+Cosmetics\n
+Ecommerce\n
+Pharmaceuticals\n
+Automobiles\n
+Information Technology\n
+</string>
+    <string name="faq_title4">What is our current printing capacity?</string>
+    <string name="faq_description4">We can print up to 90000 running meter per day.</string>
+    <string name="faq_title5">Do we have screen printing capabilities?</string>
+    <string name="faq_description5">Yes, GCP has inhouse screen printing capabilities.</string>
+    <string name="faq_title6">How can we be reached for any queries?</string>
+    <string name="faq_description6">For any queries you can write to us at info@globalcorepkg.com. More information
+    about our products is available at www.globalcorepkg.com.</string>
+    <string name="services_title1">Other Services</string>
+    <string name="services_description1">Deployment of web version of GCP software on server for at least 1 year from date of completion of development. This may continue on extension of support period.\n
+Deployment of app version of GCP software on Android and Apple App Store
+Migration of web version of GCP software to another server if required during
+support period. One time migration of the web version of GCP software to another server if required after completion of support period.</string>
 </resources>

@@ -1,20 +1,372 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.fragments.FAQsFragment">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <ExpandableListView
-            android:id="@+id/expandableListView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:padding="@dimen/small_size"
+            tools:context=".ui.fragments.FAQsFragment">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/label_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/medium_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/medium_size">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_type_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/small_size"
+                        android:onClick="@{clickListener::onClick}"
+                        android:text="@string/faq_title1"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/medium_size"
+                        app:fontFamily="@font/gotham_black"
+                        app:layout_constraintEnd_toStartOf="@id/label_type_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatToggleButton
+                        android:id="@+id/label_type_icon"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/toggle_selector"
+                        android:includeFontPadding="false"
+                        android:onClick="@{clickListener::onClick}"
+                        android:textOff=""
+                        android:textOn=""
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_type_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_size"
+                        android:text="@string/faq_description1"
+                        android:textColor="@color/greyText_color"
+                        android:textSize="@dimen/medium_size"
+                        android:visibility="gone"
+                        app:fontFamily="@font/gotham_bold"
+                        app:layout_constraintTop_toBottomOf="@id/label_type_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/label_office"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_size"
+                app:cardCornerRadius="@dimen/medium_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_type"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/medium_size">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_office_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/small_size"
+                        android:fontFamily="@font/gotham_black"
+                        android:onClick="@{clickListener::onClick}"
+                        android:text="@string/faq_title2"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/medium_size"
+                        app:layout_constraintEnd_toStartOf="@id/label_office_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatToggleButton
+                        android:id="@+id/label_office_icon"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/toggle_selector"
+                        android:includeFontPadding="false"
+                        android:onClick="@{clickListener::onClick}"
+                        android:textOff=""
+                        android:textOn=""
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_office_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_size"
+                        app:fontFamily="@font/gotham_bold"
+                        android:text="@string/faq_description2"
+                        android:textColor="@color/greyText_color"
+                        android:textSize="@dimen/medium_size"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/label_office_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/label_serve"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_size"
+                app:cardCornerRadius="@dimen/medium_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_office"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/medium_size">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_serve_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/small_size"
+                        android:fontFamily="@font/gotham_black"
+                        android:onClick="@{clickListener::onClick}"
+                        android:text="@string/faq_title3"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/medium_size"
+                        app:layout_constraintEnd_toStartOf="@id/label_serve_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatToggleButton
+                        android:id="@+id/label_serve_icon"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/toggle_selector"
+                        android:includeFontPadding="false"
+                        android:onClick="@{clickListener::onClick}"
+                        android:textOff=""
+                        android:textOn=""
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_serve_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_size"
+                        app:fontFamily="@font/gotham_bold"
+                        android:text="@string/faq_description3"
+                        android:textColor="@color/greyText_color"
+                        android:textSize="@dimen/medium_size"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/label_serve_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/label_capacity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_size"
+                app:cardCornerRadius="@dimen/medium_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_serve"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/medium_size">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_capacity_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/small_size"
+                        android:fontFamily="@font/gotham_black"
+                        android:onClick="@{clickListener::onClick}"
+                        android:text="@string/faq_title4"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/medium_size"
+                        app:layout_constraintEnd_toStartOf="@id/label_capacity_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatToggleButton
+                        android:id="@+id/label_capacity_icon"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/toggle_selector"
+                        android:includeFontPadding="false"
+                        android:onClick="@{clickListener::onClick}"
+                        android:textOff=""
+                        android:textOn=""
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_capacity_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_size"
+                        app:fontFamily="@font/gotham_bold"
+                        android:text="@string/faq_description4"
+                        android:textColor="@color/greyText_color"
+                        android:textSize="@dimen/medium_size"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/label_capacity_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/label_capabilities"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_size"
+                app:cardCornerRadius="@dimen/medium_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_capacity"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/medium_size">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_capabilities_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/small_size"
+                        android:fontFamily="@font/gotham_black"
+                        android:onClick="@{clickListener::onClick}"
+                        android:text="@string/faq_title5"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/medium_size"
+                        app:layout_constraintEnd_toStartOf="@id/label_capabilities_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatToggleButton
+                        android:id="@+id/label_capabilities_icon"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/toggle_selector"
+                        android:includeFontPadding="false"
+                        android:onClick="@{clickListener::onClick}"
+                        android:textOff=""
+                        android:textOn=""
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_capabilities_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_size"
+                        android:fontFamily="@font/gotham_bold"
+                        android:text="@string/faq_description5"
+                        android:textColor="@color/greyText_color"
+                        android:textSize="@dimen/medium_size"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/label_capabilities_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/label_queries"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_size"
+                app:cardCornerRadius="@dimen/medium_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_capabilities"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/medium_size">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_queries_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/small_size"
+                        android:fontFamily="@font/gotham_black"
+                        android:onClick="@{clickListener::onClick}"
+                        android:text="@string/faq_title6"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/medium_size"
+                        app:layout_constraintEnd_toStartOf="@id/label_queries_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatToggleButton
+                        android:id="@+id/label_queries_icon"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/toggle_selector"
+                        android:includeFontPadding="false"
+                        android:onClick="@{clickListener::onClick}"
+                        android:textOff=""
+                        android:textOn=""
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_queries_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_size"
+                        android:fontFamily="@font/gotham_bold"
+                        android:text="@string/faq_description6"
+                        android:textColor="@color/greyText_color"
+                        android:textSize="@dimen/medium_size"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/label_queries_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>
