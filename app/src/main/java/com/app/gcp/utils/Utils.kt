@@ -3,7 +3,6 @@ package com.app.gcp.utils
 import android.Manifest
 import android.app.ActivityManager
 import android.app.ActivityManager.RunningAppProcessInfo
-import android.app.DownloadManager
 import android.content.ContentUris
 import android.content.Context
 import android.content.pm.PackageManager
@@ -23,10 +22,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
-import java.io.File
-import java.io.FileOutputStream
-import java.net.URL
-import java.nio.channels.Channels
 
 
 class Utils {
@@ -197,30 +192,6 @@ class Utils {
                 e.printStackTrace()
             }
             return versionName
-        }
-
-        fun downloadPdf(baseActivity:Context,url: String?,title: String?): Long {
-            val direct = File(Environment.getExternalStorageDirectory().toString() )
-
-            if (!direct.exists()) {
-                direct.mkdirs()
-            }
-            val extension = url?.substring(url.lastIndexOf("."))
-            val downloadReference: Long
-            var  dm: DownloadManager = baseActivity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            val uri = Uri.parse(url)
-            val request = DownloadManager.Request(uri)
-            request.setDestinationInExternalPublicDir(
-                "/",
-                "pdf" + System.currentTimeMillis() + extension
-            )
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            request.setTitle(title)
-
-            downloadReference = dm?.enqueue(request) ?: 0
-
-            return downloadReference
-
         }
 
     }

@@ -7,9 +7,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import com.app.gcp.R
 import com.app.gcp.api.requestmodel.ChangePasswordRequestModel
+import com.app.gcp.api.responsemodel.LoginResponse
 import com.app.gcp.base.BaseActivity
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.ActivityChangePasswordBinding
+import com.app.gcp.utils.UserStateManager
 import com.app.gcp.utils.Validator
 import com.app.gcp.viewmodel.ChangePasswordViewModel
 
@@ -28,6 +30,11 @@ class ChangePasswordActivity : BaseActivity(), View.OnClickListener {
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(response) { _, message ->
                     showToast(message)
+                    var user: LoginResponse? = UserStateManager.getUserProfile()
+                    user?.isPasswordChange = "1"
+                    if (user != null) {
+                        UserStateManager.saveUserProfile(user)
+                    }
                     onBackPressed()
                 }
             }
@@ -48,7 +55,7 @@ class ChangePasswordActivity : BaseActivity(), View.OnClickListener {
                     val oldPassword = binding.tieOldPassword.text.toString()
                     val newPassword = binding.tieNewPassword.text.toString()
                     val changePasswordRequestModel =
-                        ChangePasswordRequestModel(oldPassword, newPassword,newPassword)
+                        ChangePasswordRequestModel(oldPassword, newPassword, newPassword)
                     viewModel.callChangePasswordAPI(changePasswordRequestModel)
                 }
             }

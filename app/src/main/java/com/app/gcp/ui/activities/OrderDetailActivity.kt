@@ -81,7 +81,7 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
                     successListener = object : (OrdersDetailsResponse, String) -> Unit {
                         override fun invoke(it: OrdersDetailsResponse, message: String) {
 //                            showToast(message)
-                            viewModel.orderDetailResponseLiveData.postValue(it)
+                            viewModel.orderDetailResponseLiveData.value = it
                             productListArray.clear()
                             it.products?.let { it1 -> productListArray.addAll(it1) }
                             productListAdapter?.setItems(productListArray as ArrayList<OrdersDetailsResponse.Product?>)
@@ -92,12 +92,21 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
                                 "₹ ".plus(productListArray.sumBy { Integer.parseInt(it.total) }
                                     .toString())
 
-                            binding.tvGstValue.text =
-                                "₹ ".plus(productListArray.sumBy { Integer.parseInt(it.total) }
-                                    .toString())
+//                            binding.tvGstValue.text =
+//                                "₹ ".plus(productListArray.sumBy { Integer.parseInt(it.total) }
+//                                    .toString())
+
                             binding.tvGrandTotalValue.text =
-                                "₹ ".plus(productListArray.sumBy { Integer.parseInt(it.total) }
-                                    .toString())
+                                "₹ ".plus(
+                                    productListArray.sumBy { Integer.parseInt(it.total) }
+                                        .plus(viewModel.orderDetailResponseLiveData.value?.details?.gstAmount?.let { it1 ->
+                                            Integer.parseInt(
+                                                it1
+                                            )
+                                        }!!)
+
+                                )
+
 
                             binding.tvNoData.visibility = View.GONE
                         }

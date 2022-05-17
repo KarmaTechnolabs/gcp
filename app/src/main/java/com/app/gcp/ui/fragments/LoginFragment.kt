@@ -50,7 +50,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
                     UserStateManager.saveUserProfile(it)
                     requireActivity().gotoActivity(
                         DashboardActivity::class.java,
-                        bundle = bundleOf(Constants.EXTRA_DATA to  UserStateManager.getUserProfile()?.user_type),
+//                        bundle = bundleOf(Constants.EXTRA_DATA to  UserStateManager.getUserProfile()?.user_type),
                         clearAllActivity = true
                     )
                 }
@@ -177,11 +177,11 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
                 binding.tiePassword.error = getString(R.string.password_error)
                 false
             }
-            password?.length!! < 8 -> {//!Validator.isPasswordValid(password)
-                showToast(R.string.enter_valid_password)
-                binding.tiePassword.error = getString(R.string.enter_valid_password)
-                false
-            }
+//            password?.length!! < 8 -> {//!Validator.isPasswordValid(password)
+//                showToast(R.string.enter_valid_password)
+//                binding.tiePassword.error = getString(R.string.enter_valid_password)
+//                false
+//            }
             else -> {
                 true
             }

@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.app.gcp.R
 import com.app.gcp.api.requestmodel.ChangePasswordRequestModel
+import com.app.gcp.api.responsemodel.LoginResponse
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentChangePasswordBinding
@@ -44,6 +45,11 @@ class ChangePasswordFragment : BaseFragment(), View.OnClickListener {
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(response) { _, message ->
                     showToast(message)
+                    var user: LoginResponse? = UserStateManager.getUserProfile()
+                    user?.isPasswordChange = "1"
+                    if (user != null) {
+                        UserStateManager.saveUserProfile(user)
+                    }
                     findNavController().navigateUp()
                 }
             }

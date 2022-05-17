@@ -83,6 +83,9 @@ data class LoginResponse(
     @SerializedName("website")
     val website: String,
     @SerializedName("zip")
-    val zip: String
+    val zip: String,
+    @SerializedName("is_password_change")
+    var isPasswordChange: String,
+
 )
 
