@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.app.gcp.api.responsemodel.OrdersDetailsResponse.OrderStagesHistory" />
+
+        <import type="com.app.gcp.utils.DateTimeUtils" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/small_size"
+        android:paddingBottom="@dimen/small_size">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_order_stage_name"
+            style="@style/TextViewPrimaryStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_black"
+            android:text="@{model.title}"
+            android:gravity="start"
+            app:layout_constraintEnd_toStartOf="@id/tv_order_note"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="order stage" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_order_note"
+            style="@style/TextViewPrimarySmallStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_black"
+            android:text="@{model.notes}"
+            android:gravity="start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_order_update"
+            app:layout_constraintHorizontal_weight="4"
+            app:layout_constraintStart_toEndOf="@id/tv_order_stage_name"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="notes data" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_order_update"
+            style="@style/TextViewPrimarySmallStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_black"
+            android:text="@{DateTimeUtils.formatDateForString(DateTimeUtils.DATE_FORMAT_FULL,DateTimeUtils.YEAR_MONTH_DAY_HOUR_MINUTE_AM_PM_FORMAT,model.statusChangedAt)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@id/tv_order_note"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="yyyy-MM-dd HH:mm a" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

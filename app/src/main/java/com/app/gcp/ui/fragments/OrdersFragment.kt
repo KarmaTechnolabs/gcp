@@ -68,13 +68,17 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
                             orderListArray.clear()
                             orderListArray.addAll(it)
                             orderListAdapter?.setItems(orderListArray as ArrayList<OrdersResponse?>)
-                            checkNoData()
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                checkNoData()
+                            }, 100)
                             binding.swipeRefresh.isRefreshing = false
                         }
                     },
                     failureListener = object : () -> Unit {
                         override fun invoke() {
-                            checkNoData()
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                checkNoData()
+                            }, 100)
                             binding.swipeRefresh.isRefreshing = false
                         }
                     })
@@ -246,5 +250,8 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
                 ignoreCase = true
             ) || dashboardViewModel.selectedOrderStagesFilter.isEmpty()
         } as ArrayList<OrdersResponse?>)
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            checkNoData()
+//        }, 100)
     }
 }

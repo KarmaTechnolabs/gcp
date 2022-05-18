@@ -13,6 +13,7 @@ import androidx.work.*
 import com.app.gcp.R
 import com.app.gcp.adapter.OrderDetailAdditionalDetailsAdapter
 import com.app.gcp.adapter.OrderDetailProductAdapter
+import com.app.gcp.adapter.OrderDetailStageAdapter
 import com.app.gcp.api.requestmodel.OrderDetailsRequestModel
 import com.app.gcp.api.responsemodel.OrdersDetailsResponse
 import com.app.gcp.api.responsemodel.OrdersResponse
@@ -30,6 +31,8 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
     val viewModel: OrderDetailViewModel by viewModels()
     private val productListArray = mutableListOf<OrdersDetailsResponse.Product>()
     private var productListAdapter: OrderDetailProductAdapter? = null
+    private val stageListArray = mutableListOf<OrdersDetailsResponse.OrderStagesHistory>()
+    private var stageListAdapter: OrderDetailStageAdapter? = null
     private val additionalDetailsListArray = mutableListOf<OrdersDetailsResponse.CustomField>()
     private var additionalDetailsListAdapter: OrderDetailAdditionalDetailsAdapter? = null
     lateinit var workManager: WorkManager
@@ -62,11 +65,13 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
         workManager = WorkManager.getInstance(this)
 
         productListAdapter = OrderDetailProductAdapter(this)
-//        productListAdapter?.setClickListener(this)
         binding.rvProduct.adapter = productListAdapter
+
         additionalDetailsListAdapter = OrderDetailAdditionalDetailsAdapter(this)
-//        productListAdapter?.setClickListener(this)
         binding.rvAdditional.adapter = additionalDetailsListAdapter
+
+        stageListAdapter = OrderDetailStageAdapter(this)
+        binding.rvOrderStage.adapter = stageListAdapter
 
         if (intent.extras != null && intent.hasExtra(Constants.EXTRA_ORDER_STATUS)) {
             viewModel.orderStatusResponse.value =
@@ -82,12 +87,19 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
                         override fun invoke(it: OrdersDetailsResponse, message: String) {
 //                            showToast(message)
                             viewModel.orderDetailResponseLiveData.value = it
+
                             productListArray.clear()
                             it.products?.let { it1 -> productListArray.addAll(it1) }
                             productListAdapter?.setItems(productListArray as ArrayList<OrdersDetailsResponse.Product?>)
+
                             additionalDetailsListArray.clear()
                             it.customFields?.let { it1 -> additionalDetailsListArray.addAll(it1) }
                             additionalDetailsListAdapter?.setItems(additionalDetailsListArray as ArrayList<OrdersDetailsResponse.CustomField?>)
+
+                            stageListArray.clear()
+                            it.orderStagesHistory?.let { it1 -> stageListArray.addAll(it1) }
+                            stageListAdapter?.setItems(stageListArray as ArrayList<OrdersDetailsResponse.OrderStagesHistory?>)
+
                             binding.tvSubtotalValue.text =
                                 "₹ ".plus(productListArray.sumBy { Integer.parseInt(it.total) }
                                     .toString())

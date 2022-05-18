@@ -307,4 +307,8 @@ Information Technology\n
 Deployment of app version of GCP software on Android and Apple App Store
 Migration of web version of GCP software to another server if required during
 support period. One time migration of the web version of GCP software to another server if required after completion of support period.</string>
+    <string name="order_stage">Order Stage</string>
+    <string name="stage_name">Stage Name</string>
+    <string name="notes">Notes</string>
+    <string name="updated_at">Updated at</string>
 </resources>

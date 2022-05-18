@@ -2,20 +2,27 @@ package com.app.gcp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.gcp.R
 import com.app.gcp.api.responsemodel.OrdersDetailsResponse
+import com.app.gcp.api.responsemodel.OrdersResponse
+import com.app.gcp.databinding.ItemListOrderStageBinding
+import com.app.gcp.databinding.ItemListOrdersBinding
 import com.app.gcp.databinding.ItemListProductBinding
+import com.app.gcp.listeners.ItemClickListener
 import java.util.*
 
-class OrderDetailProductAdapter(context: Context?) :
-    BaseAdapter<OrdersDetailsResponse.Product?, OrderDetailProductAdapter.ViewHolder?>(context){
-    var orderProductList = ArrayList<OrdersDetailsResponse.Product?>()
+class OrderDetailStageAdapter(context: Context?) :
+    BaseAdapter<OrdersDetailsResponse.OrderStagesHistory?, OrderDetailStageAdapter.ViewHolder?>(context){
+    var orderProductList = ArrayList<OrdersDetailsResponse.OrderStagesHistory?>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: ItemListProductBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context), R.layout.item_list_product, parent, false
+        val binding: ItemListOrderStageBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context), R.layout.item_list_order_stage, parent, false
         )
         return ViewHolder(binding)
     }
@@ -31,14 +38,14 @@ class OrderDetailProductAdapter(context: Context?) :
         return orderProductList.size
     }
 
-    override fun getListItem(position: Int): OrdersDetailsResponse.Product {
+    override fun getListItem(position: Int): OrdersDetailsResponse.OrderStagesHistory {
         return orderProductList[position]!!
     }
 
-    inner class ViewHolder(binding: ItemListProductBinding) :
+    inner class ViewHolder(binding: ItemListOrderStageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        var binding: ItemListProductBinding = binding
-        fun setBinding(model: OrdersDetailsResponse.Product?) {
+        var binding: ItemListOrderStageBinding = binding
+        fun setBinding(model: OrdersDetailsResponse.OrderStagesHistory?) {
             binding.model = model
             binding.executePendingBindings()
         }
@@ -47,5 +54,4 @@ class OrderDetailProductAdapter(context: Context?) :
     init {
         orderProductList = list
     }
-
 }

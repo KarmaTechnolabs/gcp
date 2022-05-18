@@ -14,8 +14,11 @@ public data class OrdersDetailsResponse(
     @SerializedName("customFields")
     val customFields: List<CustomField>?,
     @SerializedName("pdf")
-    val pdf: String?
-) : Parcelable {
+    val pdf: String?,
+    @SerializedName("orderStagesHistory")
+    val orderStagesHistory: List<OrderStagesHistory>?,
+
+    ) : Parcelable {
     @Parcelize
     public data class Details(
         @SerializedName("address")
@@ -111,6 +114,7 @@ public data class OrdersDetailsResponse(
         @SerializedName("unit_type")
         val unitType: String?
     ) : Parcelable
+
     @Parcelize
     data class CustomField(
         @SerializedName("add_filter")
@@ -166,16 +170,33 @@ public data class OrdersDetailsResponse(
     ) : Parcelable
 
     @Parcelize
-    data class File(
-        @SerializedName("file_id")
-        val fileId: String?,
-        @SerializedName("file_name")
-        val fileName: String?,
-        @SerializedName("file_size")
-        val fileSize: String?,
-        @SerializedName("service_type")
-        val serviceType: String?
-    ): Parcelable
+    data class OrderStagesHistory(
+        @SerializedName("color")
+        val color: String?,
+        @SerializedName("created_at")
+        val createdAt: String?,
+        @SerializedName("deleted")
+        val deleted: String?,
+        @SerializedName("id")
+        val id: String?,
+        @SerializedName("is_current")
+        val isCurrent: String?,
+        @SerializedName("notes")
+        val notes: String?,
+        @SerializedName("order_id")
+        val orderId: String?,
+        @SerializedName("sort")
+        val sort: String?,
+        @SerializedName("stage_id")
+        val stageId: String?,
+        @SerializedName("status_changed_at")
+        val statusChangedAt: String?="",
+        @SerializedName("title")
+        val title: String?,
+        @SerializedName("updated_at")
+        val updatedAt: String?
+    ) : Parcelable
 }
+
 
 

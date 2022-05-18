@@ -9,17 +9,6 @@
             name="model"
             type="com.app.gcp.api.responsemodel.OrdersDetailsResponse.Product" />
 
-        <variable
-            name="position"
-            type="int" />
-
-        <import type="com.app.gcp.utils.DateTimeUtils" />
-
-        <import type="com.app.gcp.utils.DateTimeConstants" />
-
-        <variable
-            name="clickListener"
-            type="com.app.gcp.listeners.ItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
