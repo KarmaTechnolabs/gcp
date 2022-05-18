@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.app.gcp.api.responsemodel.TrackOrderResponse.History" />
+
+        <variable
+            name="isFirst"
+            type="boolean" />
+
+        <variable
+            name="isLast"
+            type="boolean" />
+
+        <import type="com.app.gcp.utils.DateTimeUtils" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="clickListener"
+            type="com.app.gcp.listeners.ItemClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mcv_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view_up"
+            android:layout_width="@dimen/_3sdp"
+            android:layout_height="@dimen/text_size_extra_huge"
+            android:background="@color/colorPrimaryDark"
+            android:visibility="@{isFirst?View.INVISIBLE:View.VISIBLE,default=invisible}"
+            app:layout_constraintEnd_toEndOf="@id/view_order_dot"
+            app:layout_constraintStart_toStartOf="@id/view_order_dot"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_order_dot"
+            android:layout_width="@dimen/large_size"
+            android:layout_height="@dimen/large_size"
+            android:layout_marginStart="@dimen/margin_size_medium"
+            android:background="@drawable/shape_status_completed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_up" />
+
+        <View
+            android:id="@+id/view_down"
+            android:layout_width="@dimen/_3sdp"
+            android:layout_height="@dimen/margin_size_medium"
+            android:background="@color/colorPrimaryDark"
+            android:visibility="@{isLast?View.INVISIBLE:View.VISIBLE,default=invisible}"
+            app:layout_constraintEnd_toEndOf="@id/view_order_dot"
+            app:layout_constraintStart_toStartOf="@id/view_order_dot"
+            app:layout_constraintTop_toBottomOf="@id/view_order_dot" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/view_order_arrow"
+            android:layout_width="@dimen/margin_size_large"
+            android:layout_height="@dimen/margin_size_large"
+            android:src="@drawable/ic_back_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/view_order_dot"
+            app:layout_constraintStart_toEndOf="@id/view_order_dot"
+            app:layout_constraintTop_toTopOf="@id/view_order_dot" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_status_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{model.title}"
+            app:fontFamily="@font/gotham_black"
+            app:layout_constraintStart_toEndOf="@id/view_order_arrow"
+            app:layout_constraintTop_toTopOf="@id/view_order_arrow"
+            tools:text="model.titledsfsadd" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_status_notes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{model.notes}"
+            app:fontFamily="@font/gotham_bold"
+            app:layout_constraintStart_toEndOf="@id/view_order_arrow"
+            app:layout_constraintTop_toBottomOf="@id/tv_status_title"
+            tools:text="model.notessdfdsvds" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_status_updated"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{DateTimeUtils.formatDateForString(DateTimeUtils.DATE_FORMAT_FULL,DateTimeUtils.YEAR_MONTH_DAY_HOUR_MINUTE_AM_PM_FORMAT,model.statusChangedAt)}"
+            app:fontFamily="@font/gotham_bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_order_arrow"
+            app:layout_constraintStart_toEndOf="@id/view_order_arrow"
+            app:layout_constraintTop_toBottomOf="@id/tv_status_notes"
+            tools:text="model.notessdfdsvascsddvsds" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

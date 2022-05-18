@@ -12,15 +12,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.app.gcp.R
 import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
+import com.app.gcp.api.responsemodel.TrackOrderResponse
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.gotoActivity
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.FragmentTrackOrderBinding
-import com.app.gcp.ui.activities.MainActivity
 import com.app.gcp.ui.activities.OrderStatusActivity
 import com.app.gcp.ui.dialogs.PasswordResetLinkAlertDialog
 import com.app.gcp.utils.Constants
-import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.OnBoardViewModel
 
 class TrackOrderFragment : BaseFragment(), View.OnClickListener,
@@ -50,19 +49,26 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
         binding.clickListener = this
 
         binding.isBack = args.isBack
+
         onBoardViewModel.trackingOrderResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
-                manageAPIResource(response) { _, message ->
-                    showToast(message)
-
-                    findNavController().navigateUp()
-                    requireActivity().gotoActivity(
-                        OrderStatusActivity::class.java,
-                        bundle = bundleOf(Constants.EXTRA_TRACK_ORDER to response),
-                        needToFinish = false
-                    )
-//                    findNavController().navigateUp()
-                }
+                manageAPIResource(
+                    response, isShowProgress = false,
+                    successListener = object : (TrackOrderResponse, String) -> Unit {
+                        override fun invoke(it: TrackOrderResponse, message: String) {
+//                            showToast(message)
+                            requireActivity().gotoActivity(
+                                OrderStatusActivity::class.java,
+                                bundle = bundleOf(Constants.EXTRA_TRACK_ORDER to it),
+                                needToFinish = false
+                            )
+                        }
+                    },
+                    failureListener = object : () -> Unit {
+                        override fun invoke() {
+                            showToast("Order number not found")
+                        }
+                    })
             }
         }
 
