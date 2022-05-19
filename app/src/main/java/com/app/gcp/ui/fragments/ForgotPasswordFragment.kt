@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.app.gcp.BuildConfig
 import com.app.gcp.R
 import com.app.gcp.api.requestmodel.ForgotPasswordRequestModel
 import com.app.gcp.base.BaseFragment
@@ -37,6 +38,10 @@ class ForgotPasswordFragment : BaseFragment(), View.OnClickListener,
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.clickListener = this
+
+        if (BuildConfig.IS_DEBUG) {
+            binding.tieEmail.setText("admin@gmail.com")
+        }
 
         onBoardViewModel.forgotPasswordResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->

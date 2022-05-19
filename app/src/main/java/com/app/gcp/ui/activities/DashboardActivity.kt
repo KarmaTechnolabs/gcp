@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -22,7 +21,6 @@ import com.app.gcp.custom.hideKeyboard
 import com.app.gcp.custom.showToast
 import com.app.gcp.databinding.ActivityDashboardBinding
 import com.app.gcp.ui.dialogs.LogOutAlertDialog
-import com.app.gcp.ui.fragments.LoginFragmentDirections
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.DashBoardViewModel
 import com.google.android.material.navigation.NavigationView
@@ -114,7 +112,11 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_customers,R.id.nav_orders, R.id.nav_order_tracking, R.id.nav_change_password, R.id.nav_faqs
+                R.id.nav_customers,
+                R.id.nav_orders,
+                R.id.nav_order_tracking,
+                R.id.nav_change_password,
+                R.id.nav_faqs
             ), drawerLayout
         )
         setupActionBarWithNavController(
@@ -135,24 +137,30 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
         headerView.findViewById<AppCompatTextView>(R.id.tv_short_email).text =
             UserStateManager.getUserProfile()?.email
 
+
 //        if (intent.extras != null && intent.hasExtra(Constants.EXTRA_DATA)) {
         if (UserStateManager.getUserProfile()?.user_type.equals(
                 "client",
                 ignoreCase = true
-            ) && UserStateManager.getUserProfile()?.isPasswordChange.equals(
-                "0",
-                ignoreCase = true
             )
         ) {
-            val navHost =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_dashboard) as NavHostFragment?
+            navView.menu.findItem(R.id.nav_customers).isVisible = false
+            if (UserStateManager.getUserProfile()?.isPasswordChange.equals(
+                    "0",
+                    ignoreCase = true
+                )
+            ) {
+                val navHost =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_dashboard) as NavHostFragment?
 
-            navController = navHost!!.navController
+                navController = navHost!!.navController
 //            val navInflater = navController.navInflater
 //            val graph = navInflater.inflate(R.navigation.dashboard_navigation)
 //            graph.setStartDestination(R.id.nav_change_password)
 //            navController.graph = graph
-            navController.navigate(R.id.nav_change_password);
+                navController.navigate(R.id.nav_change_password)
+            }
+
 
         }
 
