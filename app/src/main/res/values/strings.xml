@@ -194,6 +194,7 @@
     <string name="action_search">Search</string>
     <string name="action_filter">Filter</string>
 
+    <string name="menu_customers">Customers</string>
     <string name="menu_orders">Orders</string>
     <string name="menu_track_your_order">Track your order</string>
     <string name="menu_faqs">FAQs</string>
@@ -210,6 +211,11 @@
 
     <!--orders status-->
     <string name="order_status">Order Status</string>
+
+    <!--customer list Screen-->
+    <string name="name">Name:&#160;</string>
+    <string name="company">Company:&#160;</string>
+    <string name="mobile">9876543210</string>
 
     <!--orders update status-->
     <string name="comment">Comment</string>
@@ -235,45 +241,9 @@
     <string name="filter_by_status">Filter by Status</string>
     <string name="filter_by_stages">Filter by Stages</string>
 
-    <string-array name="string_array_alcohol">
-        <item>Vodka</item>
-        <item>Rum</item>
-        <item>Whiskey</item>
-        <item>Gin</item>
-        <item>Tequila</item>
-    </string-array>
+    <!--customer detail-->
+    <string name="customer_detail">Customer Detail</string>
 
-    <string-array name="string_array_coffee">
-        <item>Espresso</item>
-        <item>Machado</item>
-        <item>Cappuccino</item>
-        <item>Cafe Latte</item>
-        <item>Ristretto</item>
-    </string-array>
-
-    <string-array name="string_array_pasta">
-        <item>Carbonate</item>
-        <item>Capelli</item>
-        <item>Spaghetti</item>
-        <item>Gnocchi</item>
-        <item>Lanette</item>
-    </string-array>
-
-    <string-array name="string_array_cold_drinks">
-        <item>Cola</item>
-        <item>Lemonade</item>
-        <item>Citrus soda</item>
-        <item>Juice</item>
-        <item>Sparkling Water</item>
-    </string-array>
-
-
-    <string name="text_alcohol">Alcohol</string>
-    <string name="text_coffee">Coffee</string>
-    <string name="text_pasta">Pasta</string>
-    <string name="text_cold_drinks">Cold Drinks</string>
-    <string name="text_expanded">Expanded</string>
-    <string name="text_collapsed">Collapsed</string>
     <string name="faq_title1">What types of labels do we manufacture?</string>
     <string name="faq_description1">We manufacture the following types of labels:\n
 Self-adhesive labels\n
@@ -311,4 +281,5 @@ support period. One time migration of the web version of GCP software to another
     <string name="stage_name">Stage Name</string>
     <string name="notes">Notes</string>
     <string name="updated_at">Updated at</string>
+    <string name="company_name">Company Name</string>
 </resources>

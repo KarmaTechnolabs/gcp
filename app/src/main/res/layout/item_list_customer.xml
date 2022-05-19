@@ -41,69 +41,53 @@
             android:padding="@dimen/normal_size">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_order_number"
+                android:id="@+id/tv_customer_name"
                 style="@style/TextViewPrimaryStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gotham_black"
-                android:text="@{@string/order+model.orderId}"
+                android:text="@{@string/name+model.orderId}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/order" />
+                tools:text="@string/name" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_tracking_number"
+                android:id="@+id/tv_mobile"
+                style="@style/TextViewPrimarySmallStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_size"
+                android:fontFamily="@font/gotham_black"
+                android:text="@{model.orderDate}"
+                app:layout_constraintEnd_toStartOf="@id/tv_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_customer_name"
+                tools:text="@string/mobile" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_email"
+                style="@style/TextViewPrimarySmallStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_size"
+                android:fontFamily="@font/gotham_black"
+                android:text="@{model.companyName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_customer_name"
+                tools:text="admin@gmail.com" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_company_name"
                 style="@style/TextViewPrimaryStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/normal_size"
                 android:fontFamily="@font/gotham_bold"
-                android:text="@{@string/tracking+model.trackingNumber}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_order_number"
-                tools:text="@string/tracking" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_order_date"
-                style="@style/TextViewPrimarySmallStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_size"
-                android:fontFamily="@font/gotham_black"
-                android:text="@{model.orderDate}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_tracking_number"
-                tools:text="@string/order_date" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_name"
-                style="@style/TextViewPrimarySmallStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/normal_size"
-                android:fontFamily="@font/gotham_black"
                 android:textColor="@color/colorBlue"
-                android:text="@{model.companyName}"
+                android:text="@{@string/company+model.trackingNumber}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_order_date"
-                tools:text="Excel Inc. | Mr. John Doe" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_order_status"
-                style="@style/TextViewPrimarySmallStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/round_corner_gray_drawable"
-                android:fontFamily="@font/gotham_black"
-                android:onClick="@{v -> clickListener.onItemClick(v.id,model,position)}"
-                android:paddingLeft="@dimen/medium_size"
-                android:paddingTop="@dimen/normal_size"
-                android:paddingRight="@dimen/medium_size"
-                android:paddingBottom="@dimen/normal_size"
-                android:text="@{model.orderStageTitle}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/pending..." />
+                app:layout_constraintTop_toBottomOf="@id/tv_email"
+                tools:text="@string/company" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

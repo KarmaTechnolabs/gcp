@@ -136,7 +136,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         dashboardViewModel.callOrderListAPI(
             OrderListRequestModel(
                 user_type = UserStateManager.getUserProfile()?.user_type.toString(),
-                token = UserStateManager?.getBearerToken()
+                token = UserStateManager.getBearerToken()
             )
         )
     }
@@ -239,6 +239,9 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
                 ignoreCase = true
             ) || dashboardViewModel.selectedOrderStatusFilter.isEmpty()
         } as ArrayList<OrdersResponse?>)
+        Handler(Looper.getMainLooper()).postDelayed({
+            checkNoData()
+        }, 100)
 //        callOrderListApi()
     }
 

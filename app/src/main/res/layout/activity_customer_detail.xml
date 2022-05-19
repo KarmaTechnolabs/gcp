@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.app.gcp.viewmodel.OrderDetailViewModel" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activities.CustomerDetailActivity">
+
+        <include
+            android:id="@+id/toolbar_order_status"
+            layout="@layout/toolbar_main"
+            android:padding="@dimen/normal_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:isBackButtonHide="false" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/regular_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_order_status">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_customer_detail"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/regular_size"
+                    android:text="@string/company_name"
+                    app:fontFamily="@font/gotham_bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="company_name" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_customer_name"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_black"
+                    android:text="@{`Name: `+model.orderDetailResponseLiveData.details.firstName}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_detail"
+                    tools:text="name" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_customer_address"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_black"
+                    android:text="@{`Address: `+model.orderDetailResponseLiveData.details.address}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_name"
+                    tools:text="Address" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_customer_email"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_black"
+                    android:text="@{`Email: `+model.orderDetailResponseLiveData.details.email}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_address"
+                    tools:text="Email" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_customer_contact"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_black"
+                    android:text="@{`Contact: `+model.orderDetailResponseLiveData.details.phone}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_email"
+                    tools:text="Contact" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_customer_gst"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_black"
+                    android:text="@{`GST: `+model.orderDetailResponseLiveData.details.discountAmount}"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_contact"
+                    tools:text="GST" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data_found"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
