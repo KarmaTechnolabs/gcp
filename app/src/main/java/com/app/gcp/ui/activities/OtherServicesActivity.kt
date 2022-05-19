@@ -16,18 +16,21 @@ class OtherServicesActivity : BaseActivity(), View.OnClickListener {
         binding.clickListener = this
         binding.toolbarOrderStatus.ivBack.setOnClickListener(this)
         binding.toolbarOrderStatus.tvTitle.text = getString(R.string.services_title1)
+
+        binding.webview.loadUrl("file:///android_asset/other_services.html")
+        binding.webview.settings.javaScriptEnabled = true
     }
 
     override fun onClick(view: View?) {
         when (view) {
 
-            binding.labelServiceIcon, binding.labelServiceTitle -> {
-                if (binding.labelServiceIcon.isChecked) {
-                    binding.labelServiceDescription.visibility = View.VISIBLE
-                } else {
-                    binding.labelServiceDescription.visibility = View.GONE
-                }
-            }
+//            binding.labelServiceIcon, binding.labelServiceTitle -> {
+//                if (binding.labelServiceIcon.isChecked) {
+//                    binding.labelServiceDescription.visibility = View.VISIBLE
+//                } else {
+//                    binding.labelServiceDescription.visibility = View.GONE
+//                }
+//            }
             binding.toolbarOrderStatus.ivBack -> onBackPressed()
         }
     }

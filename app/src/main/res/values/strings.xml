@@ -255,7 +255,7 @@ Metallised labels\n
 Holographic labels\n
 Antimicrobial labels</string>
     <string name="faq_title2">Where is our Corporate office located?</string>
-    <string name="faq_description2">Our state of art Corporate office is located at C-152 Okhla Industrial Area Phase 1, New Delhi -110020. </string>
+    <string name="faq_description2">Our state of art Corporate office is located at C-152 Okhla Industrial Area Phase 1, New Delhi -110020.</string>
     <string name="faq_title3">What sectors do we serve?</string>
     <string name="faq_description3">We provide labels to the following sectors:\n
 FMCG\n
@@ -263,7 +263,7 @@ Cosmetics\n
 Ecommerce\n
 Pharmaceuticals\n
 Automobiles\n
-Information Technology\n
+Information Technology
 </string>
     <string name="faq_title4">What is our current printing capacity?</string>
     <string name="faq_description4">We can print up to 90000 running meter per day.</string>

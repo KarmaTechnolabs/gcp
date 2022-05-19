@@ -24,30 +24,30 @@ class WebActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initView(){
-
-        if (intent.extras!=null){
-            title = intent.getStringExtra(Constants.EXTRA_TITLE);
-            link = intent.getStringExtra(Constants.EXTRA_LINK);
-            binding.toolbarGetInTouch.tvTitle.text = title
-        }
-
+        binding.webview.loadUrl("file:///android_asset/other_services.html")
+//        if (intent.extras!=null){
+//            title = intent.getStringExtra(Constants.EXTRA_TITLE);
+//            link = intent.getStringExtra(Constants.EXTRA_LINK);
+//            binding.toolbarGetInTouch.tvTitle.text = title
+//        }
+//
         binding.toolbarGetInTouch.ivBack.setOnClickListener(this)
-
-        binding.webview.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                view.loadUrl(url)
-                return false
-            }
-
-            override fun onPageFinished(view: WebView, url: String) {
-                super.onPageFinished(view, url)
-                hideProgressDialog()
-            }
-        }
-
+//
+//        binding.webview.webViewClient = object : WebViewClient() {
+//            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+//                view.loadUrl(url)
+//                return false
+//            }
+//
+//            override fun onPageFinished(view: WebView, url: String) {
+//                super.onPageFinished(view, url)
+//                hideProgressDialog()
+//            }
+//        }
+//
         binding.webview.settings.javaScriptEnabled = true
-        link?.let { binding.webview.loadUrl(it) }
-        showProgressDialog()
+//        link?.let { binding.webview.loadUrl(it) }
+//        showProgressDialog()
 
 
     }

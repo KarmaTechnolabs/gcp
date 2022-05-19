@@ -37,6 +37,8 @@ class FAQsFragment : BaseFragment(), View.OnClickListener {
 
         binding.lifecycleOwner = this
         binding.clickListener = this
+        binding.webview.loadUrl("file:///android_asset/faq.html")
+        binding.webview.settings.javaScriptEnabled = true
     }
 
 
@@ -48,48 +50,48 @@ class FAQsFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view) {
 
-            binding.labelTypeIcon, binding.labelTypeTitle -> {
-                if (binding.labelTypeIcon.isChecked) {
-                    binding.labelTypeDescription.visibility = View.VISIBLE
-                } else {
-                    binding.labelTypeDescription.visibility = View.GONE
-                }
-            }
-            binding.labelOfficeIcon, binding.labelOfficeTitle -> {
-                if (binding.labelOfficeIcon.isChecked) {
-                    binding.labelOfficeDescription.visibility = View.VISIBLE
-                } else {
-                    binding.labelOfficeDescription.visibility = View.GONE
-                }
-            }
-            binding.labelServeIcon, binding.labelServeTitle -> {
-                if (binding.labelServeIcon.isChecked) {
-                    binding.labelServeDescription.visibility = View.VISIBLE
-                } else {
-                    binding.labelServeDescription.visibility = View.GONE
-                }
-            }
-            binding.labelCapacityIcon, binding.labelCapacityTitle -> {
-                if (binding.labelCapacityIcon.isChecked) {
-                    binding.labelCapacityDescription.visibility = View.VISIBLE
-                } else {
-                    binding.labelCapacityDescription.visibility = View.GONE
-                }
-            }
-            binding.labelCapabilitiesIcon, binding.labelCapabilitiesTitle -> {
-                if (binding.labelCapabilitiesIcon.isChecked) {
-                    binding.labelCapabilitiesDescription.visibility = View.VISIBLE
-                } else {
-                    binding.labelCapabilitiesDescription.visibility = View.GONE
-                }
-            }
-            binding.labelQueriesIcon, binding.labelQueriesTitle -> {
-                if (binding.labelQueriesIcon.isChecked) {
-                    binding.labelQueriesDescription.visibility = View.VISIBLE
-                } else {
-                    binding.labelQueriesDescription.visibility = View.GONE
-                }
-            }
+//            binding.labelTypeIcon, binding.labelTypeTitle -> {
+//                if (binding.labelTypeIcon.isChecked) {
+//                    binding.labelTypeDescription.visibility = View.VISIBLE
+//                } else {
+//                    binding.labelTypeDescription.visibility = View.GONE
+//                }
+//            }
+//            binding.labelOfficeIcon, binding.labelOfficeTitle -> {
+//                if (binding.labelOfficeIcon.isChecked) {
+//                    binding.labelOfficeDescription.visibility = View.VISIBLE
+//                } else {
+//                    binding.labelOfficeDescription.visibility = View.GONE
+//                }
+//            }
+//            binding.labelServeIcon, binding.labelServeTitle -> {
+//                if (binding.labelServeIcon.isChecked) {
+//                    binding.labelServeDescription.visibility = View.VISIBLE
+//                } else {
+//                    binding.labelServeDescription.visibility = View.GONE
+//                }
+//            }
+//            binding.labelCapacityIcon, binding.labelCapacityTitle -> {
+//                if (binding.labelCapacityIcon.isChecked) {
+//                    binding.labelCapacityDescription.visibility = View.VISIBLE
+//                } else {
+//                    binding.labelCapacityDescription.visibility = View.GONE
+//                }
+//            }
+//            binding.labelCapabilitiesIcon, binding.labelCapabilitiesTitle -> {
+//                if (binding.labelCapabilitiesIcon.isChecked) {
+//                    binding.labelCapabilitiesDescription.visibility = View.VISIBLE
+//                } else {
+//                    binding.labelCapabilitiesDescription.visibility = View.GONE
+//                }
+//            }
+//            binding.labelQueriesIcon, binding.labelQueriesTitle -> {
+//                if (binding.labelQueriesIcon.isChecked) {
+//                    binding.labelQueriesDescription.visibility = View.VISIBLE
+//                } else {
+//                    binding.labelQueriesDescription.visibility = View.GONE
+//                }
+//            }
         }
     }
 }

@@ -21,75 +21,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         bind:isBackButtonHide="false" />
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_order_status">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <WebView
+            android:id="@+id/webview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/small_size">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_order_status"/>
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:scrollbars="none"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/toolbar_order_status">-->
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/label_service"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/medium_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/colorPrimary"
-                app:strokeWidth="@dimen/_1sdp">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:padding="@dimen/small_size">-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/medium_size">
+<!--            <com.google.android.material.card.MaterialCardView-->
+<!--                android:id="@+id/label_service"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:cardCornerRadius="@dimen/medium_size"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:strokeColor="@color/colorPrimary"-->
+<!--                app:strokeWidth="@dimen/_1sdp">-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/label_service_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/small_size"
-                        android:onClick="@{clickListener::onClick}"
-                        android:text="@string/services_title1"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/medium_size"
-                        app:fontFamily="@font/gotham_black"
-                        app:layout_constraintEnd_toStartOf="@id/label_service_icon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/medium_size">-->
 
-                    <androidx.appcompat.widget.AppCompatToggleButton
-                        android:id="@+id/label_service_icon"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:background="@drawable/toggle_selector"
-                        android:includeFontPadding="false"
-                        android:onClick="@{clickListener::onClick}"
-                        android:textOff=""
-                        android:textOn=""
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/label_service_title"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="@dimen/small_size"-->
+<!--                        android:onClick="@{clickListener::onClick}"-->
+<!--                        android:text="@string/services_title1"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="@dimen/medium_size"-->
+<!--                        app:fontFamily="@font/gotham_black"-->
+<!--                        app:layout_constraintEnd_toStartOf="@id/label_service_icon"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/label_service_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/regular_size"
-                        android:text="@string/services_description1"
-                        android:textColor="@color/greyText_color"
-                        android:textSize="@dimen/medium_size"
-                        android:visibility="gone"
-                        app:fontFamily="@font/gotham_bold"
-                        app:layout_constraintTop_toBottomOf="@id/label_service_title" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    <androidx.appcompat.widget.AppCompatToggleButton-->
+<!--                        android:id="@+id/label_service_icon"-->
+<!--                        android:layout_width="@dimen/_30sdp"-->
+<!--                        android:layout_height="@dimen/_30sdp"-->
+<!--                        android:background="@drawable/toggle_selector"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:onClick="@{clickListener::onClick}"-->
+<!--                        android:textOff=""-->
+<!--                        android:textOn=""-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-            </com.google.android.material.card.MaterialCardView>
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/label_service_description"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/regular_size"-->
+<!--                        android:text="@string/services_description1"-->
+<!--                        android:textColor="@color/greyText_color"-->
+<!--                        android:textSize="@dimen/medium_size"-->
+<!--                        android:visibility="gone"-->
+<!--                        app:fontFamily="@font/gotham_bold"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/label_service_title" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+<!--            </com.google.android.material.card.MaterialCardView>-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </androidx.core.widget.NestedScrollView>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
