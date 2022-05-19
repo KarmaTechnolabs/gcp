@@ -82,7 +82,7 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
         viewModel.orderDetailsResponse.observe(this) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(
-                    response, isShowProgress = false,
+                    response, isShowProgress = true,
                     successListener = object : (OrdersDetailsResponse, String) -> Unit {
                         override fun invoke(it: OrdersDetailsResponse, message: String) {
 //                            showToast(message)

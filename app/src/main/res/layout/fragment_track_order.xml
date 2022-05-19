@@ -102,7 +102,7 @@
                     android:imeOptions="actionDone"
                     android:inputType="number"
                     android:maxLength="@integer/max_track_order_length"
-                    android:text="66491651690168"
+                    android:text=""
                     tools:text="12345678" />
             </com.google.android.material.textfield.TextInputLayout>
 

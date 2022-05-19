@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.app.gcp.BuildConfig
 import com.app.gcp.R
 import com.app.gcp.api.requestmodel.LoginRequestModel
 import com.app.gcp.base.BaseFragment
@@ -41,6 +41,10 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+        if (BuildConfig.IS_DEBUG) {
+            binding.tieEmail.setText("admin@gmail.com")
+            binding.tiePassword.setText("admin@gmail.com")
+        }
 
         onBoardViewModel.loginResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.app.gcp.BuildConfig
 import com.app.gcp.R
 import com.app.gcp.api.requestmodel.ChangePasswordRequestModel
 import com.app.gcp.api.responsemodel.LoginResponse
@@ -40,6 +41,10 @@ class ChangePasswordFragment : BaseFragment(), View.OnClickListener {
 
         binding.lifecycleOwner = this
         binding.clickListener = this
+        if (BuildConfig.IS_DEBUG) {
+            binding.tieNewPassword.setText("admin@gmail.com")
+            binding.tieConfirmPassword.setText("admin@gmail.com")
+        }
 
         viewModel.changePasswordResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->

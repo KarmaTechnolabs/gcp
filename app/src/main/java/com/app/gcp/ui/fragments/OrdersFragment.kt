@@ -61,7 +61,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         dashboardViewModel.orderListResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(
-                    response, isShowProgress = false,
+                    response, isShowProgress = true,
                     successListener = object : (List<OrdersResponse>, String) -> Unit {
                         override fun invoke(it: List<OrdersResponse>, message: String) {
 //                            showToast(message)
@@ -250,8 +250,8 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
                 ignoreCase = true
             ) || dashboardViewModel.selectedOrderStagesFilter.isEmpty()
         } as ArrayList<OrdersResponse?>)
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            checkNoData()
-//        }, 100)
+        Handler(Looper.getMainLooper()).postDelayed({
+            checkNoData()
+        }, 100)
     }
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.app.gcp.BuildConfig
 import com.app.gcp.R
 import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
 import com.app.gcp.api.responsemodel.TrackOrderResponse
@@ -49,11 +50,14 @@ class TrackOrderFragment : BaseFragment(), View.OnClickListener,
         binding.clickListener = this
 
         binding.isBack = args.isBack
+        if (BuildConfig.IS_DEBUG) {
+            binding.tieTrackingNumber.setText("66491651690168")
+        }
 
         onBoardViewModel.trackingOrderResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(
-                    response, isShowProgress = false,
+                    response, isShowProgress = true,
                     successListener = object : (TrackOrderResponse, String) -> Unit {
                         override fun invoke(it: TrackOrderResponse, message: String) {
 //                            showToast(message)
