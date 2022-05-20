@@ -17,7 +17,7 @@ class CustomerDetailViewModel : ViewModel() {
     private var repository: CustomerDetailsRepository = CustomerDetailsRepository.getInstance()
     private val customerDetailRequestLiveData = MutableLiveData<CustomerDetailsRequestModel>()
     val customerDetailResponseLiveData = MutableLiveData<CustomerDetailsResponse.Client>()
-    val customerResponse = MutableLiveData<CustomersResponse>()
+    val customerId = MutableLiveData<String>()
 
     val customerDetailsResponse: LiveData<Event<APIResource<CustomerDetailsResponse>>> =
         customerDetailRequestLiveData.switchMap {

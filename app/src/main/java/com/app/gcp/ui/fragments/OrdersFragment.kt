@@ -19,6 +19,7 @@ import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.gotoActivity
 import com.app.gcp.databinding.FragmentOrdersBinding
 import com.app.gcp.listeners.ItemClickListener
+import com.app.gcp.ui.activities.CustomerDetailActivity
 import com.app.gcp.ui.activities.OrderDetailActivity
 import com.app.gcp.ui.dialogs.OrderStatusFilterBottomSheet
 import com.app.gcp.utils.Constants
@@ -212,6 +213,13 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
                 requireActivity().gotoActivity(
                     OrderDetailActivity::class.java,
                     bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model),
+                    needToFinish = false
+                )
+            }
+            R.id.tv_name -> {
+                requireActivity().gotoActivity(
+                    CustomerDetailActivity::class.java,
+                    bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model.clientId),
                     needToFinish = false
                 )
             }

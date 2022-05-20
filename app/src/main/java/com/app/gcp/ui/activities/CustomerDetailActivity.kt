@@ -3,21 +3,29 @@ package com.app.gcp.ui.activities
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import com.app.gcp.R
+import com.app.gcp.adapter.OrdersAdapter
 import com.app.gcp.api.requestmodel.CustomerDetailsRequestModel
 import com.app.gcp.api.responsemodel.CustomerDetailsResponse
 import com.app.gcp.api.responsemodel.CustomersResponse
+import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.base.BaseActivity
+import com.app.gcp.custom.gotoActivity
 import com.app.gcp.databinding.ActivityCustomerDetailBinding
+import com.app.gcp.listeners.ItemClickListener
 import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.CustomerDetailViewModel
 
-class CustomerDetailActivity : BaseActivity(), View.OnClickListener {
+class CustomerDetailActivity : BaseActivity(), View.OnClickListener,
+    ItemClickListener<OrdersResponse> {
 
     private lateinit var binding: ActivityCustomerDetailBinding
     val viewModel: CustomerDetailViewModel by viewModels()
+    private val orderListArray = mutableListOf<OrdersResponse>()
+    private var orderListAdapter: OrdersAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +43,14 @@ class CustomerDetailActivity : BaseActivity(), View.OnClickListener {
         binding.toolbarOrderStatus.tvTitle.text = getString(R.string.customer_detail)
 
         if (intent.extras != null && intent.hasExtra(Constants.EXTRA_CUSTOMER)) {
-            viewModel.customerResponse.value =
-                intent?.getParcelableExtra<CustomersResponse>(Constants.EXTRA_CUSTOMER)
+            viewModel.customerId.value =
+                intent?.getStringExtra(Constants.EXTRA_CUSTOMER)
             callOrderDetailApi()
         }
+
+        orderListAdapter = OrdersAdapter(this)
+        orderListAdapter?.setClickListener(this)
+        binding.rvSearchOrder.adapter = orderListAdapter
 
         viewModel.customerDetailsResponse.observe(this) { event ->
             event.getContentIfNotHandled()?.let { response ->
@@ -48,7 +60,9 @@ class CustomerDetailActivity : BaseActivity(), View.OnClickListener {
                         override fun invoke(it: CustomerDetailsResponse, message: String) {
 //                            showToast(message)
                             viewModel.customerDetailResponseLiveData.value = it.client
-
+                            orderListArray.clear()
+                            it.orders?.let { it1 -> orderListArray.addAll(it1) }
+                            orderListAdapter?.setItems(orderListArray as ArrayList<OrdersResponse?>)
                             binding.tvNoData.visibility = View.GONE
                         }
                     },
@@ -66,7 +80,7 @@ class CustomerDetailActivity : BaseActivity(), View.OnClickListener {
         viewModel.callCustomerDetailAPI(
             CustomerDetailsRequestModel(
                 user_type = UserStateManager.getUserProfile()?.user_type.toString(),
-                clientId = viewModel.customerResponse.value?.id,
+                clientId = viewModel.customerId.value,
                 token =
                 UserStateManager.getBearerToken()
             )
@@ -77,6 +91,25 @@ class CustomerDetailActivity : BaseActivity(), View.OnClickListener {
         when (view) {
             binding.toolbarOrderStatus.ivBack -> onBackPressed()
 
+        }
+    }
+
+    override fun onItemClick(viewIdRes: Int, model: OrdersResponse, position: Int) {
+        when (viewIdRes) {
+            R.id.mcv_main -> {
+                gotoActivity(
+                    OrderDetailActivity::class.java,
+                    bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model),
+                    needToFinish = false
+                )
+            }
+//            R.id.tv_order_status -> {
+//                requireActivity().gotoActivity(
+//                    OrderStatusUpdateActivity::class.java,
+//                    bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model),
+//                    needToFinish = false
+//                )
+//            }
         }
     }
 }

@@ -130,7 +130,7 @@ class CustomersFragment : BaseFragment(),
             R.id.mcv_main -> {
                 requireActivity().gotoActivity(
                     CustomerDetailActivity::class.java,
-                    bundle = bundleOf(Constants.EXTRA_CUSTOMER to model),
+                    bundle = bundleOf(Constants.EXTRA_CUSTOMER to model.id),
                     needToFinish = false
                 )
             }

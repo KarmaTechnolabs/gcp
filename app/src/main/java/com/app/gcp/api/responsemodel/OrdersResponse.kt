@@ -58,5 +58,4 @@ public data class OrdersResponse(
     @SerializedName("order_stage_title")
     val orderStageTitle: String?=""
 
-
 ) : Parcelable

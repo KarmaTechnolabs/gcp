@@ -25,7 +25,7 @@
 
     <!-- forgot password screen -->
     <string name="forgot_password_label">Forgot your password</string>
-    <string name="enter_registered_email_to_receive_link">Enter enter your registered email below to receive your password reset link.</string>
+    <string name="enter_registered_email_to_receive_link">Enter your registered email below to receive your password reset link.</string>
     <string name="enter_registered_phone_number_for_otp">Enter your phone number below to receive your OTP.</string>
     <string name="request_reset_link">Request reset link</string>
     <string name="back_to_login">Back to login</string>
@@ -281,5 +281,8 @@ support period. One time migration of the web version of GCP software to another
     <string name="stage_name">Stage Name</string>
     <string name="notes">Notes</string>
     <string name="updated_at">Updated at</string>
-    <string name="company_name">Company Name</string>
+    <string name="company_name">Company Name:</string>
+    <string name="company_type">Company Type:</string>
+    <string name="customer_info">Customer info</string>
+
 </resources>

@@ -46,11 +46,23 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
-                    android:text="@string/company_name"
+                    android:text="@string/customer_info"
                     app:fontFamily="@font/gotham_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="company_name" />
+                    tools:text="@string/customer_info" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_customer_company"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_black"
+                    android:text="@{@string/company_name+model.customerDetailResponseLiveData.companyName}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_detail"
+                    tools:text="@string/company_name" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_customer_name"
@@ -61,7 +73,7 @@
                     android:fontFamily="@font/gotham_black"
                     android:text="@{`Name: `+model.customerDetailResponseLiveData.firstName+` `+model.customerDetailResponseLiveData.lastName}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_customer_detail"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_company"
                     tools:text="name" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -89,6 +101,18 @@
                     tools:text="Email" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_customer_company_type"
+                    style="@style/TextViewPrimaryStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/regular_size"
+                    android:fontFamily="@font/gotham_black"
+                    android:text="@{@string/company_type+model.customerDetailResponseLiveData.groupIds}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_email"
+                    tools:text="@string/company_type" />
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_customer_contact"
                     style="@style/TextViewPrimaryStyle"
                     android:layout_width="0dp"
@@ -97,7 +121,7 @@
                     android:fontFamily="@font/gotham_black"
                     android:text="@{`Contact: `+model.customerDetailResponseLiveData.phone}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_customer_email"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_company_type"
                     tools:text="Contact" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -113,6 +137,25 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_contact"
                     tools:text="GST" />
 
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/medium_size"
+                    android:background="@color/colorGray"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_gst" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_search_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                    app:layout_constraintTop_toBottomOf="@id/divider"
+                    tools:itemCount="8"
+                    tools:listitem="@layout/item_list_orders" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
