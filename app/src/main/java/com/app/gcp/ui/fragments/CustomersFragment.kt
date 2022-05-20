@@ -13,7 +13,7 @@ import androidx.lifecycle.observe
 import com.app.gcp.R
 import com.app.gcp.adapter.CustomerAdapter
 import com.app.gcp.api.requestmodel.OrderListRequestModel
-import com.app.gcp.api.responsemodel.OrdersResponse
+import com.app.gcp.api.responsemodel.CustomersResponse
 import com.app.gcp.base.BaseFragment
 import com.app.gcp.custom.gotoActivity
 import com.app.gcp.databinding.FragmentCustomersBinding
@@ -24,10 +24,10 @@ import com.app.gcp.utils.UserStateManager
 import com.app.gcp.viewmodel.DashBoardViewModel
 
 class CustomersFragment : BaseFragment(),
-    ItemClickListener<OrdersResponse> {
+    ItemClickListener<CustomersResponse> {
 
     private var _binding: FragmentCustomersBinding? = null
-    private val customerListArray = mutableListOf<OrdersResponse>()
+    private val customerListArray = mutableListOf<CustomersResponse>()
     private var customerListAdapter: CustomerAdapter? = null
     private val dashboardViewModel by activityViewModels<DashBoardViewModel>()
 
@@ -51,20 +51,20 @@ class CustomersFragment : BaseFragment(),
         binding.lifecycleOwner = this
 
         binding.swipeRefresh.setOnRefreshListener {
-            callOrderListApi()
+            callCustomerListApi()
             binding.swipeRefresh.isRefreshing = true
         }
 
-        dashboardViewModel.orderListResponse.observe(viewLifecycleOwner) { event ->
+        dashboardViewModel.customerListResponse.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(
                     response, isShowProgress = true,
-                    successListener = object : (List<OrdersResponse>, String) -> Unit {
-                        override fun invoke(it: List<OrdersResponse>, message: String) {
+                    successListener = object : (List<CustomersResponse>, String) -> Unit {
+                        override fun invoke(it: List<CustomersResponse>, message: String) {
 //                            showToast(message)
                             customerListArray.clear()
                             customerListArray.addAll(it)
-                            customerListAdapter?.setItems(customerListArray as ArrayList<OrdersResponse?>)
+                            customerListAdapter?.setItems(customerListArray as ArrayList<CustomersResponse?>)
                             Handler(Looper.getMainLooper()).postDelayed({
                                 checkNoData()
                             }, 100)
@@ -86,9 +86,9 @@ class CustomersFragment : BaseFragment(),
         customerListAdapter?.setClickListener(this)
         binding.rvSearchOrder.adapter = customerListAdapter
 
-        callOrderListApi()
+        callCustomerListApi()
 
-        binding.svSearchOrder.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.svSearchCustomer.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 customerListAdapter?.filter?.filter(query)
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -108,8 +108,8 @@ class CustomersFragment : BaseFragment(),
 
     }
 
-    private fun callOrderListApi() {
-        dashboardViewModel.callOrderListAPI(
+    private fun callCustomerListApi() {
+        dashboardViewModel.callCustomerListAPI(
             OrderListRequestModel(
                 user_type = UserStateManager.getUserProfile()?.user_type.toString(),
                 token = UserStateManager.getBearerToken()
@@ -125,12 +125,12 @@ class CustomersFragment : BaseFragment(),
         }
     }
 
-    override fun onItemClick(viewIdRes: Int, model: OrdersResponse, position: Int) {
+    override fun onItemClick(viewIdRes: Int, model: CustomersResponse, position: Int) {
         when (viewIdRes) {
             R.id.mcv_main -> {
                 requireActivity().gotoActivity(
                     CustomerDetailActivity::class.java,
-                    bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model),
+                    bundle = bundleOf(Constants.EXTRA_CUSTOMER to model),
                     needToFinish = false
                 )
             }

@@ -7,10 +7,7 @@ import androidx.lifecycle.switchMap
 import com.app.gcp.api.requestmodel.ChangePasswordRequestModel
 import com.app.gcp.api.requestmodel.OrderListRequestModel
 import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
-import com.app.gcp.api.responsemodel.EmptyResponse
-import com.app.gcp.api.responsemodel.LoginResponse
-import com.app.gcp.api.responsemodel.OrderStatusResponse
-import com.app.gcp.api.responsemodel.OrdersResponse
+import com.app.gcp.api.responsemodel.*
 import com.app.gcp.base.APIResource
 import com.app.gcp.custom.Event
 import com.app.gcp.repository.ChangePasswordRepository
@@ -20,6 +17,7 @@ class DashBoardViewModel : ViewModel() {
 
     private var repository: DashBoardRepository = DashBoardRepository.getInstance()
     private val orderListRequestLiveData = MutableLiveData<OrderListRequestModel>()
+    private val customerListRequestLiveData = MutableLiveData<OrderListRequestModel>()
     private val orderStatusRequestLiveData = MutableLiveData<TrackingOrderRequestModel>()
     private val changePasswordRequestLiveData = MutableLiveData<ChangePasswordRequestModel>()
 
@@ -31,6 +29,11 @@ class DashBoardViewModel : ViewModel() {
     val orderListResponse: LiveData<Event<APIResource<List<OrdersResponse>>>> =
         orderListRequestLiveData.switchMap {
             repository.callOrderListAPI(it)
+        }
+
+    val customerListResponse: LiveData<Event<APIResource<List<CustomersResponse>>>> =
+        customerListRequestLiveData.switchMap {
+            repository.callCustomerListAPI(it)
         }
 
     val orderStatusListResponse: LiveData<Event<APIResource<List<OrderStatusResponse>>>> =
@@ -45,6 +48,10 @@ class DashBoardViewModel : ViewModel() {
     //    val callLogoutAPI: LiveData<Event<APIResource<Any>>> = repository.callLogoutAPI()
     fun callOrderListAPI(request: OrderListRequestModel) {
         orderListRequestLiveData.value = request
+    }
+
+    fun callCustomerListAPI(request: OrderListRequestModel) {
+        customerListRequestLiveData.value = request
     }
 
     fun callOrderStatusAPI(request: TrackingOrderRequestModel) {

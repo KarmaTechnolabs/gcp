@@ -9,7 +9,7 @@
 
         <variable
             name="model"
-            type="com.app.gcp.viewmodel.OrderDetailViewModel" />
+            type="com.app.gcp.viewmodel.CustomerDetailViewModel" />
 
         <variable
             name="clickListener"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="@{`Name: `+model.orderDetailResponseLiveData.details.firstName}"
+                    android:text="@{`Name: `+model.customerDetailResponseLiveData.firstName+` `+model.customerDetailResponseLiveData.lastName}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_detail"
                     tools:text="name" />
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="@{`Address: `+model.orderDetailResponseLiveData.details.address}"
+                    android:text="@{`Address: `+model.customerDetailResponseLiveData.address}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_name"
                     tools:text="Address" />
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="@{`Email: `+model.orderDetailResponseLiveData.details.email}"
+                    android:text="@{`Email: `+model.customerDetailResponseLiveData.email}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_address"
                     tools:text="Email" />
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="@{`Contact: `+model.orderDetailResponseLiveData.details.phone}"
+                    android:text="@{`Contact: `+model.customerDetailResponseLiveData.phone}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_email"
                     tools:text="Contact" />
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
-                    android:text="@{`GST: `+model.orderDetailResponseLiveData.details.discountAmount}"
+                    android:text="@{`GST: `+model.customerDetailResponseLiveData.gstNumber}"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_contact"

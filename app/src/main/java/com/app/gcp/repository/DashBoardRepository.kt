@@ -5,24 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.app.gcp.api.APIConstants
 import com.app.gcp.api.ApiHelperClass
-import com.app.gcp.api.requestmodel.ChangePasswordRequestModel
-import com.app.gcp.api.requestmodel.LoginRequestModel
 import com.app.gcp.api.requestmodel.OrderListRequestModel
-import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
-import com.app.gcp.api.responsemodel.LoginResponse
+import com.app.gcp.api.responsemodel.CustomersResponse
 import com.app.gcp.api.responsemodel.OrderStatusResponse
 import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.base.APIResource
-import com.app.gcp.base.BaseRequestModel
 import com.app.gcp.custom.Event
-import com.app.gcp.model.StateModel
 import com.app.gcp.utils.Utils
 import com.google.gson.reflect.TypeToken
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import java.util.ArrayList
 
 class DashBoardRepository private constructor() {
 
@@ -81,10 +75,52 @@ class DashBoardRepository private constructor() {
                     }
 
                     if (responseModel.status == APIConstants.SUCCESS) {
-                        val typeOfObjectsList = object : TypeToken<ArrayList<OrdersResponse>>() {}.type
+                        val typeOfObjectsList =
+                            object : TypeToken<ArrayList<OrdersResponse>>() {}.type
                         val orderResponse =
                             responseModel.getResponseModel(typeOfObjectsList)
-                        data.value = Event(APIResource.success(orderResponse, responseModel.message))
+                        data.value =
+                            Event(APIResource.success(orderResponse, responseModel.message))
+                    } else {
+                        responseModel.message?.let {
+                            data.value = Event(APIResource.error(it, null))
+                        }
+                    }
+                }, { e ->
+                    Timber.e(e)
+                    data.postValue(Event(APIResource.error(e.localizedMessage ?: "", null)))
+                })
+            compositeDisposable.add(disposable)
+        } else {
+            data.value = Event(APIResource.noNetwork())
+        }
+        return data
+    }
+
+    fun callCustomerListAPI(requestModel: OrderListRequestModel): LiveData<Event<APIResource<List<CustomersResponse>>>> {
+        val data = MutableLiveData<Event<APIResource<List<CustomersResponse>>>>()
+        data.value = Event(APIResource.loading(null))
+
+//        val baseLoginRequestModel = BaseRequestModel(requestModel)
+
+        if (Utils.isNetworkAvailable()) {
+            val disposable = ApiHelperClass.getAPIClient().callCustomerListAPI(requestModel)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ responseModel ->
+
+                    if (responseModel == null) {
+                        data.value = Event(APIResource.error("", null))
+                        return@subscribe
+                    }
+
+                    if (responseModel.status == APIConstants.SUCCESS) {
+                        val typeOfObjectsList =
+                            object : TypeToken<ArrayList<CustomersResponse>>() {}.type
+                        val orderResponse =
+                            responseModel.getResponseModel(typeOfObjectsList)
+                        data.value =
+                            Event(APIResource.success(orderResponse, responseModel.message))
                     } else {
                         responseModel.message?.let {
                             data.value = Event(APIResource.error(it, null))
@@ -118,10 +154,12 @@ class DashBoardRepository private constructor() {
                     }
 
                     if (responseModel.status == APIConstants.SUCCESS) {
-                        val typeOfObjectsList = object : TypeToken<ArrayList<OrderStatusResponse>>() {}.type
+                        val typeOfObjectsList =
+                            object : TypeToken<ArrayList<OrderStatusResponse>>() {}.type
                         val orderResponse =
                             responseModel.getResponseModel(typeOfObjectsList)
-                        data.value = Event(APIResource.success(orderResponse, responseModel.message))
+                        data.value =
+                            Event(APIResource.success(orderResponse, responseModel.message))
                     } else {
                         responseModel.message?.let {
                             data.value = Event(APIResource.error(it, null))
@@ -155,10 +193,12 @@ class DashBoardRepository private constructor() {
                     }
 
                     if (responseModel.status == APIConstants.SUCCESS) {
-                        val typeOfObjectsList = object : TypeToken<ArrayList<OrderStatusResponse>>() {}.type
+                        val typeOfObjectsList =
+                            object : TypeToken<ArrayList<OrderStatusResponse>>() {}.type
                         val orderResponse =
                             responseModel.getResponseModel(typeOfObjectsList)
-                        data.value = Event(APIResource.success(orderResponse, responseModel.message))
+                        data.value =
+                            Event(APIResource.success(orderResponse, responseModel.message))
                     } else {
                         responseModel.message?.let {
                             data.value = Event(APIResource.error(it, null))

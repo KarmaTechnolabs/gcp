@@ -16,7 +16,7 @@ public data class OrdersDetailsResponse(
     @SerializedName("pdf")
     val pdf: String?,
     @SerializedName("orderStagesHistory")
-    val orderStagesHistory: List<OrderStagesHistory>?,
+    val orderStagesHistory: List<OrderStagesHistory>?
 
     ) : Parcelable {
     @Parcelize

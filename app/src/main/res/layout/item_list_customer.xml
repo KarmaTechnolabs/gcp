@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.app.gcp.api.responsemodel.OrdersResponse" />
+            type="com.app.gcp.api.responsemodel.CustomersResponse" />
 
         <variable
             name="position"
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gotham_black"
-                android:text="@{@string/name+model.orderId}"
+                android:text="@{@string/name+model.firstName+` `+model.lastName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/name" />
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_size"
                 android:fontFamily="@font/gotham_black"
-                android:text="@{model.orderDate}"
+                android:text="@{model.phone}"
                 app:layout_constraintEnd_toStartOf="@id/tv_email"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_customer_name"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_size"
                 android:fontFamily="@font/gotham_black"
-                android:text="@{model.companyName}"
+                android:text="@{model.email}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_customer_name"
                 tools:text="admin@gmail.com" />
@@ -84,7 +84,7 @@
                 android:layout_marginTop="@dimen/normal_size"
                 android:fontFamily="@font/gotham_bold"
                 android:textColor="@color/colorBlue"
-                android:text="@{@string/company+model.trackingNumber}"
+                android:text="@{@string/company+model.companyName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_email"
                 tools:text="@string/company" />

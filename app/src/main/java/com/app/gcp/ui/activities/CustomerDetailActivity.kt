@@ -4,24 +4,20 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.observe
 import com.app.gcp.R
-import com.app.gcp.adapter.OrderDetailAdditionalDetailsAdapter
-import com.app.gcp.adapter.OrderDetailProductAdapter
-import com.app.gcp.adapter.OrderDetailStageAdapter
-import com.app.gcp.api.requestmodel.OrderDetailsRequestModel
-import com.app.gcp.api.responsemodel.OrdersDetailsResponse
-import com.app.gcp.api.responsemodel.OrdersResponse
+import com.app.gcp.api.requestmodel.CustomerDetailsRequestModel
+import com.app.gcp.api.responsemodel.CustomerDetailsResponse
+import com.app.gcp.api.responsemodel.CustomersResponse
 import com.app.gcp.base.BaseActivity
 import com.app.gcp.databinding.ActivityCustomerDetailBinding
 import com.app.gcp.utils.Constants
 import com.app.gcp.utils.UserStateManager
-import com.app.gcp.viewmodel.OrderDetailViewModel
+import com.app.gcp.viewmodel.CustomerDetailViewModel
 
 class CustomerDetailActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityCustomerDetailBinding
-    val viewModel: OrderDetailViewModel by viewModels()
+    val viewModel: CustomerDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,20 +34,20 @@ class CustomerDetailActivity : BaseActivity(), View.OnClickListener {
         binding.toolbarOrderStatus.ivMedia.setOnClickListener(this)
         binding.toolbarOrderStatus.tvTitle.text = getString(R.string.customer_detail)
 
-        if (intent.extras != null && intent.hasExtra(Constants.EXTRA_ORDER_STATUS)) {
-            viewModel.orderStatusResponse.value =
-                intent?.getParcelableExtra<OrdersResponse>(Constants.EXTRA_ORDER_STATUS)
+        if (intent.extras != null && intent.hasExtra(Constants.EXTRA_CUSTOMER)) {
+            viewModel.customerResponse.value =
+                intent?.getParcelableExtra<CustomersResponse>(Constants.EXTRA_CUSTOMER)
             callOrderDetailApi()
         }
 
-        viewModel.orderDetailsResponse.observe(this) { event ->
+        viewModel.customerDetailsResponse.observe(this) { event ->
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(
                     response, isShowProgress = true,
-                    successListener = object : (OrdersDetailsResponse, String) -> Unit {
-                        override fun invoke(it: OrdersDetailsResponse, message: String) {
+                    successListener = object : (CustomerDetailsResponse, String) -> Unit {
+                        override fun invoke(it: CustomerDetailsResponse, message: String) {
 //                            showToast(message)
-                            viewModel.orderDetailResponseLiveData.value = it
+                            viewModel.customerDetailResponseLiveData.value = it.client
 
                             binding.tvNoData.visibility = View.GONE
                         }
@@ -67,10 +63,10 @@ class CustomerDetailActivity : BaseActivity(), View.OnClickListener {
 
 
     private fun callOrderDetailApi() {
-        viewModel.callOrderDetailAPI(
-            OrderDetailsRequestModel(
+        viewModel.callCustomerDetailAPI(
+            CustomerDetailsRequestModel(
                 user_type = UserStateManager.getUserProfile()?.user_type.toString(),
-                orderId = viewModel.orderStatusResponse.value?.orderId,
+                clientId = viewModel.customerResponse.value?.id,
                 token =
                 UserStateManager.getBearerToken()
             )

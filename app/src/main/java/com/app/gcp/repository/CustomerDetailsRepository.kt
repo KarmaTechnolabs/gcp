@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.app.gcp.api.APIConstants
 import com.app.gcp.api.ApiHelperClass
-import com.app.gcp.api.requestmodel.OrderDetailsRequestModel
-import com.app.gcp.api.requestmodel.OrderListRequestModel
-import com.app.gcp.api.requestmodel.OrderStatusUpdateRequestModel
-import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
+import com.app.gcp.api.requestmodel.*
 import com.app.gcp.api.responsemodel.*
 import com.app.gcp.base.APIResource
 import com.app.gcp.custom.Event
@@ -19,18 +16,18 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.util.ArrayList
 
-class OrderDetailsRepository private constructor() {
+class CustomerDetailsRepository private constructor() {
 
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    fun callOrderDetailsUpdateAPI(requestModel: OrderDetailsRequestModel): LiveData<Event<APIResource<OrdersDetailsResponse>>> {
-        val data = MutableLiveData<Event<APIResource<OrdersDetailsResponse>>>()
+    fun callCustomerDetailsUpdateAPI(requestModel: CustomerDetailsRequestModel): LiveData<Event<APIResource<CustomerDetailsResponse>>> {
+        val data = MutableLiveData<Event<APIResource<CustomerDetailsResponse>>>()
         data.value = Event(APIResource.loading(null))
 
 //        val baseLoginRequestModel = BaseRequestModel(requestModel)
 
         if (Utils.isNetworkAvailable()) {
-            val disposable = ApiHelperClass.getAPIClient().callOrderDetailsAPI(requestModel)
+            val disposable = ApiHelperClass.getAPIClient().callCustomerDetailsAPI(requestModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ responseModel ->
@@ -42,7 +39,7 @@ class OrderDetailsRepository private constructor() {
 
                     if (responseModel.status == APIConstants.SUCCESS) {
                         val response =
-                            responseModel.getResponseModel(OrdersDetailsResponse::class.java)
+                            responseModel.getResponseModel(CustomerDetailsResponse::class.java)
                         data.value =
                             Event(APIResource.success(response, responseModel.message))
                     } else {
@@ -67,12 +64,12 @@ class OrderDetailsRepository private constructor() {
 
     companion object {
         @Volatile
-        private var instance: OrderDetailsRepository? = null
+        private var instance: CustomerDetailsRepository? = null
 
         fun getInstance() =
             instance ?: synchronized(this) {
                 instance
-                    ?: OrderDetailsRepository().also { instance = it }
+                    ?: CustomerDetailsRepository().also { instance = it }
             }
     }
 }

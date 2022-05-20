@@ -9,18 +9,17 @@ import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.gcp.R
-import com.app.gcp.api.responsemodel.OrdersResponse
+import com.app.gcp.api.responsemodel.CustomersResponse
 import com.app.gcp.databinding.ItemListCustomerBinding
-import com.app.gcp.databinding.ItemListOrdersBinding
 import com.app.gcp.listeners.ItemClickListener
 import java.util.*
 
 class CustomerAdapter(context: Context?) :
-    BaseAdapter<OrdersResponse?, CustomerAdapter.ViewHolder?>(context),
+    BaseAdapter<CustomersResponse?, CustomerAdapter.ViewHolder?>(context),
     Filterable {
-    var filteredOrderList = ArrayList<OrdersResponse?>()
-    var originalData = ArrayList<OrdersResponse?>()
-    private var clickListener: ItemClickListener<OrdersResponse>? = null
+    var filteredCustomerList = ArrayList<CustomersResponse?>()
+    var originalData = ArrayList<CustomersResponse?>()
+    private var clickListener: ItemClickListener<CustomersResponse>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemListCustomerBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context), R.layout.item_list_customer, parent, false
@@ -43,7 +42,7 @@ class CustomerAdapter(context: Context?) :
                     results.values = originalData
                     results.count = originalData.size
                 } else {
-                    val filterData: MutableList<OrdersResponse?> = ArrayList()
+                    val filterData: MutableList<CustomersResponse?> = ArrayList()
                     for (model in list) {
                         if (model?.companyName?.lowercase(Locale.getDefault())
                                 ?.contains(charSequence)!!
@@ -58,24 +57,24 @@ class CustomerAdapter(context: Context?) :
             }
 
             override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
-                filteredOrderList = filterResults.values as ArrayList<OrdersResponse?>
+                filteredCustomerList = filterResults.values as ArrayList<CustomersResponse?>
                 notifyDataSetChanged()
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return filteredOrderList.size
+        return filteredCustomerList.size
     }
 
-    override fun getListItem(position: Int): OrdersResponse {
-        return filteredOrderList[position]!!
+    override fun getListItem(position: Int): CustomersResponse {
+        return filteredCustomerList[position]!!
     }
 
     inner class ViewHolder(binding: ItemListCustomerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         var binding: ItemListCustomerBinding = binding
-        fun setBinding(model: OrdersResponse?) {
+        fun setBinding(model: CustomersResponse?) {
             binding.model = model
             binding.clickListener = clickListener
             binding.position = absoluteAdapterPosition
@@ -85,7 +84,7 @@ class CustomerAdapter(context: Context?) :
         init {
             binding.root.setOnClickListener(View.OnClickListener { view ->
                 if (onItemClickListener != null) {
-                    val model: OrdersResponse = getListItem(bindingAdapterPosition)
+                    val model: CustomersResponse = getListItem(bindingAdapterPosition)
                     val selectedPos = bindingAdapterPosition
                     notifyDataSetChanged()
                     onItemClickListener.onItemClick(view, model, selectedPos)
@@ -95,11 +94,11 @@ class CustomerAdapter(context: Context?) :
     }
 
     init {
-        filteredOrderList = list
+        filteredCustomerList = list
         originalData = list
     }
 
-    fun setClickListener(clickListener: ItemClickListener<OrdersResponse>) {
+    fun setClickListener(clickListener: ItemClickListener<CustomersResponse>) {
         this.clickListener = clickListener
     }
 }
