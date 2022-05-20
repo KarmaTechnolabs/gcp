@@ -219,7 +219,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
             R.id.tv_name -> {
                 requireActivity().gotoActivity(
                     CustomerDetailActivity::class.java,
-                    bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model.clientId),
+                    bundle = bundleOf(Constants.EXTRA_CUSTOMER to model.clientId),
                     needToFinish = false
                 )
             }

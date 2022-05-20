@@ -84,7 +84,7 @@
                 android:layout_marginTop="@dimen/normal_size"
                 android:fontFamily="@font/gotham_bold"
                 android:textColor="@color/colorBlue"
-                android:text="@{@string/company+model.companyName}"
+                android:text="@{model.companyName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_email"
                 tools:text="@string/company" />
