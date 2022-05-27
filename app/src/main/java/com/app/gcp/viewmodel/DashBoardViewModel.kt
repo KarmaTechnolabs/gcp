@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.app.gcp.api.requestmodel.ChangePasswordRequestModel
 import com.app.gcp.api.requestmodel.OrderListRequestModel
+import com.app.gcp.api.requestmodel.OrderStatusRequestModel
 import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
 import com.app.gcp.api.responsemodel.*
 import com.app.gcp.base.APIResource
@@ -18,11 +19,11 @@ class DashBoardViewModel : ViewModel() {
     private var repository: DashBoardRepository = DashBoardRepository.getInstance()
     private val orderListRequestLiveData = MutableLiveData<OrderListRequestModel>()
     private val customerListRequestLiveData = MutableLiveData<OrderListRequestModel>()
-    private val orderStatusRequestLiveData = MutableLiveData<TrackingOrderRequestModel>()
+    private val orderStatusRequestLiveData = MutableLiveData<OrderStatusRequestModel>()
     private val changePasswordRequestLiveData = MutableLiveData<ChangePasswordRequestModel>()
 
-    var orderStagesArray = mutableListOf<OrderStatusResponse>()
-    var orderStatusArray = mutableListOf<OrderStatusResponse>()
+    var orderStagesArray = mutableListOf<OrderStatusResponse.OrderStatus>()
+    var orderStatusArray = mutableListOf<OrderStatusResponse.OrderStatus>()
     var selectedOrderStatusFilter : String = ""
     var selectedOrderStagesFilter : String = ""
 
@@ -36,12 +37,12 @@ class DashBoardViewModel : ViewModel() {
             repository.callCustomerListAPI(it)
         }
 
-    val orderStatusListResponse: LiveData<Event<APIResource<List<OrderStatusResponse>>>> =
+    val orderStatusListResponse: LiveData<Event<APIResource<OrderStatusResponse>>> =
         orderStatusRequestLiveData.switchMap {
-            repository.callOrderStatusAPI()
+            repository.callOrderStatusAPI(it)
         }
 
-    fun getOrderStagListAPI(): LiveData<Event<APIResource<List<OrderStatusResponse>>>> {
+    fun getOrderStagListAPI(): LiveData<Event<APIResource<List<OrderStatusResponse.OrderStatus>>>> {
         return repository.callOrderStageListAPI()
     }
 
@@ -54,11 +55,9 @@ class DashBoardViewModel : ViewModel() {
         customerListRequestLiveData.value = request
     }
 
-    fun callOrderStatusAPI(request: TrackingOrderRequestModel) {
+    fun callOrderStatusAPI(request: OrderStatusRequestModel) {
         orderStatusRequestLiveData.value = request
     }
-
-
 
     val changePasswordResponse: LiveData<Event<APIResource<EmptyResponse>>> =
         changePasswordRequestLiveData.switchMap {

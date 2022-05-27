@@ -15,7 +15,7 @@ class OrderStatusUpdateViewModel : ViewModel() {
 
     private var repository: OrderStatusRepository = OrderStatusRepository.getInstance()
 
-    var orderStatusArray = mutableListOf<OrderStatusResponse>()
+    var orderStatusArray = mutableListOf<OrderStatusResponse.OrderStatus>()
     val orderStatusResponse = MutableLiveData<OrdersResponse>()
 
     fun callOrderStatusUpdateAPI(request: OrderStatusUpdateRequestModel): LiveData<Event<APIResource<EmptyResponse>>> {

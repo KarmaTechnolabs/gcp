@@ -9,7 +9,6 @@ import com.app.gcp.R
 import com.app.gcp.adapter.OrdersAdapter
 import com.app.gcp.api.requestmodel.CustomerDetailsRequestModel
 import com.app.gcp.api.responsemodel.CustomerDetailsResponse
-import com.app.gcp.api.responsemodel.CustomersResponse
 import com.app.gcp.api.responsemodel.OrdersResponse
 import com.app.gcp.base.BaseActivity
 import com.app.gcp.custom.gotoActivity
@@ -97,11 +96,20 @@ class CustomerDetailActivity : BaseActivity(), View.OnClickListener,
     override fun onItemClick(viewIdRes: Int, model: OrdersResponse, position: Int) {
         when (viewIdRes) {
             R.id.mcv_main -> {
-                gotoActivity(
-                    OrderDetailActivity::class.java,
-                    bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model),
-                    needToFinish = false
-                )
+                if ((UserStateManager.getUserProfile()?.user_type.equals(
+                        "admin",
+                        ignoreCase = true
+                    ) && UserStateManager.getUserProfile()?.permissions?.order.equals(
+                        "all",
+                        ignoreCase = true
+                    ))
+                ) {
+                    gotoActivity(
+                        OrderDetailActivity::class.java,
+                        bundle = bundleOf(Constants.EXTRA_ORDER_STATUS to model),
+                        needToFinish = false
+                    )
+                }
             }
 //            R.id.tv_order_status -> {
 //                requireActivity().gotoActivity(

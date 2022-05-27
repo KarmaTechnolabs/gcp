@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.app.gcp.api.responsemodel.OrderStatusResponse" />
+            type="com.app.gcp.api.responsemodel.OrderStatusResponse.OrderStatus" />
 
         <variable
             name="position"

@@ -14,17 +14,17 @@ import com.app.gcp.listeners.ItemClickListener
 import com.app.gcp.utils.Constants
 
 class OrderStatusFilterBottomSheet : BaseBottomSheetFragment(), View.OnClickListener,
-    ItemClickListener<OrderStatusResponse> {
+    ItemClickListener<OrderStatusResponse.OrderStatus> {
 
     private lateinit var binding: OrderStatusFilterBottomSheetBinding
     private var listener: OrderStatusListener? = null
-    private val orderFilterListArray = mutableListOf<OrderStatusResponse>()
+    private val orderFilterListArray = mutableListOf<OrderStatusResponse.OrderStatus>()
     private var typeFilter: Int? = 0
     private var orderFilterAdapter: OrdersFilterAdapter? = null
 
     companion object {
         fun newInstance(
-            orderStatusList: ArrayList<OrderStatusResponse>,
+            orderStatusList: ArrayList<OrderStatusResponse.OrderStatus>,
             selectedOrderStatusFilter: String,
             selectedOrderStagesFilter: String,
             typeFilter: Int
@@ -66,9 +66,9 @@ class OrderStatusFilterBottomSheet : BaseBottomSheetFragment(), View.OnClickList
         orderFilterListArray.clear()
         if (arguments != null && requireArguments().containsKey(Constants.EXTRA_DATA)) {
 
-            arguments?.getParcelableArrayList<OrderStatusResponse>(Constants.EXTRA_DATA)
+            arguments?.getParcelableArrayList<OrderStatusResponse.OrderStatus>(Constants.EXTRA_DATA)
                 ?.let { orderFilterListArray.addAll(it) }
-            orderFilterAdapter?.setItems(orderFilterListArray as ArrayList<OrderStatusResponse?>)
+            orderFilterAdapter?.setItems(orderFilterListArray as ArrayList<OrderStatusResponse.OrderStatus?>)
             typeFilter = arguments?.getInt(Constants.EXTRA_FILTER_TYPE)
             if (typeFilter == 1) {
                 orderFilterAdapter?.setSelectedFilter(arguments?.getString(Constants.EXTRA_SELECTED_STATUS))
@@ -86,11 +86,11 @@ class OrderStatusFilterBottomSheet : BaseBottomSheetFragment(), View.OnClickList
 
     interface OrderStatusListener {
         fun onOrderStatusSelected(
-            orderStatus: OrderStatusResponse
+            orderStatus: OrderStatusResponse.OrderStatus
         )
 
         fun onOrderStagesSelected(
-            orderStatus: OrderStatusResponse
+            orderStatus: OrderStatusResponse.OrderStatus
         )
     }
 
@@ -106,7 +106,7 @@ class OrderStatusFilterBottomSheet : BaseBottomSheetFragment(), View.OnClickList
         }
     }
 
-    override fun onItemClick(viewIdRes: Int, model: OrderStatusResponse, position: Int) {
+    override fun onItemClick(viewIdRes: Int, model: OrderStatusResponse.OrderStatus, position: Int) {
         if (typeFilter == 1) {
             listener?.onOrderStatusSelected(model)
         } else if (typeFilter == 2) {

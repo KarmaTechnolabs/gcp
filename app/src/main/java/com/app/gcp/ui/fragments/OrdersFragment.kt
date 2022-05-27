@@ -165,7 +165,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         val orderStatusBottomSheet =
             dashboardViewModel.orderStatusArray.let {
                 OrderStatusFilterBottomSheet.newInstance(
-                    it as ArrayList<OrderStatusResponse>,
+                    it as ArrayList<OrderStatusResponse.OrderStatus>,
                     dashboardViewModel.selectedOrderStatusFilter,
                     dashboardViewModel.selectedOrderStagesFilter,
                     1
@@ -190,7 +190,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         val orderStagesBottomSheet =
             dashboardViewModel.orderStagesArray.let {
                 OrderStatusFilterBottomSheet.newInstance(
-                    it as ArrayList<OrderStatusResponse>,
+                    it as ArrayList<OrderStatusResponse.OrderStatus>,
                     dashboardViewModel.selectedOrderStatusFilter,
                     dashboardViewModel.selectedOrderStagesFilter,
                     2
@@ -217,11 +217,17 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
                 )
             }
             R.id.tv_name -> {
-                requireActivity().gotoActivity(
-                    CustomerDetailActivity::class.java,
-                    bundle = bundleOf(Constants.EXTRA_CUSTOMER to model.clientId),
-                    needToFinish = false
-                )
+                if (UserStateManager.getUserProfile()?.user_type.equals(
+                        "admin",
+                        ignoreCase = true
+                    ) && UserStateManager.getUserProfile()?.permissions?.client == 1
+                ) {
+                    requireActivity().gotoActivity(
+                        CustomerDetailActivity::class.java,
+                        bundle = bundleOf(Constants.EXTRA_CUSTOMER to model.clientId),
+                        needToFinish = false
+                    )
+                }
             }
 //            R.id.tv_order_status -> {
 //                requireActivity().gotoActivity(
@@ -239,7 +245,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
         _binding = null
     }
 
-    override fun onOrderStatusSelected(orderStatus: OrderStatusResponse) {
+    override fun onOrderStatusSelected(orderStatus: OrderStatusResponse.OrderStatus) {
         dashboardViewModel.selectedOrderStatusFilter = orderStatus.id.toString()
         orderListAdapter?.setItems(orderListArray.filter {
             it.statusId.equals(
@@ -253,7 +259,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
 //        callOrderListApi()
     }
 
-    override fun onOrderStagesSelected(orderStatus: OrderStatusResponse) {
+    override fun onOrderStagesSelected(orderStatus: OrderStatusResponse.OrderStatus) {
         dashboardViewModel.selectedOrderStagesFilter = orderStatus.id.toString()
         orderListAdapter?.setItems(orderListArray.filter {
             it.stageId.equals(

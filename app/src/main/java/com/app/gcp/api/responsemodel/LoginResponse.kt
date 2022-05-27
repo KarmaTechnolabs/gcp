@@ -86,6 +86,14 @@ data class LoginResponse(
     val zip: String,
     @SerializedName("is_password_change")
     var isPasswordChange: String,
+    @SerializedName("permissions")
+    val permissions: Permissions?
+) {
 
-)
-
+    data class Permissions(
+        @SerializedName("client")
+        val client: Int?,
+        @SerializedName("order")
+        val order: String?
+    )
+}

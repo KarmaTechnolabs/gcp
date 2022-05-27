@@ -26,7 +26,7 @@ interface ApiCallInterface {
     fun callCustomerListAPI(@Body requestBody: OrderListRequestModel): Single<BaseResponseModel<List<CustomersResponse>>>
 
     @POST(APIConstants.API_ORDER_STATUS)
-    fun callOrderStatusAPI(): Single<BaseResponseModel<List<OrderStatusResponse>>>
+    fun callOrderStatusAPI(@Body requestBody: OrderStatusRequestModel): Single<BaseResponseModel<OrderStatusResponse>>
 
     @POST(APIConstants.API_UPDATE_ORDER)
     fun callOrderStatusUpdateAPI(@Body requestBody: OrderStatusUpdateRequestModel): Single<EmptyResponse>
@@ -53,7 +53,7 @@ interface ApiCallInterface {
     fun getStateList(@Body requestBody: BaseRequestModel<StateRequestModel>): Single<BaseResponseModel<List<StateModel>>>
 
     @GET(APIConstants.API_ORDER_STAGES)
-    fun getStagesList(): Single<BaseResponseModel<List<OrderStatusResponse>>>
+    fun getStagesList(): Single<BaseResponseModel<List<OrderStatusResponse.OrderStatus>>>
 
     @Multipart
     @POST(APIConstants.API_UPDATE_PROFILE)

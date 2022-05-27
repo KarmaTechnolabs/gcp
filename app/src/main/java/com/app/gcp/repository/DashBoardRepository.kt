@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.app.gcp.api.APIConstants
 import com.app.gcp.api.ApiHelperClass
 import com.app.gcp.api.requestmodel.OrderListRequestModel
+import com.app.gcp.api.requestmodel.OrderStatusRequestModel
 import com.app.gcp.api.responsemodel.CustomersResponse
 import com.app.gcp.api.responsemodel.OrderStatusResponse
 import com.app.gcp.api.responsemodel.OrdersResponse
@@ -138,8 +139,8 @@ class DashBoardRepository private constructor() {
     }
 
     @SuppressLint("CheckResult")
-    fun callOrderStageListAPI(): LiveData<Event<APIResource<List<OrderStatusResponse>>>> {
-        val data = MutableLiveData<Event<APIResource<List<OrderStatusResponse>>>>()
+    fun callOrderStageListAPI(): LiveData<Event<APIResource<List<OrderStatusResponse.OrderStatus>>>> {
+        val data = MutableLiveData<Event<APIResource<List<OrderStatusResponse.OrderStatus>>>>()
         data.value = Event(APIResource.loading(null))
 
         if (Utils.isNetworkAvailable()) {
@@ -155,7 +156,7 @@ class DashBoardRepository private constructor() {
 
                     if (responseModel.status == APIConstants.SUCCESS) {
                         val typeOfObjectsList =
-                            object : TypeToken<ArrayList<OrderStatusResponse>>() {}.type
+                            object : TypeToken<ArrayList<OrderStatusResponse.OrderStatus>>() {}.type
                         val orderResponse =
                             responseModel.getResponseModel(typeOfObjectsList)
                         data.value =
@@ -175,14 +176,14 @@ class DashBoardRepository private constructor() {
         return data
     }
 
-    fun callOrderStatusAPI(): LiveData<Event<APIResource<List<OrderStatusResponse>>>> {
-        val data = MutableLiveData<Event<APIResource<List<OrderStatusResponse>>>>()
+    fun callOrderStatusAPI(requestModel: OrderStatusRequestModel): LiveData<Event<APIResource<OrderStatusResponse>>> {
+        val data = MutableLiveData<Event<APIResource<OrderStatusResponse>>>()
         data.value = Event(APIResource.loading(null))
 
 //        val baseLoginRequestModel = BaseRequestModel(requestModel)
 
         if (Utils.isNetworkAvailable()) {
-            val disposable = ApiHelperClass.getAPIClient().callOrderStatusAPI()
+            val disposable = ApiHelperClass.getAPIClient().callOrderStatusAPI(requestModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ responseModel ->
@@ -191,14 +192,10 @@ class DashBoardRepository private constructor() {
                         data.value = Event(APIResource.error("", null))
                         return@subscribe
                     }
-
                     if (responseModel.status == APIConstants.SUCCESS) {
-                        val typeOfObjectsList =
-                            object : TypeToken<ArrayList<OrderStatusResponse>>() {}.type
-                        val orderResponse =
-                            responseModel.getResponseModel(typeOfObjectsList)
-                        data.value =
-                            Event(APIResource.success(orderResponse, responseModel.message))
+                        val otpInt =
+                            responseModel.getResponseModel(OrderStatusResponse::class.java)
+                        data.value = Event(APIResource.success(otpInt, responseModel.message))
                     } else {
                         responseModel.message?.let {
                             data.value = Event(APIResource.error(it, null))

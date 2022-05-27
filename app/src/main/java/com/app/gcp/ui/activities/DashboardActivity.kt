@@ -14,7 +14,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.app.gcp.R
-import com.app.gcp.api.requestmodel.TrackingOrderRequestModel
+import com.app.gcp.api.requestmodel.OrderStatusRequestModel
 import com.app.gcp.api.responsemodel.OrderStatusResponse
 import com.app.gcp.base.BaseActivity
 import com.app.gcp.custom.hideKeyboard
@@ -46,12 +46,12 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
             event.getContentIfNotHandled()?.let { response ->
                 manageAPIResource(
                     response, isShowProgress = false,
-                    successListener = object : (List<OrderStatusResponse>, String) -> Unit {
-                        override fun invoke(it: List<OrderStatusResponse>, message: String) {
+                    successListener = object : (OrderStatusResponse, String) -> Unit {
+                        override fun invoke(it: OrderStatusResponse, message: String) {
 //                            showToast(message)
                             viewModel.orderStatusArray.clear()
                             viewModel.orderStatusArray.add(
-                                OrderStatusResponse(
+                                OrderStatusResponse.OrderStatus(
                                     id = "",
                                     color = "#000000",
                                     title = "All",
@@ -59,7 +59,12 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
                                     deleted = "0"
                                 )
                             )
-                            viewModel.orderStatusArray.addAll(it)
+                            it.orderStatus?.let { it1 -> viewModel.orderStatusArray.addAll(it1) }
+
+                            if (it.users?.isPermissionUpdated.equals("1")) {
+                                showToast("Your access writes are changed,need to login again.")
+                                UserStateManager.logout(this@DashboardActivity)
+                            }
                         }
                     },
                     failureListener = object : () -> Unit {
@@ -73,7 +78,11 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
 
     private fun callOrderStatusApi() {
         viewModel.callOrderStatusAPI(
-            TrackingOrderRequestModel(tracking_number = "")
+            OrderStatusRequestModel(
+                tracking_number = "",
+                user_type = UserStateManager.getUserProfile()?.user_type.toString(),
+                token = UserStateManager.getBearerToken()
+            )
         )
     }
 
@@ -83,7 +92,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
                 manageAPIResource(response) { it, _ ->
                     viewModel.orderStagesArray.clear()
                     viewModel.orderStagesArray.add(
-                        OrderStatusResponse(
+                        OrderStatusResponse.OrderStatus(
                             id = "",
                             color = "#000000",
                             title = "All",
@@ -95,7 +104,6 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
                 }
             }
         }
-
     }
 
     private fun initView() {
@@ -160,11 +168,43 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
 //            navController.graph = graph
                 navController.navigate(R.id.nav_change_password)
             }
-
-
+        }
+        if (UserStateManager.getUserProfile()?.user_type.equals(
+                "admin",
+                ignoreCase = true
+            ) && !UserStateManager.getUserProfile()?.permissions?.order.equals(
+                "all",
+                ignoreCase = true
+            )
+        ) {
+            navView.menu.findItem(R.id.nav_orders).isVisible = false
+            val navInflater = navController.navInflater
+            val graph = navInflater.inflate(R.navigation.dashboard_navigation)
+            graph.setStartDestination(R.id.nav_customers)
+            navController.graph = graph
+        }
+        if (UserStateManager.getUserProfile()?.user_type.equals(
+                "admin",
+                ignoreCase = true
+            ) && UserStateManager.getUserProfile()?.permissions?.client == 0
+        ) {
+            navView.menu.findItem(R.id.nav_customers).isVisible = false
         }
 
-//        }
+        if (UserStateManager.getUserProfile()?.user_type.equals(
+                "admin",
+                ignoreCase = true
+            ) && !UserStateManager.getUserProfile()?.permissions?.order.equals(
+                "all",
+                ignoreCase = true
+            ) && UserStateManager.getUserProfile()?.permissions?.client == 0
+        ) {
+            val navInflater = navController.navInflater
+            val graph = navInflater.inflate(R.navigation.dashboard_navigation)
+            graph.setStartDestination(R.id.nav_order_tracking)
+            navController.graph = graph
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -13,12 +13,12 @@ import com.app.gcp.api.responsemodel.OrderStatusResponse;
 
 import java.util.List;
 
-public class OrderStatusAdapter extends ArrayAdapter<OrderStatusResponse> {
+public class OrderStatusAdapter extends ArrayAdapter<OrderStatusResponse.OrderStatus> {
 
     private LayoutInflater flater;
     private Context context;
 
-    public OrderStatusAdapter(Activity context, int resouceId, int textviewId, List<OrderStatusResponse> list){
+    public OrderStatusAdapter(Activity context, int resouceId, int textviewId, List<OrderStatusResponse.OrderStatus> list){
         super(context,resouceId,textviewId, list);
         this.context = context;
         flater = context.getLayoutInflater();
@@ -37,7 +37,7 @@ public class OrderStatusAdapter extends ArrayAdapter<OrderStatusResponse> {
 
     private View rowview(View convertView , int position){
 
-        OrderStatusResponse rowItem = getItem(position);
+        OrderStatusResponse.OrderStatus rowItem = getItem(position);
 
         viewHolder holder ;
         View rowview = convertView;
