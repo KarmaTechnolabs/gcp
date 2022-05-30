@@ -14,6 +14,7 @@
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -110,8 +111,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_order_status"
                         tools:text="Tracking Id:789789" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+                
                 <View
                     android:id="@+id/view_title"
                     android:layout_width="match_parent"
@@ -126,6 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:text="@string/customer_details"
+                    android:visibility="@{model.isCustomer?View.VISIBLE:View.GONE,default=gone}"
                     app:fontFamily="@font/gotham_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view_title"
@@ -138,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
                     android:fontFamily="@font/gotham_black"
+                    android:visibility="@{model.isCustomer?View.VISIBLE:View.GONE,default=gone}"
                     android:text="@{`Name: `+model.orderDetailResponseLiveData.details.firstName}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_detail"
@@ -149,6 +151,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
+                    android:visibility="@{model.isCustomer?View.VISIBLE:View.GONE,default=gone}"
                     android:fontFamily="@font/gotham_black"
                     android:text="@{`Address: `+model.orderDetailResponseLiveData.details.address}"
                     app:layout_constraintStart_toStartOf="parent"
@@ -161,6 +164,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
+                    android:visibility="@{model.isCustomer?View.VISIBLE:View.GONE,default=gone}"
                     android:fontFamily="@font/gotham_black"
                     android:text="@{`Email: `+model.orderDetailResponseLiveData.details.email}"
                     app:layout_constraintStart_toStartOf="parent"
@@ -173,6 +177,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/regular_size"
+                    android:visibility="@{model.isCustomer?View.VISIBLE:View.GONE,default=gone}"
                     android:fontFamily="@font/gotham_black"
                     android:text="@{`Contact: `+model.orderDetailResponseLiveData.details.phone}"
                     app:layout_constraintStart_toStartOf="parent"
@@ -197,6 +202,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/normal_size"
+                    android:visibility="@{model.isCustomer?View.VISIBLE:View.GONE,default=gone}"
                     android:background="@color/colorGray"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_gst" />
 

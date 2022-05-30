@@ -20,6 +20,7 @@ class OrderDetailViewModel : ViewModel() {
     private val orderDetailRequestLiveData = MutableLiveData<OrderDetailsRequestModel>()
     val orderDetailResponseLiveData = MutableLiveData<OrdersDetailsResponse>()
     val orderStatusResponse = MutableLiveData<OrdersResponse>()
+    val isCustomer = MutableLiveData<Boolean>(true)
 
     val orderDetailsResponse: LiveData<Event<APIResource<OrdersDetailsResponse>>> =
         orderDetailRequestLiveData.switchMap {

@@ -78,6 +78,23 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
                 intent?.getParcelableExtra<OrdersResponse>(Constants.EXTRA_ORDER_STATUS)
             callOrderDetailApi()
         }
+//        viewModel.isCustomer.postValue(true)
+        if (UserStateManager.getUserProfile()?.user_type.equals(
+                "client",
+                ignoreCase = true
+            ) || (UserStateManager.getUserProfile()?.user_type.equals(
+                "admin",
+                ignoreCase = true
+            ) && !UserStateManager.getUserProfile()?.permissions?.client.equals(
+                "1",
+                ignoreCase = true
+            )
+                    )
+        ) {
+            viewModel.isCustomer.postValue(false)
+        } else {
+            viewModel.isCustomer.postValue(true)
+        }
 
         viewModel.orderDetailsResponse.observe(this) { event ->
             event.getContentIfNotHandled()?.let { response ->
