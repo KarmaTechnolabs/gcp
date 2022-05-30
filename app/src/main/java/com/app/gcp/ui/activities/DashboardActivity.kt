@@ -145,7 +145,10 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
         headerView.findViewById<AppCompatTextView>(R.id.tv_short_email).text =
             UserStateManager.getUserProfile()?.email
 
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_dashboard) as NavHostFragment?
 
+        navController = navHost!!.navController
 //        if (intent.extras != null && intent.hasExtra(Constants.EXTRA_DATA)) {
         if (UserStateManager.getUserProfile()?.user_type.equals(
                 "client",
@@ -158,10 +161,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
                     ignoreCase = true
                 )
             ) {
-                val navHost =
-                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_dashboard) as NavHostFragment?
 
-                navController = navHost!!.navController
 //            val navInflater = navController.navInflater
 //            val graph = navInflater.inflate(R.navigation.dashboard_navigation)
 //            graph.setStartDestination(R.id.nav_change_password)
@@ -186,7 +186,10 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
         if (UserStateManager.getUserProfile()?.user_type.equals(
                 "admin",
                 ignoreCase = true
-            ) && !UserStateManager.getUserProfile()?.permissions?.client.equals("1",ignoreCase = true)
+            ) && !UserStateManager.getUserProfile()?.permissions?.client.equals(
+                "1",
+                ignoreCase = true
+            )
         ) {
             navView.menu.findItem(R.id.nav_customers).isVisible = false
         }
@@ -197,7 +200,10 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
             ) && !UserStateManager.getUserProfile()?.permissions?.order.equals(
                 "all",
                 ignoreCase = true
-            ) && !UserStateManager.getUserProfile()?.permissions?.client.equals("1",ignoreCase = true)
+            ) && !UserStateManager.getUserProfile()?.permissions?.client.equals(
+                "1",
+                ignoreCase = true
+            )
         ) {
             val navInflater = navController.navInflater
             val graph = navInflater.inflate(R.navigation.dashboard_navigation)
