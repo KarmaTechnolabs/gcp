@@ -186,7 +186,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
         if (UserStateManager.getUserProfile()?.user_type.equals(
                 "admin",
                 ignoreCase = true
-            ) && UserStateManager.getUserProfile()?.permissions?.client == 0
+            ) && !UserStateManager.getUserProfile()?.permissions?.client.equals("1",ignoreCase = true)
         ) {
             navView.menu.findItem(R.id.nav_customers).isVisible = false
         }
@@ -197,7 +197,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener,
             ) && !UserStateManager.getUserProfile()?.permissions?.order.equals(
                 "all",
                 ignoreCase = true
-            ) && UserStateManager.getUserProfile()?.permissions?.client == 0
+            ) && !UserStateManager.getUserProfile()?.permissions?.client.equals("1",ignoreCase = true)
         ) {
             val navInflater = navController.navInflater
             val graph = navInflater.inflate(R.navigation.dashboard_navigation)

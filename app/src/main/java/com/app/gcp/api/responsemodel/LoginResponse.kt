@@ -92,7 +92,7 @@ data class LoginResponse(
 
     data class Permissions(
         @SerializedName("client")
-        val client: Int?,
+        val client: String?,
         @SerializedName("order")
         val order: String?
     )

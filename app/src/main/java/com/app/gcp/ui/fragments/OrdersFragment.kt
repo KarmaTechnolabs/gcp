@@ -220,7 +220,7 @@ class OrdersFragment : BaseFragment(), View.OnClickListener,
                 if (UserStateManager.getUserProfile()?.user_type.equals(
                         "admin",
                         ignoreCase = true
-                    ) && UserStateManager.getUserProfile()?.permissions?.client == 1
+                    ) && UserStateManager.getUserProfile()?.permissions?.client.equals("1",ignoreCase = true)
                 ) {
                     requireActivity().gotoActivity(
                         CustomerDetailActivity::class.java,
