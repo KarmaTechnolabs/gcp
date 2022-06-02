@@ -30,7 +30,7 @@ android {
         buildConfigField "String", "CONTACT_US", '"http://159.89.167.87/jeewanjyoti/contact-us"'
         buildConfigField "String", "ABOUT_US", '"http://159.89.167.87/jeewanjyoti/about-us"'
         buildConfigField "String", "OUT_TEAM", '"http://159.89.167.87/jeewanjyoti/our-team"'
-        buildConfigField "boolean", "IS_DEBUG", 'true'
+        buildConfigField "boolean", "IS_DEBUG", 'false'
 
         //facebook login keys
         resValue "string", "facebook_app_id", "418562175019271"

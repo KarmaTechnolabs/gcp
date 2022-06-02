@@ -60,7 +60,7 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
         binding.toolbarOrderStatus.ivBack.setOnClickListener(this)
         binding.toolbarOrderStatus.ivMedia.setOnClickListener(this)
         binding.toolbarOrderStatus.tvTitle.text = getString(R.string.order_detail)
-        binding.toolbarOrderStatus.ivMedia.visibility = View.VISIBLE
+//        binding.toolbarOrderStatus.ivMedia.visibility = View.VISIBLE
         binding.toolbarOrderStatus.ivMedia.setImageResource(R.drawable.ic_download)
         workManager = WorkManager.getInstance(this)
 
@@ -92,8 +92,10 @@ class OrderDetailActivity : BaseActivity(), View.OnClickListener {
                     )
         ) {
             viewModel.isCustomer.postValue(false)
+            binding.toolbarOrderStatus.ivMedia.visibility = View.GONE
         } else {
             viewModel.isCustomer.postValue(true)
+            binding.toolbarOrderStatus.ivMedia.visibility = View.VISIBLE
         }
 
         viewModel.orderDetailsResponse.observe(this) { event ->
