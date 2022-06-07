@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.app.gcp.model.HomeSliderModel" />
+            type="com.gcptrack.model.HomeSliderModel" />
 
         <variable
             name="needToShowTitle"

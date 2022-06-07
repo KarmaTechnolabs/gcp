@@ -7,19 +7,19 @@
 
         <variable
             name="model"
-            type="com.app.gcp.api.responsemodel.OrdersDetailsResponse.CustomField" />
+            type="com.gcptrack.api.responsemodel.OrdersDetailsResponse.CustomField" />
 
         <variable
             name="position"
             type="int" />
 
-        <import type="com.app.gcp.utils.DateTimeUtils" />
+        <import type="com.gcptrack.utils.DateTimeUtils" />
 
-        <import type="com.app.gcp.utils.DateTimeConstants" />
+        <import type="com.gcptrack.utils.DateTimeConstants" />
 
         <variable
             name="clickListener"
-            type="com.app.gcp.listeners.ItemClickListener" />
+            type="com.gcptrack.listeners.ItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

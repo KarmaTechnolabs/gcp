@@ -3,7 +3,7 @@
         <import type="android.view.View"/>
         <variable
             name="model"
-            type="com.app.gcp.model.StateGenericModel" />
+            type="com.gcptrack.model.StateGenericModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

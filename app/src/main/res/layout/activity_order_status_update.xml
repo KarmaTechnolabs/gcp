@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="com.app.gcp.viewmodel.OrderStatusUpdateViewModel" />
+            type="com.gcptrack.viewmodel.OrderStatusUpdateViewModel" />
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />

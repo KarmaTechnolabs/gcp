@@ -7,9 +7,9 @@
 
         <variable
             name="model"
-            type="com.app.gcp.api.responsemodel.OrdersDetailsResponse.OrderStagesHistory" />
+            type="com.gcptrack.api.responsemodel.OrdersDetailsResponse.OrderStagesHistory" />
 
-        <import type="com.app.gcp.utils.DateTimeUtils" />
+        <import type="com.gcptrack.utils.DateTimeUtils" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

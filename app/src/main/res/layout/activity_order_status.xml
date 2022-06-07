@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.app.gcp.api.responsemodel.TrackOrderResponse" />
+            type="com.gcptrack.api.responsemodel.TrackOrderResponse" />
 
         <variable
             name="clickListener"

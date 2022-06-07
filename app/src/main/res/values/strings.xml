@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GCP</string>
+    <string name="app_name">GCP Track App</string>
 
     <!-- login screen -->
     <string name="login">Login</string>
@@ -165,13 +165,6 @@
     <string name="need_permission">Need permission</string>
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
-    <string name="this_app_requires_camera_permission_to_continue">This app requires Camera permission to access some features</string>
-
-    <string name="camera">Camera</string>
-    <string name="gallery">Gallery</string>
-    <string name="choose_via">Choose via</string>
-    <string name="go_to_settings">Go to Settings</string>
-    <string name="allow_permission_to_use_this_feature">Allow permission to use this feature</string>
 
     <string name="search_here">Search here..</string>
     <string name="select_state">Select State</string>

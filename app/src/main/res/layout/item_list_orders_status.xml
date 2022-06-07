@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.app.gcp.api.responsemodel.OrderStatusResponse.OrderStatus" />
+            type="com.gcptrack.api.responsemodel.OrderStatusResponse.OrderStatus" />
 
         <variable
             name="position"
@@ -19,7 +19,7 @@
 
         <variable
             name="clickListener"
-            type="com.app.gcp.listeners.ItemClickListener" />
+            type="com.gcptrack.listeners.ItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

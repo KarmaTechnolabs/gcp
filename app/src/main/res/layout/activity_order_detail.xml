@@ -9,7 +9,7 @@
 
         <variable
             name="model"
-            type="com.app.gcp.viewmodel.OrderDetailViewModel" />
+            type="com.gcptrack.viewmodel.OrderDetailViewModel" />
 
         <variable
             name="clickListener"

@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.app.gcp.api.responsemodel.TrackOrderResponse.History" />
+            type="com.gcptrack.api.responsemodel.TrackOrderResponse.History" />
 
         <variable
             name="isFirst"
@@ -17,13 +17,13 @@
             name="isLast"
             type="boolean" />
 
-        <import type="com.app.gcp.utils.DateTimeUtils" />
+        <import type="com.gcptrack.utils.DateTimeUtils" />
 
         <import type="android.view.View" />
 
         <variable
             name="clickListener"
-            type="com.app.gcp.listeners.ItemClickListener" />
+            type="com.gcptrack.listeners.ItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
