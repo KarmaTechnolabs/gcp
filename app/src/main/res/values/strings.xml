@@ -55,7 +55,6 @@
     <string name="validation_empty_education_qualification">Please enter highest education qualification</string>
     <string name="validation_empty_dob">Please select date of birth</string>
     <string name="validation_empty_occupation">Please enter occupation</string>
-    <string name="validation_empty_how_you_hear_about_us">Please enter how did you hear about us</string>
     <string name="validation_empty_member_of_app">Please select member type</string>
     <string name="enter_valid_email">Enter valid email</string>
     <string name="enter_valid_phone">Enter valid phone number</string>
@@ -107,7 +106,6 @@
     <string name="enroll">Enroll</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="change_password">Change Password</string>
-    <string name="about_us">About Us</string>
     <string name="app_version">App Version</string>
     <string name="our_team">Our Team</string>
     <string name="get_in_touch">Get in Touch</string>
@@ -130,7 +128,6 @@
     <string name="hint_highest_education_qualification">Highest Education Qualification</string>
     <string name="hint_date_of_birth">Date of Birth</string>
     <string name="hint_occupation">Occupation</string>
-    <string name="hint_how_did_you_hear_about_us">How did you hear about us</string>
     <string name="are_you_member_of_jeewan_jyoti_s">Are you member of GCP?</string>
     <string name="shg">SHG</string>
     <string name="trainee">Trainee</string>

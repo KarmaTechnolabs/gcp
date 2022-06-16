@@ -1,7 +1,8 @@
 package com.gcptrack.api.requestmodel
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class ChangePasswordRequestModel(
 
 	@field:SerializedName("user_type")

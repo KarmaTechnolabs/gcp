@@ -1,7 +1,8 @@
 package com.gcptrack.api.responsemodel
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class LoginResponse(
 
     @field:SerializedName("id")
