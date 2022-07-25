@@ -41,8 +41,8 @@ class ChangePasswordFragment : BaseFragment(), View.OnClickListener {
         binding.lifecycleOwner = this
         binding.clickListener = this
         if (BuildConfig.IS_DEBUG) {
-            binding.tieNewPassword.setText("admin@gmail.com")
-            binding.tieConfirmPassword.setText("admin@gmail.com")
+            binding.tieNewPassword.setText("12345")
+            binding.tieConfirmPassword.setText("12345")
         }
 
         viewModel.changePasswordResponse.observe(viewLifecycleOwner) { event ->
@@ -84,11 +84,11 @@ class ChangePasswordFragment : BaseFragment(), View.OnClickListener {
         val confirmPassword = binding.tieConfirmPassword.text
 
         return when {
-            newPassword?.length!! < 8 -> {//!Validator.isPasswordValid(password)
-                showToast(R.string.enter_valid_password)
-//                binding.tieNewPassword.error = getString(R.string.enter_valid_password)
-                false
-            }
+//            newPassword?.length!! < 8 -> {//!Validator.isPasswordValid(password)
+//                showToast(R.string.enter_valid_password)
+////                binding.tieNewPassword.error = getString(R.string.enter_valid_password)
+//                false
+//            }
             confirmPassword.toString() != newPassword.toString() -> {
                 showToast(R.string.new_password_confirm_password_does_not_match)
                 false

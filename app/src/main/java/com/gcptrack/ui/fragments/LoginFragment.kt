@@ -44,8 +44,8 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         if (BuildConfig.IS_DEBUG) {
 //            binding.tieEmail.setText("jaydave8866@gmail.com")
 //            binding.tiePassword.setText("123456789")
-            binding.tieEmail.setText("admin@gmail.com")
-            binding.tiePassword.setText("admin@gmail.com")
+            binding.tieEmail.setText("jaydave94@gmail.com")
+            binding.tiePassword.setText("jaydave94@gmail.com")
         }
 
         onBoardViewModel.loginResponse.observe(viewLifecycleOwner) { event ->
